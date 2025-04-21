@@ -46,18 +46,26 @@
                                 </div>
                             </div>
                         </div>
+                        @php
+                            $contact = \App\Models\FooterContact::latest()->first();
+                            $platforms = json_decode($contact->social_media_platforms ?? '[]', true);
+                            $urls = json_decode($contact->social_media_urls ?? '[]', true);
+                        @endphp
+
+                        @if($contact)
                         <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
                             <div class="footer_widgets wid_tit style_two">
                                 <div class="fo_wid_title">
                                     <h2>Get In Touch</h2>
                                 </div>
                             </div>
+
                             <div class="footer_contact_list light_color type_one">
                                 <div class="same_contact address">
                                     <span class="icon-location2"></span>
                                     <div class="content">
                                         <h6 class="titles">Address</h6>
-                                        <p>832 Edgebrook Ln, West Palm Beach, FL 33411</p>
+                                        <p>{{ $contact->address }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -67,48 +75,54 @@
                                     <span class="icon-mail"></span>
                                     <div class="content">
                                         <h6 class="titles">Mail Us</h6>
-                                        <a href="mailto:sendmail@gmail.com">sendmail@gmail.com</a>
+                                        <a href="mailto:{{ $contact->email }}">{{ $contact->email }}</a>
                                     </div>
                                 </div>
                             </div>
+
                             <div class="pd_bottom_20"></div>
+
                             <div class="footer_contact_list light_color type_one">
                                 <div class="same_contact phone">
                                     <span class="icon-telephone"></span>
                                     <div class="content">
-                                        <h6 class="titles"> Phone</h6>
-                                        <a href="tel:+9806071234 ">+9806071234 </a>
+                                        <h6 class="titles">Phone</h6>
+                                        <a href="tel:{{ $contact->phone }}">+91 {{ $contact->phone }}</a>
                                     </div>
                                 </div>
                             </div>
+
                             <div class="pd_bottom_20"></div>
 
                             <div class="social_media_v_one">
                                 <ul>
-                                    <li>
-                                        <a href="#" aria-label="Visit our Facebook page"> <span class="fa fa-facebook"></span>
-                                            <small>facebook</small>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" aria-label="Visit our Twiiter page"> <span class="fa fa-twitter"></span>
-                                            <small>twitter</small>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" aria-label="Visit our Skype page"> <span class="fa fa-skype"></span>
-                                            <small>skype</small>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" aria-label="Visit our Instagram page"> <span class="fa fa-instagram"></span>
-                                            <small>instagram</small>
-                                        </a>
-                                    </li>
+                                    @foreach($platforms as $index => $platform)
+                                        @php
+                                            $url = $urls[$index] ?? '#';
+                                            $icon = match(strtolower($platform)) {
+                                                'facebook' => 'fa-facebook',
+                                                'twitter' => 'fa-twitter',
+                                                'instagram' => 'fa-instagram',
+                                                'linkedin' => 'fa-linkedin',
+                                                'youtube' => 'fa-youtube',
+                                                'watsapp' => 'fa-whatsapp',
+                                                'pinterest' => 'fa-pinterest',
+                                                default => 'fa-share-alt',
+                                            };
+                                        @endphp
+                                        <li>
+                                            <a href="{{ $url }}" target="_blank" aria-label="Visit our {{ $platform }} page">
+                                                <span class="fa {{ $icon }}"></span>
+                                                <small>{{ strtolower($platform) }}</small>
+                                            </a>
+                                        </li>
+                                    @endforeach
                                 </ul>
                             </div>
                             <div class="pd_bottom_40"></div>
                         </div>
+                        @endif
+
                     </div>
                 </div>
                 <div class="pd_bottom_30"></div>
@@ -119,7 +133,7 @@
                     <div class="row text-center">
                         <div class="col-lg-12">
                             <div class="footer_copy_content color_white">
-                                © Copyright 2025 PAM Electronix Pvt Ltd. | Designed By <a target="_blank" href="https://www.matrixbricks.com/">Matrix Bricks.</a> All Rights Reserved
+                                © Copyright {{ date('Y') }} PAM Electronix Pvt Ltd. | Designed By <a target="_blank" href="https://www.matrixbricks.com/">Matrix Bricks.</a> All Rights Reserved
                             </div>
                         </div>
 

@@ -13,6 +13,13 @@
             </div>
             <div class="header_area" id="header_contents">
                 <header class="main-header  header style_two header_v13">
+                    @php
+                        $contact = \App\Models\FooterContact::latest()->first();
+                        $platforms = json_decode($contact->social_media_platforms ?? '[]', true);
+                        $urls = json_decode($contact->social_media_urls ?? '[]', true);
+                    @endphp
+
+                    @if($contact)
                     <div class="top_bar style_one">
                         <div class="container">
                             <div class="row align-items-center">
@@ -22,13 +29,13 @@
                                             <div class="contntent address">
                                                 <i class="icon-placeholder"></i>
                                                 <div class="text">
-                                                    <span>832 Edgebrook Ln, West Palm Beach, FL 33411</span>
+                                                    <span>{{ $contact->address }}</span>
                                                 </div>
                                             </div>
                                             <div class="contntent email">
                                                 <i class="icon-email"></i>
                                                 <div class="text">
-                                                    <a href="mailto:sendmail@creote.com">sendmail@gmail.com</a>
+                                                    <a href="mailto:{{ $contact->email }}">{{ $contact->email }}</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -36,24 +43,31 @@
                                             <div class="contntent phone">
                                                 <i class="icon-phone-call"></i>
                                                 <div class="text">
-                                                    <a href="tel:+9806071234">+9806071234</a>
+                                                    <a href="tel:{{ $contact->phone }}">+91 {{ $contact->phone }}</a>
                                                 </div>
                                             </div>
                                             <div class="contntent media">
                                                 <div class="text">
-
-                                                    <a href="#" target="_blank" rel="nofollow">
-                                                        <i class="fa fa-facebook"></i>
-                                                    </a>
-                                                    <a href="#" target="_blank" rel="nofollow">
-                                                        <i class="fa fa-twitter"></i>
-                                                    </a>
-                                                    <a href="#" target="_blank" rel="nofollow">
-                                                        <i class="fa fa-skype"></i>
-                                                    </a>
-                                                    <a href="#" target="_blank" rel="nofollow">
-                                                        <i class="fa fa-telegram"></i>
-                                                    </a>
+                                                    @foreach($platforms as $index => $platform)
+                                                        @php
+                                                            $url = $urls[$index] ?? '#';
+                                                            $icon = match(strtolower($platform)) {
+                                                                'facebook' => 'fa-facebook',
+                                                                'twitter' => 'fa-twitter',
+                                                                'instagram' => 'fa-instagram',
+                                                                'linkedin' => 'fa-linkedin',
+                                                                'youtube' => 'fa-youtube',
+                                                                'watsapp' => 'fa-whatsapp',
+                                                                'pinterest' => 'fa-pinterest',
+                                                                'skype' => 'fa-skype',
+                                                                'telegram' => 'fa-telegram',
+                                                                default => 'fa-share-alt',
+                                                            };
+                                                        @endphp
+                                                        <a href="{{ $url }}" target="_blank" rel="nofollow">
+                                                            <i class="fa {{ $icon }}"></i>
+                                                        </a>
+                                                    @endforeach
                                                 </div>
                                             </div>
                                         </div>
@@ -62,6 +76,9 @@
                             </div>
                         </div>
                     </div>
+                    @endif
+
+
                     <section class="navbar_outer get_sticky_header">
                         <div class="container">
                             <nav class="inner_box">
