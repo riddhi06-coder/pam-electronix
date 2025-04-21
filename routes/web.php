@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 
 use App\Http\Controllers\Backend\BannerHomeController;
+use App\Http\Controllers\Backend\HomeIntroController;
 
 // =========================================================================== Backend Routes
 
@@ -34,4 +35,7 @@ Route::group(['middleware' => ['auth:web', \App\Http\Middleware\PreventBackHisto
 
 // ==== Manage Home Page
 Route::resource('banner-home', BannerHomeController::class);
+
+// ==== Manage Home Page
+Route::resource('home-intro', HomeIntroController::class);
 
