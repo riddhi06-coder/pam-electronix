@@ -65,7 +65,11 @@
                                     <span class="icon-location2"></span>
                                     <div class="content">
                                         <h6 class="titles">Address</h6>
-                                        <p>{{ $contact->address }}</p>
+                                        <p>
+                                            <a href="{{ $contact->url }}" target="_blank" rel="noopener noreferrer">
+                                                {{ $contact->address }}
+                                            </a>
+                                        </p>
                                     </div>
                                 </div>
                             </div>

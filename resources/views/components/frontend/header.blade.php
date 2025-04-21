@@ -29,8 +29,11 @@
                                             <div class="contntent address">
                                                 <i class="icon-placeholder"></i>
                                                 <div class="text">
-                                                    <span>{{ $contact->address }}</span>
+                                                    <a href="{{ $contact->url }}" target="_blank" rel="noopener noreferrer">
+                                                        <span>{{ $contact->address }}</span>
+                                                    </a>
                                                 </div>
+
                                             </div>
                                             <div class="contntent email">
                                                 <i class="icon-email"></i>
