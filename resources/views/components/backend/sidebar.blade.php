@@ -48,6 +48,7 @@
                   <ul class="sidebar-submenu">
                     <li><a href="{{ route('banner-home.index') }}" class="{{ request()->routeIs('banner-home.index') ? 'active' : '' }}">Banner Details</a></li>
                     <li><a href="{{ route('home-intro.index') }}" class="{{ request()->routeIs('home-intro.index') ? 'active' : '' }}">Introduction</a></li>
+                    <li><a href="{{ route('home-why-choose.index') }}" class="{{ request()->routeIs('home-why-choose.index') ? 'active' : '' }}">Why Choose</a></li>
                   </ul>
                 </li>
 

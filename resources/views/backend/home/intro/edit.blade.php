@@ -51,7 +51,7 @@
                                     @csrf
                                     @method('PUT') 
 
-                                        <!-- Banner Image-->
+                                    <!-- Banner Image-->
                                     <div class="col-md-12 mb-3">
                                         <label class="form-label" for="banner_image">Image <span class="txt-danger">*</span></label>
                                         <input class="form-control @error('banner_image') is-invalid @enderror" id="banner_image" type="file" name="banner_image" accept=".jpg, .jpeg, .png, .webp" onchange="previewBannerImage()">
@@ -81,7 +81,7 @@
                                         <div class="invalid-feedback">Please enter a Description.</div>
                                     </div>
 
-                                    <h4><strong># Connect with our experts</strong></h4>
+                                    <h4><strong># Shop Our Products</strong></h4>
 
                                     <!-- Section Heading -->
                                     <div class="col-md-12">
@@ -89,6 +89,33 @@
                                         <input class="form-control @error('section_heading') is-invalid @enderror" id="section_heading" type="text" name="section_heading" placeholder="Enter Section Heading" required value="{{ old('section_heading', $intro->section_heading) }}">
                                         <div class="invalid-feedback">Please enter a Section Heading.</div>
                                     </div>
+
+
+
+                                    <!-- Section Image-->
+                                    <div class="col-md-12 mb-3">
+                                        <label class="form-label" for="section_image">Section Image <span class="txt-danger">*</span></label>
+                                        <input class="form-control @error('section_image') is-invalid @enderror" id="section_image" type="file" name="section_image" accept=".jpg, .jpeg, .png, .webp" required onchange="previewSectionImage()">
+                                        <div class="invalid-feedback">Please upload a Section Image.</div>
+                                        <small class="text-secondary"><b>Note: The file size should be less than 2MB.</b></small>
+                                        <br>
+                                        <small class="text-secondary"><b>Note: Only files in .jpg, .jpeg, .png, .webp format can be uploaded.</b></small>
+                              
+                                        
+                                        {{-- Existing Image Preview --}}
+                                        @if ($intro->section_image)
+                                            <div class="mt-2 existing-image-preview-1">
+                                                <img src="{{ asset('uploads/home/' . $intro->section_image) }}" alt="Current Image" class="img-fluid" style="max-height: 150px; border: 1px solid #ccc; padding: 4px;">
+                                            </div>
+                                        @endif
+
+                        
+                                        <!-- Preview Section -->
+                                        <div class="col-md-12" id="sectionImagePreviewContainer" style="display: none;">
+                                            <img id="section_image_preview" src="" alt="Preview" class="img-fluid" style="max-height: 200px; border: 1px solid #ddd; padding: 5px;">
+                                        </div>
+                                    </div>
+
 
                                     <!-- Form Actions -->
                                     <div class="col-12 text-end">
@@ -127,6 +154,41 @@
                 const previewImage = document.getElementById('banner_image_preview');
                 const existingImage = document.querySelector('.existing-image-preview');
 
+                // Clear the previous preview
+                previewImage.src = '';
+
+                if (file) {
+                    const validImageTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
+
+                    // Hide the existing image if a new file is selected
+                    if (existingImage) {
+                        existingImage.style.display = 'none';
+                    }
+
+                    if (validImageTypes.includes(file.type)) {
+                        const reader = new FileReader();
+
+                        reader.onload = function (e) {
+                            // Display the image preview
+                            previewImage.src = e.target.result;
+                            previewContainer.style.display = 'block';  // Show the preview section
+                        };
+
+                        reader.readAsDataURL(file);
+                    } else {
+                        alert('Please upload a valid image file (jpg, jpeg, png, webp).');
+                    }
+                }
+            }
+
+
+            function previewSectionImage() {
+                const file = document.getElementById('section_image').files[0];
+                const previewContainer = document.getElementById('sectionImagePreviewContainer');
+                const previewImage = document.getElementById('section_image_preview');
+                const existingImage = document.querySelector('.existing-image-preview-1');
+
+               
                 // Clear the previous preview
                 previewImage.src = '';
 

@@ -74,7 +74,7 @@
      
                                         </div>
 
-                                        <h4><strong># Connect with our experts</strong></h4>
+                                        <h4><strong># Shop Our Products</strong></h4>
 
                                         
                                         <!-- Section Heading -->
@@ -84,6 +84,22 @@
                                             <div class="invalid-feedback">Please enter a Section Heading.</div>
         
                                         </div>
+
+                                        <!-- Section Image-->
+                                        <div class="col-md-12 mb-3">
+                                            <label class="form-label" for="section_image">Section Image <span class="txt-danger">*</span></label>
+                                            <input class="form-control @error('section_image') is-invalid @enderror" id="section_image" type="file" name="section_image" accept=".jpg, .jpeg, .png, .webp" required onchange="previewSectionImage()">
+                                            <div class="invalid-feedback">Please upload a Section Image.</div>
+                                            <small class="text-secondary"><b>Note: The file size should be less than 2MB.</b></small>
+                                            <br>
+                                            <small class="text-secondary"><b>Note: Only files in .jpg, .jpeg, .png, .webp format can be uploaded.</b></small>
+                                        </div>
+                          
+                                        <!-- Preview Section -->
+                                        <div class="col-md-12" id="sectionImagePreviewContainer" style="display: none;">
+                                            <img id="section_image_preview" src="" alt="Preview" class="img-fluid" style="max-height: 200px; border: 1px solid #ddd; padding: 5px;">
+                                        </div>
+
                                         
 
                                         <!-- Form Actions -->
@@ -120,6 +136,34 @@
                 const file = document.getElementById('banner_image').files[0];
                 const previewContainer = document.getElementById('bannerImagePreviewContainer');
                 const previewImage = document.getElementById('banner_image_preview');
+
+                // Clear the previous preview
+                previewImage.src = '';
+                
+                if (file) {
+                    const validImageTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
+
+                    if (validImageTypes.includes(file.type)) {
+                        const reader = new FileReader();
+
+                        reader.onload = function (e) {
+                            // Display the image preview
+                            previewImage.src = e.target.result;
+                            previewContainer.style.display = 'block';  // Show the preview section
+                        };
+
+                        reader.readAsDataURL(file);
+                    } else {
+                        alert('Please upload a valid image file (jpg, jpeg, png, webp).');
+                    }
+                }
+            }
+
+
+            function previewSectionImage() {
+                const file = document.getElementById('section_image').files[0];
+                const previewContainer = document.getElementById('sectionImagePreviewContainer');
+                const previewImage = document.getElementById('section_image_preview');
 
                 // Clear the previous preview
                 previewImage.src = '';
