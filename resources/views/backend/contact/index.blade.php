@@ -63,7 +63,22 @@
                             </tr>
                         </thead>
                         <tbody>
-                            
+                            @foreach($contacts as $index => $contact)
+                                <tr>
+                                    <td>{{ $index + 1 }}</td>
+                                    <td>{{ $contact->address }}</td>
+                                    <td>{{ $contact->phone }}</td>
+                                    <td>{{ $contact->email }}</td>
+                                    <td>
+                                        <a href="{{ route('footer-contact.edit', $contact->id) }}" class="btn btn-sm btn-primary">Edit</a>
+                                        <form action="{{ route('footer-contact.destroy', $contact->id) }}" method="POST" style="display:inline-block;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this?')">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
 
