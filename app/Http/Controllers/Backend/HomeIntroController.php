@@ -32,10 +32,10 @@ class HomeIntroController extends Controller
 
     public function store(Request $request)
     {
-        // Validate the request data
+
         $validatedData = $request->validate([
             'banner_image'     => 'required|image|mimes:jpg,jpeg,png,webp|max:2048',
-            'section_image'    => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',  // Optional for section_image
+            'section_image'    => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048', 
             'description'      => 'required|string',
             'section_heading'  => 'required|string|max:255',
         ], [
@@ -56,7 +56,7 @@ class HomeIntroController extends Controller
             'section_heading.max'      => 'The section heading may not be greater than 255 characters.',
         ]);
     
-        // Image handling for banner_image
+
         $imageName = null;
     
         if ($request->hasFile('banner_image')) {
@@ -64,8 +64,8 @@ class HomeIntroController extends Controller
             $imageName = time() . rand(10, 999) . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('uploads/home/'), $imageName);
         }
-    
-        // Image handling for section_image
+
+
         $sectionimageName = null;
     
         if ($request->hasFile('section_image')) {
@@ -74,17 +74,15 @@ class HomeIntroController extends Controller
             $image->move(public_path('uploads/home/'), $sectionimageName);
         }
     
-        // Save data to the database
         $homeIntro = new HomeIntro();
-        $homeIntro->banner_image = $imageName;         // Corrected to use $imageName for banner image
-        $homeIntro->section_image = $sectionimageName; // Corrected to use $sectionimageName for section image
+        $homeIntro->banner_image = $imageName;         
+        $homeIntro->section_image = $sectionimageName; 
         $homeIntro->description = $validatedData['description'];
         $homeIntro->section_heading = $validatedData['section_heading'];
         $homeIntro->created_at = Carbon::now(); 
         $homeIntro->created_by = Auth::user()->id;
         $homeIntro->save();
     
-        // Redirect with success message
         return redirect()->route('home-intro.index')->with('message', 'Introduction created successfully.');
     }
     
