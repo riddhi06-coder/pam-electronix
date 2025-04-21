@@ -9,6 +9,9 @@ use App\Http\Controllers\Backend\BannerHomeController;
 use App\Http\Controllers\Backend\HomeIntroController;
 use App\Http\Controllers\Backend\HomeChooseController;
 
+
+use App\Http\Controllers\Frontend\HomeController;
+
 // =========================================================================== Backend Routes
 
 // Route::get('/', function () {
@@ -43,3 +46,13 @@ Route::resource('home-intro', HomeIntroController::class);
 // ==== Manage Why choose in Home Page
 Route::resource('home-why-choose', HomeChooseController::class);
 
+
+
+// ===================================================================Frontend================================================================
+
+Route::group(['prefix'=> '', 'middleware'=>[\App\Http\Middleware\PreventBackHistoryMiddleware::class]],function(){
+
+    
+    Route::get('/', [HomeController::class, 'index'])->name('home.page');
+   
+});
