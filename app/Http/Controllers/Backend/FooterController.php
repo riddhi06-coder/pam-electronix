@@ -66,4 +66,66 @@ class FooterController extends Controller
 
         return redirect()->route('footer-contact.index')->with('message', 'Contact details saved successfully.');
     }
+
+    public function edit($id)
+    {
+        $details = FooterContact::findOrFail($id);
+        return view('backend.contact.edit', compact('details'));
+    }
+
+
+    public function update(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'email' => 'required|email|max:255',
+            'phone' => 'required|digits_between:10,12',
+            'address' => 'required|string|max:1000',
+            'url' => 'required|url|max:255',
+            'social_media_platform' => 'required|array',
+            'social_media_platform.*' => 'required|string',
+            'social_media_url' => 'required|array',
+            'social_media_url.*' => 'required|url'
+        ], [
+            'email.required' => 'Email is required.',
+            'email.email' => 'Please enter a valid email address.',
+            'phone.required' => 'Phone number is required.',
+            'phone.digits_between' => 'Phone number must be between 10 to 12 digits.',
+            'address.required' => 'Address is required.',
+            'url.required' => 'Location URL is required.',
+            'url.url' => 'Please enter a valid Location URL.',
+            'social_media_platform.*.required' => 'Please select a social media platform.',
+            'social_media_url.*.required' => 'Please enter a valid URL for the selected platform.'
+        ]);
+
+        $footerContact = FooterContact::findOrFail($id);
+
+        $footerContact->update([
+            'email' => $validated['email'],
+            'phone' => $validated['phone'],
+            'address' => $validated['address'],
+            'url' => $validated['url'],
+            'social_media_platforms' => json_encode($validated['social_media_platform']),
+            'social_media_urls' => json_encode($validated['social_media_url']),
+            'modified_at' => Carbon::now(),
+            'modified_by' => Auth::user()->id,
+        ]);
+
+        return redirect()->route('footer-contact.index')->with('message', 'Contact details updated successfully.');
+    }
+
+    
+    public function destroy(string $id)
+    {
+        $data['deleted_by'] =  Auth::user()->id;
+        $data['deleted_at'] =  Carbon::now();
+        try {
+            $industries = FooterContact::findOrFail($id);
+            $industries->update($data);
+
+            return redirect()->route('footer-contact.index')->with('message', 'Details deleted successfully!');
+        } catch (Exception $ex) {
+            return redirect()->back()->with('error', 'Something Went Wrong - ' . $ex->getMessage());
+        }
+    }
+
 }
