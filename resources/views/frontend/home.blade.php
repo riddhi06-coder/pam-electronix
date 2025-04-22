@@ -110,106 +110,25 @@
 
                     <div class="container">
                         <div class="row gutter_15px">
-                                 <div class="col-lg-4 col-md-6 col-sm-12">
-                                    <div class="icon_box_all  style_two">
-                                       <div class="icon_content  icon_imgs ">
-                                          <div class="icon">
-                                             <img src="{{ asset('frontend/assets/images/icons/right-chevron.svg') }}" class="img-fluid svg_image" alt="icon png">
-                                          </div>
-                                          <div class="txt_content">
-                                             <h3><a href="#" target="_blank" rel="nofollow">Dipped Mica Capacitors</a>
-                                             </h3>
-                                          </div>
-                                       </div>
+                            @foreach ($products as $product)
+                                <div class="col-lg-4 col-md-6 col-sm-12">
+                                    <div class="icon_box_all style_two">
+                                        <div class="icon_content icon_imgs">
+                                            <div class="icon">
+                                                <img src="{{ asset('frontend/assets/images/icons/right-chevron.svg') }}" class="img-fluid svg_image" alt="icon png">
+                                            </div>
+                                            <div class="txt_content">
+                                                <h3>
+                                                    <a href="#" target="_blank" rel="nofollow">{{ $product->product_name }}</a>
+                                                </h3>
+                                            </div>
+                                        </div>
                                     </div>
-                                 </div>
-                                 <div class="col-lg-4 col-md-6 col-sm-12">
-                                    <div class="icon_box_all  style_two">
-                                       <div class="icon_content  icon_imgs ">
-                                          <div class="icon">
-                                             <img src="{{ asset('frontend/assets/images/icons/right-chevron.svg') }}" class="img-fluid svg_image" alt="icon png">
-                                          </div>
-                                          <div class="txt_content">
-                                             <h3><a href="#" target="_blank" rel="nofollow">Chip Mica Capacitors</a></h3>
-                                          </div>
-                                       </div>
-                                    </div>
-                                 </div>
-                                 <div class="col-lg-4 col-md-6 col-sm-12">
-                                    <div class="icon_box_all  style_two">
-                                       <div class="icon_content  icon_imgs ">
-                                          <div class="icon">
-                                             <img src="{{ asset('frontend/assets/images/icons/right-chevron.svg') }}" class="img-fluid svg_image" alt="icon png">
-                                          </div>
-                                          <div class="txt_content">
-                                             <h3><a href="#" target="_blank" rel="nofollow">High Voltage Mica Capacitors</a></h3>
-                                          </div>
-                                       </div>
-                                    </div>
-                                 </div>
-                                 <div class="col-lg-4 col-md-6 col-sm-12">
-                                    <div class="icon_box_all  style_two">
-                                       <div class="icon_content  icon_imgs ">
-                                          <div class="icon">
-                                             <img src="{{ asset('frontend/assets/images/icons/right-chevron.svg') }}" class="img-fluid svg_image" alt="icon png">
-                                          </div>
-                                          <div class="txt_content">
-                                             <h3><a href="#" target="_blank" rel="nofollow">Miniature Dipped Mica Capacitors</a></h3>
-                                          </div>
-                                       </div>
-                                    </div>
-                                 </div>
-                                 <div class="col-lg-4 col-md-6 col-sm-12">
-                                    <div class="icon_box_all  style_two">
-                                       <div class="icon_content  icon_imgs ">
-                                          <div class="icon">
-                                             <img src="{{ asset('frontend/assets/images/icons/right-chevron.svg') }}" class="img-fluid svg_image" alt="icon png">
-                                          </div>
-                                          <div class="txt_content">
-                                             <h3><a href="#" target="_blank" rel="nofollow">Metal Clad Capacitors</a></h3>
-                                          </div>
-                                       </div>
-                                    </div>
-                                 </div>
-                                 <div class="col-lg-4 col-md-6 col-sm-12">
-                                    <div class="icon_box_all  style_two">
-                                       <div class="icon_content  icon_imgs ">
-                                          <div class="icon">
-                                             <img src="{{ asset('frontend/assets/images/icons/right-chevron.svg') }}" class="img-fluid svg_image" alt="icon png">
-                                          </div>
-                                          <div class="txt_content">
-                                             <h3><a href="#" target="_blank" rel="nofollow">Tape & Reel Capacitors</a></h3>
-                                          </div>
-                                       </div>
-                                    </div>
-                                 </div>
-                                 <div class="col-lg-4 col-md-6 col-sm-12">
-                                    <div class="icon_box_all  style_two">
-                                       <div class="icon_content  icon_imgs ">
-                                          <div class="icon">
-                                             <img src="{{ asset('frontend/assets/images/icons/right-chevron.svg') }}" class="img-fluid svg_image" alt="icon png">
-                                          </div>
-                                          <div class="txt_content">
-                                             <h3><a href="#" target="_blank" rel="nofollow">Molded Capacitor</a></h3>
-                                          </div>
-                                       </div>
-                                    </div>
-                                 </div>
-                                 <div class="col-lg-4 col-md-6 col-sm-12">
-                                    <div class="icon_box_all  style_two">
-                                       <div class="icon_content  icon_imgs ">
-                                          <div class="icon">
-                                             <img src="{{ asset('frontend/assets/images/icons/right-chevron.svg') }}" class="img-fluid svg_image" alt="icon png">
-                                          </div>
-                                          <div class="txt_content">
-                                             <h3><a href="#" target="_blank" rel="nofollow">Made to Order Capacitors</a></h3>
-                                          </div>
-                                       </div>
-                                    </div>
-                                 </div>
-                             </div>
-
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
+
                     <div class="pd_bottom_60"></div>
                 </section>
 

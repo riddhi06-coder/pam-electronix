@@ -13,7 +13,7 @@ use Illuminate\Support\Str;
 use App\Models\HomeWhyChoose;
 use App\Models\HomeIntro;
 use App\Models\BannerDetails;
-
+use App\Models\Product;
 
 use Carbon\Carbon;
 
@@ -25,8 +25,9 @@ class HomeController extends Controller
         $banners = BannerDetails::wherenull('deleted_by')->get(); 
         $homeIntro = HomeIntro::whereNull('deleted_by')->latest()->first();
         $homeWhyChoose = HomeWhyChoose::whereNull('deleted_by')->latest()->first(); 
+        $products = Product::orderBy('id', 'asc')->get();
 
-        return view('frontend.home', compact('banners','homeIntro','homeWhyChoose'));
+        return view('frontend.home', compact('banners','homeIntro','homeWhyChoose','products'));
     }
     
 }
