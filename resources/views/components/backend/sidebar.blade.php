@@ -10,7 +10,7 @@
             <div class="toggle-sidebar"><i class="status_toggle middle sidebar-toggle" data-feather="grid"> </i></div>
           </div>
           <div class="logo-icon-wrapper">
-            <!-- <a href="{{ route('admin.dashboard') }}"><img class="img-fluid" src="{{ asset('admin/assets/images/logo/logo.webp1') }}" alt="" style="max-width: 20% !important;"></a> -->
+            <!-- <a href="{{ route('admin.dashboard') }}"><img class="img-fluid" src="{{ asset('admin/assets/images/logo/logo.webp') }}" alt="" style="max-width: 20% !important;"></a> -->
           </div>
           
           <nav class="sidebar-main">
@@ -52,7 +52,6 @@
                   </ul>
                 </li>
 
-
                 <li class="sidebar-list"> <i class="fa fa-thumb-tack"> </i><a class="sidebar-link sidebar-title" href="{{ route('footer-contact.index') }}">
                     <svg class="stroke-icon"> 
                       <use href="{{ asset('admin/assets/svg/icon-sprite.svg#stroke-social') }}"></use>
@@ -62,6 +61,22 @@
                     </svg><span>General Information</span></a>
                 </li>
 
+                <li class="sidebar-list {{ request()->routeIs('add-product.index','add-product.index') ? 'active' : '' }}">
+                  <i class="fa fa-thumb-tack"> </i>
+                  <a class="sidebar-link sidebar-title" href="#">
+                    <svg class="stroke-icon"> 
+                      <use href="{{ asset('admin/assets/svg/icon-sprite.svg#cart') }}"></use>
+                    </svg>
+                    <svg class="fill-icon">
+                      <use href="{{ asset('admin/assets/svg/icon-sprite.svg#cart') }}"></use>
+                    </svg>
+                    <span>Store Management</span>
+                  </a>
+                  <ul class="sidebar-submenu">
+                    <li><a href="{{ route('add-product.index') }}" class="{{ request()->routeIs('add-product.index') ? 'active' : '' }}">Products</a></li>
+                    <li><a href="{{ route('add-product.index') }}" class="{{ request()->routeIs('add-product.index') ? 'active' : '' }}">Product Details</a></li>
+                  </ul>
+                </li>
 
               </ul>
               <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>

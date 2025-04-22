@@ -9,6 +9,7 @@ use App\Http\Controllers\Backend\BannerHomeController;
 use App\Http\Controllers\Backend\HomeIntroController;
 use App\Http\Controllers\Backend\HomeChooseController;
 use App\Http\Controllers\Backend\FooterController;
+use App\Http\Controllers\Backend\AddProductController;
 
 
 use App\Http\Controllers\Frontend\HomeController;
@@ -49,6 +50,17 @@ Route::resource('home-why-choose', HomeChooseController::class);
 
 // ==== Manage Footer
 Route::resource('footer-contact', FooterController::class);
+
+// ==== Manage Product Master
+Route::resource('add-product', AddProductController::class);
+
+
+
+
+
+
+
+
 
 // ===================================================================Frontend================================================================
 
