@@ -10,6 +10,7 @@ use App\Http\Controllers\Backend\HomeIntroController;
 use App\Http\Controllers\Backend\HomeChooseController;
 use App\Http\Controllers\Backend\FooterController;
 use App\Http\Controllers\Backend\AddProductController;
+use App\Http\Controllers\Backend\ProductDescriptionController;
 
 
 use App\Http\Controllers\Frontend\HomeController;
@@ -54,7 +55,8 @@ Route::resource('footer-contact', FooterController::class);
 // ==== Manage Product Master
 Route::resource('add-product', AddProductController::class);
 
-
+// ==== Manage Product Description
+Route::resource('product-descriptions', ProductDescriptionController::class);
 
 
 

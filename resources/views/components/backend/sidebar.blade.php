@@ -61,7 +61,8 @@
                     </svg><span>General Information</span></a>
                 </li>
 
-                <li class="sidebar-list {{ request()->routeIs('add-product.index','add-product.index') ? 'active' : '' }}">
+
+                <li class="sidebar-list {{ request()->is('add-product*','product-descriptions.index*') ? 'active' : '' }}">
                   <i class="fa fa-thumb-tack"> </i>
                   <a class="sidebar-link sidebar-title" href="#">
                     <svg class="stroke-icon"> 
@@ -73,11 +74,25 @@
                     <span>Store Management</span>
                   </a>
                   <ul class="sidebar-submenu">
-                    <li><a href="{{ route('add-product.index') }}" class="{{ request()->routeIs('add-product.index') ? 'active' : '' }}">Products</a></li>
-                    <li><a href="{{ route('add-product.index') }}" class="{{ request()->routeIs('add-product.index') ? 'active' : '' }}">Product Details</a></li>
+                    <li>
+                      <a href="{{ route('add-product.index') }}" class="{{ request()->routeIs('add-product.index') ? 'active' : '' }}">
+                        Products
+                      </a>
+                    </li>
+
+                    <li>
+                      <a class="submenu-title" href="#">
+                        Product Details
+                        <span class="sub-arrow"><i class="fa fa-angle-right"></i></span>
+                      </a>
+                      <ul class="nav-sub-childmenu submenu-content">
+                        <li><a href="{{ route('product-descriptions.index') }}" class="{{ request()->routeIs('product-descriptions.index') ? 'active' : '' }}">Description</a></li>
+                        <li><a href="{{ route('product-descriptions.index') }}" class="{{ request()->routeIs('product-descriptions.index') ? 'active' : '' }}">Specifications</a></li>
+                      </ul>
+                    </li>
+
                   </ul>
                 </li>
-
               </ul>
               <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>
             </div>

@@ -50,8 +50,8 @@
                                 <form class="row g-3 needs-validation custom-input" novalidate action="{{ route('banner-home.store') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
 
-                                      <!-- Banner Heading-->
-                                      <div class="col-md-6">
+                                    <!-- Banner Heading-->
+                                    <div class="col-md-6">
                                         <label class="form-label" for="banner_heading">Banner Heading <span class="txt-danger">*</span></label>
                                         <input class="form-control" id="banner_heading" type="text" name="banner_heading" placeholder="Enter Banner Heading" required>
                                         <div class="invalid-feedback">Please enter a Banner Heading.</div>
