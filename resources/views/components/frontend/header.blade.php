@@ -106,63 +106,28 @@
                                                         <span>Home</span>
                                                     </a>
                                                 </li>
-                                                <!-- <li class="menu-item nav-item">
-                                                    <a href="#" class="nav-link">
-                                                        <span>About Us</span>
-                                                    </a>
-                                                </li>
-                                                <li class="menu-item nav-item">
-                                                    <a href="#" class="nav-link">
-                                                        <span>Why Choose Us</span>
-                                                    </a>
-                                                </li> -->
-                                                <li class="menu-item  menu-item-has-children dropdown nav-item">
+
+                                                @php
+                                                    use App\Models\Product;
+                                                    $products = Product::orderBy('id', 'asc')->get();
+                                                @endphp
+
+                                                <li class="menu-item menu-item-has-children dropdown nav-item">
                                                     <a href="#" class="dropdown-toggle nav-link">
                                                         <span>Shop Products</span>
                                                     </a>
                                                     <ul class="dropdown-menu">
-                                                        <li class="menu-item  nav-item">
-                                                            <a href="#" class="dropdown-item nav-link">
-                                                                <span>Dipped Mica Capacitors</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="menu-item nav-item">
-                                                            <a href="#" class="dropdown-item nav-link">
-                                                                <span>Chip Mica Capacitors</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="menu-item nav-item">
-                                                            <a href="#" class="dropdown-item nav-link">
-                                                                <span>High Voltage Mica Capacitors</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="menu-item  nav-item">
-                                                            <a href="#" class="dropdown-item nav-link">
-                                                                <span>Miniature Dipped Mica Capacitors</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="menu-item  nav-item">
-                                                            <a href="#" class="dropdown-item nav-link">
-                                                                <span>Metal Clad Capacitors</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="menu-item  nav-item">
-                                                            <a href="#" class="dropdown-item nav-link">
-                                                                <span>Tape & Reel Capacitors</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="menu-item  nav-item">
-                                                            <a href="#" class="dropdown-item nav-link">
-                                                                <span>Molded Capacitor</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="menu-item  nav-item">
-                                                            <a href="#" class="dropdown-item nav-link">
-                                                                <span>Made to Order Capacitors</span>
-                                                            </a>
-                                                        </li>
+                                                        @foreach ($products as $product)
+                                                            <li class="menu-item nav-item">
+                                                                <a href="#" class="dropdown-item nav-link">
+                                                                    <span>{{ $product->product_name }}</span>
+                                                                </a>
+                                                            </li>
+                                                        @endforeach
                                                     </ul>
                                                 </li>
+
+
                                                 <li class="menu-item nav-item">
                                                     <a href="#" class="nav-link" aria-label="View">
                                                         <span>Specifications</span>

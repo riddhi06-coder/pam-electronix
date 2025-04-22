@@ -12,6 +12,12 @@
                         </div>
 
 
+                        @php
+                            use App\Models\Product;
+                            $products = Product::orderBy('id', 'asc')->get();
+                            $chunks = $products->chunk(ceil($products->count() / 2));
+                        @endphp
+
                         <div class="col-xl-5 col-lg-6 col-md-6 col-sm-12 mb-sm-5 mb-md-5 mb-lg-5 mb-xl-0">
                             <div class="footer_widgets wid_tit style_two">
                                 <div class="fo_wid_title">
@@ -24,21 +30,18 @@
                                         <div class="left">
                                             <div class="menu-information-container">
                                                 <ul>
-                                                    <li><a href="#">Dipped Mica Capacitors</a></li>
-                                                    <li><a href="#">Chip Mica Capacitors</a></li>
-                                                    <li><a href="#">High Voltage Mica Capacitors</a></li>
-                                                    <li><a href="#">Miniature Dipped Mica Capacitors</a></li>
-                                                    
+                                                    @foreach($chunks[0] as $product)
+                                                        <li><a href="#">{{ $product->product_name }}</a></li>
+                                                    @endforeach
                                                 </ul>
                                             </div>
                                         </div>
                                         <div class="right">
                                             <div class="menu-essentials-container">
                                                 <ul>
-                                                    <li><a href="#">Metal Clad Capacitors</a></li>
-                                                    <li><a href="#">Tape & Reel Capacitors</a></li>
-                                                    <li><a href="#">Molded Capacitor</a></li>
-                                                    <li><a href="#">Made to Order Capacitors</a></li>
+                                                    @foreach($chunks[1] as $product)
+                                                        <li><a href="#">{{ $product->product_name }}</a></li>
+                                                    @endforeach
                                                 </ul>
                                             </div>
                                         </div>
@@ -46,6 +49,8 @@
                                 </div>
                             </div>
                         </div>
+
+
                         @php
                             $contact = \App\Models\FooterContact::latest()->first();
                             $platforms = json_decode($contact->social_media_platforms ?? '[]', true);
