@@ -56,7 +56,7 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Product Description</th>
+                                <th>Product Name</th>
                                 <th>Product Image</th>
                                 <th>Action</th>
                             </tr>
@@ -65,7 +65,7 @@
                             @foreach ($descriptions as $key => $desc)
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
-                                    <td>{!! Str::limit(strip_tags($desc->product_description), 100) !!}</td>
+                                    <td>{{ $desc->product->product_name ?? 'N/A' }}</td>
                                     <td>
                                         @if($desc->product_image)
                                             <img src="{{ asset('uploads/product/' . $desc->product_image) }}" alt="Product" style="height: 60px;">
