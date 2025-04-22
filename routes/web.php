@@ -11,6 +11,7 @@ use App\Http\Controllers\Backend\HomeChooseController;
 use App\Http\Controllers\Backend\FooterController;
 use App\Http\Controllers\Backend\AddProductController;
 use App\Http\Controllers\Backend\ProductDescriptionController;
+use App\Http\Controllers\Backend\ProductSpecificationsController;
 
 
 use App\Http\Controllers\Frontend\HomeController;
@@ -58,8 +59,8 @@ Route::resource('add-product', AddProductController::class);
 // ==== Manage Product Description
 Route::resource('product-descriptions', ProductDescriptionController::class);
 
-
-
+// ==== Manage Product Specifications
+Route::resource('product-specifications', ProductSpecificationsController::class);
 
 
 
