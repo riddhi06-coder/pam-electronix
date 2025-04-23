@@ -23,6 +23,7 @@ class ProductSpecification extends Model
         'rohs',
         'capacitance',
         'voltage',
+        'voltage_rating',
         'termination',
         'pf',
         'lead_spacing',
