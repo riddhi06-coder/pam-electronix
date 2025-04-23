@@ -57,12 +57,28 @@
                             <tr>
                                 <th>#</th>
                                 <th>Product Name</th>
-                                <th>Product Image</th>
+                                <th>Specification Part</th>
+                                <th>Manufacturer</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                           
+                            @foreach ($specs as $index => $spec)
+                                <tr>
+                                    <td>{{ $index + 1 }}</td>
+                                    <td>{{ $spec->product->product_name ?? 'N/A' }}</td>
+                                    <td>{{ $spec->name }}</td>
+                                    <td>{{ $spec->manufacturer }}</td>
+                                    <td>
+                                        <a href="{{ route('product-specifications.edit', $spec->id) }}" class="btn btn-sm btn-primary">Edit</a>
+                                        <form action="{{ route('product-specifications.destroy', $spec->id) }}" method="POST" style="display:inline-block;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
 
