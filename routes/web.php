@@ -15,6 +15,7 @@ use App\Http\Controllers\Backend\ProductSpecificationsController;
 
 
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\ProductDetailsController;
 
 // =========================================================================== Backend Routes
 
@@ -71,5 +72,7 @@ Route::group(['prefix'=> '', 'middleware'=>[\App\Http\Middleware\PreventBackHist
 
     
     Route::get('/', [HomeController::class, 'index'])->name('home.page');
+    Route::get('/product-details/{slug}', [ProductDetailsController::class, 'show'])->name('product-details.show');
+
    
 });

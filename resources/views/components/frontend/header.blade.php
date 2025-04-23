@@ -119,7 +119,7 @@
                                                     <ul class="dropdown-menu">
                                                         @foreach ($products as $product)
                                                             <li class="menu-item nav-item">
-                                                                <a href="#" class="dropdown-item nav-link">
+                                                                <a href="{{ route('product-details.show', $product->slug) }}" class="dropdown-item nav-link">
                                                                     <span>{{ $product->product_name }}</span>
                                                                 </a>
                                                             </li>
