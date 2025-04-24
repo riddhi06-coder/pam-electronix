@@ -190,8 +190,33 @@
 
 
             @include('components.frontend.footer')
-
+            
             @include('components.frontend.main-js')
+            <script type="text/javascript" src="{{ asset('frontend/assets/js/freeze-table.min.js') }}" defer></script>
+
+
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    document.querySelectorAll('.quantity').forEach(function (container) {
+                        const minusBtn = container.querySelector('.minus');
+                        const plusBtn = container.querySelector('.plus');
+                        const input = container.querySelector('.qty');
+
+                        minusBtn.addEventListener('click', function () {
+                            let value = parseInt(input.value) || 0;
+                            if (value > 1) {
+                                input.value = value - 1;
+                            }
+                        });
+
+                        plusBtn.addEventListener('click', function () {
+                            let value = parseInt(input.value) || 0;
+                            input.value = value + 1;
+                        });
+                    });
+                });
+            </script>
+
 
 </body>
 </html>

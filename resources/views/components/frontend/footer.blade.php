@@ -31,7 +31,7 @@
                                             <div class="menu-information-container">
                                                 <ul>
                                                     @foreach($chunks[0] as $product)
-                                                        <li><a href="#">{{ $product->product_name }}</a></li>
+                                                        <li><a href="{{ route('product-details.show', $product->slug) }}">{{ $product->product_name }}</a></li>
                                                     @endforeach
                                                 </ul>
                                             </div>
@@ -40,7 +40,7 @@
                                             <div class="menu-essentials-container">
                                                 <ul>
                                                     @foreach($chunks[1] as $product)
-                                                        <li><a href="#">{{ $product->product_name }}</a></li>
+                                                        <li><a href="{{ route('product-details.show', $product->slug) }}">{{ $product->product_name }}</a></li>
                                                     @endforeach
                                                 </ul>
                                             </div>

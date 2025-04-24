@@ -86,7 +86,7 @@
                         <div class="container">
                             <nav class="inner_box">
                                 <div class="header_logo_box">
-                                    <a href="#" class="logo navbar-brand">
+                                    <a href="{{ route('home.page') }}" class="logo navbar-brand">
                                         <img src="{{ asset('frontend/assets/images/logo.webp') }}" alt="Logo" class="logo_default">
                                         <img src="{{ asset('frontend/assets/images/logo.webp') }}" alt="Logo" class="logo__sticky">
                                     </a>
