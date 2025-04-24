@@ -10,7 +10,7 @@
             <div class="toggle-sidebar"><i class="status_toggle middle sidebar-toggle" data-feather="grid"> </i></div>
           </div>
           <div class="logo-icon-wrapper">
-            <!-- <a href="{{ route('admin.dashboard') }}"><img class="img-fluid" src="{{ asset('admin/assets/images/logo/logo.webp') }}" alt="" style="max-width: 20% !important;"></a> -->
+            <a href="{{ route('admin.dashboard') }}"><img class="img-fluid" src="{{ asset('frontend/assets/images/favicon.ico') }}" alt="" style="max-width: 20% !important;"></a>
           </div>
           
           <nav class="sidebar-main">
