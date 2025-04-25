@@ -13,8 +13,10 @@
 
             @include('components.frontend.header')
 
+              
+                    <div class="page_header_default style_one" 
                 @if ($banners->isNotEmpty())
-                    <div class="page_header_default style_one" style="background-image: url('{{ asset('uploads/product/' . $banners->first()->banner_image) }}');">
+                    style="background-image: url('{{ asset('uploads/product/' . $banners->first()->banner_image) }}');">
                 @endif
                <div class="page_header_content">
                   <div class="auto-container">
