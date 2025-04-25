@@ -13,13 +13,9 @@
 
             @include('components.frontend.header')
 
-
-            
-
-            <div class="page_header_default style_one">
-<!--                <div class="parallax_cover">
-                  <div class="simpleParallax"><img src="assets/images/bg/2148882631.webp" alt="bg_image" class="cover-parallax" /></div>
-               </div> -->
+                @if ($banners->isNotEmpty())
+                    <div class="page_header_default style_one" style="background-image: url('{{ asset('uploads/product/' . $banners->first()->banner_image) }}');">
+                @endif
                <div class="page_header_content">
                   <div class="auto-container">
                      <div class="row">
@@ -42,6 +38,7 @@
                   </div>
                </div>
             </div>
+
             <!----header----->
             <div id="content" class="site-content ">
                <div class="pd_top_90"></div>
@@ -117,24 +114,24 @@
                                        <th>Packaging</th>
                                     </tr>
                                  </thead>
-                                 <tbody>
+                                <tbody>
                                     @foreach($Specifications as $index => $spec)
                                     <tr>
                                         <td>{{ $index + 1 }}</td>
                                         <td class="product-thumbnail">
                                             <a href="#">
-                                                <img width="300" height="300" src="{{ asset('uploads/product/specifications/' . $spec->product_image) }}" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="img" />
+                                                <img width="300" height="300" src="{{ asset('uploads/product/specifications/' . ($spec->product_image ?? 'default.png')) }}" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="img" />
                                             </a>
                                         </td>
-                                        <td>{{ $spec->name }}</td>
+                                        <td>{{ $spec->name ?? '-' }}</td>
                                         <td class="product-name" data-title="Product">
-                                            <a href="#">{{ $spec->manufacturer }}</a>
+                                            {{ $spec->manufacturer ?? '-' }}
                                         </td>
-                                        <td>{!! $spec->product_description !!}</td>
-                                        <td>{{ $spec->availability }} In Stock</td>
+                                        <td>{!! $spec->product_description ?? '-' !!}</td>
+                                        <td>{{ $spec->availability ?? '-' }} In Stock</td>
                                         <td class="price-sec">
-                                            <div><a href="#">1</a> <span>₹{{ $spec->pricing }}</span></div>
-                                            <div><a href="#">10</a> <span>₹{{ $spec->pricing }}</span></div>
+                                            <div><a href="#">1</a> <span>₹{{ $spec->pricing ?? '-' }}</span></div>
+                                            <div><a href="#">10</a> <span>₹{{ $spec->pricing ?? '-' }}</span></div>
                                         </td>
                                         <td class="product-quantity" data-title="Quantity">
                                             <div class="quantity">
@@ -143,25 +140,25 @@
                                                 <input type="button" value="+" class="qty_button plus">
                                             </div>
                                         </td>
-                                        <td><a href="#" target="_blank" rel="nofollow"  data-id="{{ $spec->id }}" class="theme-btn product-page five">Buy Now</a></td>
-                                        <td>{{ $spec->rohs }}</td>
-                                        <td>{{ $spec->capacitance }}</td>
-                                        <td>{{ $spec->voltage_rating }} V</td>
-                                        <td>{{ $spec->termination }}</td>
-                                        <td>{{ $spec->pf }}</td>
-                                        <td>{{ $spec->voltage }} V</td>
-                                        <td>{{ $spec->lead_spacing }}</td>
-                                        <td>{{ $spec->length }}</td>
-                                        <td>{{ $spec->width }}</td>
-                                        <td>{{ $spec->height }}</td>
-                                        <td>{{ $spec->lead_wire }}</td>
-                                        <td>{{ $spec->tolerance }}</td>
-                                        <td>{{ $spec->package_case }}</td>
-                                        <td>{{ $spec->operating_temp }}</td>
-                                        <td>{{ $spec->max_operating_temp }}</td>
-                                        <td>{{ $spec->series }}</td>
-                                        <td>{{ $spec->qualification }}</td>
-                                        <td>{{ $spec->packaging }}</td>
+                                        <td><a href="#" target="_blank" rel="nofollow" data-id="{{ $spec->id }}" class="theme-btn product-page five">Buy Now</a></td>
+                                        <td>{{ $spec->rohs ?? '-' }}</td>
+                                        <td>{{ $spec->capacitance ?? '-' }}</td>
+                                        <td>{{ $spec->voltage_rating ?? '-' }} V</td>
+                                        <td>{{ $spec->termination ?? '-' }}</td>
+                                        <td>{{ $spec->pf ?? '-' }}</td>
+                                        <td>{{ $spec->voltage ?? '-' }} V</td>
+                                        <td>{{ $spec->lead_spacing ?? '-' }}</td>
+                                        <td>{{ $spec->length ?? '-' }}</td>
+                                        <td>{{ $spec->width ?? '-' }}</td>
+                                        <td>{{ $spec->height ?? '-' }}</td>
+                                        <td>{{ $spec->lead_wire ?? '-' }}</td>
+                                        <td>{{ $spec->tolerance ?? '-' }}</td>
+                                        <td>{{ $spec->package_case ?? '-' }}</td>
+                                        <td>{{ $spec->operating_temp ?? '-' }} C</td>
+                                        <td>{{ $spec->max_operating_temp ?? '-' }} C</td>
+                                        <td>{{ $spec->series ?? '-' }}</td>
+                                        <td>{{ $spec->qualification ?? '-' }}</td>
+                                        <td>{{ $spec->packaging ?? '-' }}</td>
                                     </tr>
                                     @endforeach
                                 </tbody>

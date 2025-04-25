@@ -37,37 +37,37 @@ class ProductSpecificationsController extends Controller
         // dd($request);
         $validator = Validator::make($request->all(), [
             'product_id' => 'required|exists:master_product,id',
-            'product_image' => 'required|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'product_image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
 
-            'name' => 'required|string|max:255',
-            'manufacturer' => 'required|string|max:255',
-            'product_description' => 'required|string',
+            'name' => 'nullable|string|max:255',
+            'manufacturer' => 'nullable|string|max:255',
+            'product_description' => 'nullable|string',
 
-            'availability' => 'required|string|max:255',
-            'pricing' => 'required|numeric|min:0',
+            'availability' => 'nullable|string|max:255',
+            'pricing' => 'nullable|numeric|min:0',
 
-            'rohs' => 'required|string|max:255',
-            'capacitance' => 'required|numeric|min:0',
-            'voltage' => 'required|numeric|min:0',
+            'rohs' => 'nullable|string|max:255',
+            'capacitance' => 'nullable|numeric|min:0',
+            'voltage' => 'nullable|numeric|min:0',
 
-            'termination' => 'required|string|max:255',
-            'pf' => 'required|string|max:255',
+            'termination' => 'nullable|string|max:255',
+            'pf' => 'nullable|string|max:255',
 
-            'lead_spacing' => 'required|string|max:255',
-            'length' => 'required|numeric|min:0',
-            'width' => 'required|numeric|min:0',
-            'height' => 'required|numeric|min:0',
+            'lead_spacing' => 'nullable|string|max:255',
+            'length' => 'nullable|numeric|min:0',
+            'width' => 'nullable|numeric|min:0',
+            'height' => 'nullable|numeric|min:0',
 
-            'lead_wire' => 'required|string|max:255',
-            'tolerance' => 'required|string|max:255',
-            'package_case' => 'required|numeric|min:0',
+            'lead_wire' => 'nullable|string|max:255',
+            'tolerance' => 'nullable|string|max:255',
+            'package_case' => 'nullable|numeric|min:0',
 
-            'operating_temp' => 'required|string|max:255',
-            'max_operating_temp' => 'required|string|max:255',
+            'operating_temp' => 'nullable|string|max:255',
+            'max_operating_temp' => 'nullable|string|max:255',
 
-            'series' => 'required|string|max:255',
-            'qualification' => 'required|string|max:255',
-            'packaging' => 'required|string|max:255',
+            'series' => 'nullable|string|max:255',
+            'qualification' => 'nullable|string|max:255',
+            'packaging' => 'nullable|string|max:255',
         ], [
             'required' => 'The :attribute field is required.',
             'numeric' => 'The :attribute must be a number.',
@@ -144,36 +144,36 @@ class ProductSpecificationsController extends Controller
             'product_id' => 'required|exists:master_product,id',
             'product_image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
 
-            'name' => 'required|string|max:255',
-            'manufacturer' => 'required|string|max:255',
-            'product_description' => 'required|string',
+            'name' => 'nullable|string|max:255',
+            'manufacturer' => 'nullable|string|max:255',
+            'product_description' => 'nullable|string',
 
-            'availability' => 'required|string|max:255',
-            'pricing' => 'required|numeric|min:0',
+            'availability' => 'nullable|string|max:255',
+            'pricing' => 'nullable|numeric|min:0',
 
-            'rohs' => 'required|string|max:255',
-            'capacitance' => 'required|numeric|min:0',
-            'voltage' => 'required|numeric|min:0',
+            'rohs' => 'nullable|string|max:255',
+            'capacitance' => 'nullable|numeric|min:0',
+            'voltage' => 'nullable|numeric|min:0',
             'voltage_rating' => 'nullable|string|max:255',
 
-            'termination' => 'required|string|max:255',
-            'pf' => 'required|string|max:255',
+            'termination' => 'nullable|string|max:255',
+            'pf' => 'nullable|string|max:255',
 
-            'lead_spacing' => 'required|string|max:255',
-            'length' => 'required|numeric|min:0',
-            'width' => 'required|numeric|min:0',
-            'height' => 'required|numeric|min:0',
+            'lead_spacing' => 'nullable|string|max:255',
+            'length' => 'nullable|numeric|min:0',
+            'width' => 'nullable|numeric|min:0',
+            'height' => 'nullable|numeric|min:0',
 
-            'lead_wire' => 'required|string|max:255',
-            'tolerance' => 'required|string|max:255',
-            'package_case' => 'required|numeric|min:0',
+            'lead_wire' => 'nullable|string|max:255',
+            'tolerance' => 'nullable|string|max:255',
+            'package_case' => 'nullable|numeric|min:0',
 
-            'operating_temp' => 'required|string|max:255',
-            'max_operating_temp' => 'required|string|max:255',
+            'operating_temp' => 'nullable|string|max:255',
+            'max_operating_temp' => 'nullable|string|max:255',
 
-            'series' => 'required|string|max:255',
-            'qualification' => 'required|string|max:255',
-            'packaging' => 'required|string|max:255',
+            'series' => 'nullable|string|max:255',
+            'qualification' => 'nullable|string|max:255',
+            'packaging' => 'nullable|string|max:255',
         ]);
 
         if ($validator->fails()) {

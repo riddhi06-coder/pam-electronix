@@ -33,7 +33,7 @@ class ProductDetailsController extends Controller
                     ->whereNull('deleted_by')
                     ->get();
     
-                   
+        // dd($banners);          
         // Fetch specifications for that product
         $Specifications = ProductSpecification::where('product_id', $product->id)
                     ->whereNull('deleted_by')

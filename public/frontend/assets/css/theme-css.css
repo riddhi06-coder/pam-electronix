@@ -1867,7 +1867,7 @@ body.error404 .left-sidebar .content-area {
   padding: 180px 0px 50px;
   overflow: hidden;
   align-items: center;
-  background-image: url('../images/bg/2148882631.webp');
+  /* background-image: url('../images/bg/2148882631.webp'); */
   background-size: cover;
   background-position: center;
 }
