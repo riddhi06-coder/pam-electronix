@@ -191,7 +191,6 @@
             @include('components.frontend.main-js')
             <script type="text/javascript" src="{{ asset('frontend/assets/js/freeze-table.min.js') }}" defer></script>
 
-
             <script>
                 document.addEventListener('DOMContentLoaded', function () {
                     document.querySelectorAll('.quantity').forEach(function (container) {

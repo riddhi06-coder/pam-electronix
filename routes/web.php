@@ -12,6 +12,7 @@ use App\Http\Controllers\Backend\FooterController;
 use App\Http\Controllers\Backend\AddProductController;
 use App\Http\Controllers\Backend\ProductDescriptionController;
 use App\Http\Controllers\Backend\ProductSpecificationsController;
+use App\Http\Controllers\Backend\SpecificationsController;
 
 
 use App\Http\Controllers\Frontend\HomeController;
@@ -63,7 +64,8 @@ Route::resource('product-descriptions', ProductDescriptionController::class);
 // ==== Manage Product Specifications
 Route::resource('product-specifications', ProductSpecificationsController::class);
 
-
+// ==== Manage Specifications
+Route::resource('manage-specifications', SpecificationsController::class);
 
 
 // ===================================================================Frontend================================================================
