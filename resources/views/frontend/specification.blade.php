@@ -65,38 +65,38 @@
                     </div>
 
                     <div class="pd_bottom_60"></div>
-                    @foreach ($banners as $banner)
-                        @php
-                            $headers = json_decode($banner->headers, true);
-                            $tempCoeffs = json_decode($banner->spec_temp_coeff, true);
-                            $capacitorDrifts = json_decode($banner->spec_capacitor_drift, true);
-                        @endphp
+                        @foreach ($banners as $banner)
+                            @php
+                                $headers = json_decode($banner->headers, true);
+                                $tempCoeffs = json_decode($banner->spec_temp_coeff, true);
+                                $capacitorDrifts = json_decode($banner->spec_capacitor_drift, true);
+                            @endphp
 
-                        @if (!empty($headers) && !empty($tempCoeffs))
-                            <div class="container woocommerce-cart-form">
-                                <div class="col-lg-12">
-                                    <table class="shop_table specification-table shop_table_responsive cart woocommerce-cart-form__contents" cellspacing="0">
-                                        <thead>
-                                            <tr>
-                                                <th class="product-name test">{{ $headers[0]  }}</th>
-                                                <th class="product-price test">{{ $headers[1]  }}</th>
-                                                <th class="product-quantity test">{{ $headers[2] }}</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($tempCoeffs as $index => $temp)
-                                                <tr class="woocommerce-cart-form__cart-item cart_item">
-                                                    <td class="product-name test1" ><b>{{ is_string($index) ? $index : chr(67 + $index) }}</b></td>
-                                                    <td class="product-name test1">{{ $temp }}</td>
-                                                    <td class="product-name test1">{{ $capacitorDrifts[$index] ?? '-' }}</td>
+                            @if (!empty($headers) && !empty($tempCoeffs))
+                                <div class="container woocommerce-cart-form">
+                                    <div class="col-lg-12">
+                                        <table class="shop_table specification-table shop_table_responsive cart woocommerce-cart-form__contents" cellspacing="0">
+                                            <thead>
+                                                <tr>
+                                                    <th class="product-name test">{{ $headers[0]  }}</th>
+                                                    <th class="product-price test">{{ $headers[1]  }}</th>
+                                                    <th class="product-quantity test">{{ $headers[2] }}</th>
                                                 </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($tempCoeffs as $index => $temp)
+                                                    <tr class="woocommerce-cart-form__cart-item cart_item">
+                                                        <td class="product-name test1" ><b>{{ is_string($index) ? $index : chr(67 + $index) }}</b></td>
+                                                        <td class="product-name test1">{{ $temp }}</td>
+                                                        <td class="product-name test1">{{ $capacitorDrifts[$index] ?? '-' }}</td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
-                            </div>
-                        @endif
-                    @endforeach
+                            @endif
+                        @endforeach
 
     
 
