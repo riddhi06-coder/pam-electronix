@@ -85,6 +85,7 @@
                                     <div class="content">
                                         <h6 class="titles">Mail Us</h6>
                                         <a href="mailto:{{ $contact->email }}">{{ $contact->email }}</a>
+                                        <a href="mailto:{{ $contact->email2 }}">{{ $contact->email2 }}</a>
                                     </div>
                                 </div>
                             </div>
@@ -96,7 +97,7 @@
                                     <span class="icon-telephone"></span>
                                     <div class="content">
                                         <h6 class="titles">Phone</h6>
-                                        <a href="tel:{{ $contact->phone }}">+91 {{ $contact->phone }}</a>
+                                        <a href="tel:{{ $contact->phone }}">+1 {{ $contact->phone }}</a>
                                     </div>
                                 </div>
                             </div>

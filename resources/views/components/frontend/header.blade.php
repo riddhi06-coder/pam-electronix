@@ -134,7 +134,7 @@
                                                     </a>
                                                 </li>
                                                 <li class="menu-item nav-item">
-                                                    <a href="#" class="nav-link" aria-label="View">
+                                                    <a href="{{ route('contact.us') }}" class="nav-link" aria-label="View">
                                                         <span>Contact Us</span>
                                                     </a>
                                                 </li>

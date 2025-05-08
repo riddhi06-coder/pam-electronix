@@ -34,9 +34,10 @@ class FooterController extends Controller
     {
         $validated = $request->validate([
             'email' => 'required|email|max:255',
+            'email2' => 'nullable|email|max:255',
             'phone' => 'required|digits_between:10,12',
             'address' => 'required|string|max:1000',
-            'url' => 'required|url|max:255',
+            'url' => 'required|url|max:1000',
             'social_media_platform' => 'required|array',
             'social_media_platform.*' => 'required|string',
             'social_media_url' => 'required|array',
@@ -44,6 +45,7 @@ class FooterController extends Controller
         ], [
             'email.required' => 'Email is required.',
             'email.email' => 'Please enter a valid email address.',
+            'email2.email' => 'Please enter a valid email address.',
             'phone.required' => 'Phone number is required.',
             'phone.digits_between' => 'Phone number must be between 10 to 12 digits.',
             'address.required' => 'Address is required.',
@@ -55,6 +57,7 @@ class FooterController extends Controller
 
         FooterContact::create([
             'email' => $validated['email'],
+            'email2' => $validated['email2'],
             'phone' => $validated['phone'],
             'address' => $validated['address'],
             'url' => $validated['url'],
@@ -78,9 +81,10 @@ class FooterController extends Controller
     {
         $validated = $request->validate([
             'email' => 'required|email|max:255',
+            'email2' => 'nullable|email|max:255',
             'phone' => 'required|digits_between:10,12',
             'address' => 'required|string|max:1000',
-            'url' => 'required|url|max:255',
+            'url' => 'required|url|max:1000',
             'social_media_platform' => 'required|array',
             'social_media_platform.*' => 'required|string',
             'social_media_url' => 'required|array',
@@ -88,6 +92,7 @@ class FooterController extends Controller
         ], [
             'email.required' => 'Email is required.',
             'email.email' => 'Please enter a valid email address.',
+            'email2.email' => 'Please enter a valid email address.',
             'phone.required' => 'Phone number is required.',
             'phone.digits_between' => 'Phone number must be between 10 to 12 digits.',
             'address.required' => 'Address is required.',
@@ -101,6 +106,7 @@ class FooterController extends Controller
 
         $footerContact->update([
             'email' => $validated['email'],
+            'email2' => $validated['email2'],
             'phone' => $validated['phone'],
             'address' => $validated['address'],
             'url' => $validated['url'],

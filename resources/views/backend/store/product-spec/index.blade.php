@@ -50,7 +50,6 @@
                         <a href="{{ route('product-specifications.create') }}" class="btn btn-primary px-5 radius-30">+ Add Product Specifications</a>
                     </div>
 
-
                     <div class="table-responsive custom-scrollbar">
                     <table class="display" id="basic-1">
                         <thead>
@@ -93,7 +92,6 @@
                             @endforeach
                         </tbody>
                     </table>
-
 
                     </div>
                   </div>

@@ -78,17 +78,17 @@
                                     <table class="shop_table specification-table shop_table_responsive cart woocommerce-cart-form__contents" cellspacing="0">
                                         <thead>
                                             <tr>
-                                                <th class="product-name">{{ $headers[0]  }}</th>
-                                                <th class="product-price">{{ $headers[1]  }}</th>
-                                                <th class="product-quantity">{{ $headers[2] }}</th>
+                                                <th class="product-name test">{{ $headers[0]  }}</th>
+                                                <th class="product-price test">{{ $headers[1]  }}</th>
+                                                <th class="product-quantity test">{{ $headers[2] }}</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @foreach ($tempCoeffs as $index => $temp)
                                                 <tr class="woocommerce-cart-form__cart-item cart_item">
-                                                    <td class="product-name"><b>{{ is_string($index) ? $index : chr(67 + $index) }}</b></td>
-                                                    <td class="product-name">{{ $temp }}</td>
-                                                    <td class="product-name">{{ $capacitorDrifts[$index] ?? '-' }}</td>
+                                                    <td class="product-name test1" ><b>{{ is_string($index) ? $index : chr(67 + $index) }}</b></td>
+                                                    <td class="product-name test1">{{ $temp }}</td>
+                                                    <td class="product-name test1">{{ $capacitorDrifts[$index] ?? '-' }}</td>
                                                 </tr>
                                             @endforeach
                                         </tbody>

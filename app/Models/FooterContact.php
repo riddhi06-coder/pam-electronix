@@ -14,6 +14,7 @@ class FooterContact extends Model
 
     protected $fillable = [
         'email',
+        'email2',
         'phone',
         'address',
         'url',
