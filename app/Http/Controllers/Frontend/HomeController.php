@@ -14,6 +14,7 @@ use App\Models\HomeWhyChoose;
 use App\Models\HomeIntro;
 use App\Models\BannerDetails;
 use App\Models\Product;
+use App\Models\Specification;
 
 use Carbon\Carbon;
 
@@ -28,6 +29,12 @@ class HomeController extends Controller
         $products = Product::orderBy('id', 'asc')->get();
 
         return view('frontend.home', compact('banners','homeIntro','homeWhyChoose','products'));
+    }
+
+    public function specifications()
+    {
+        $banners = Specification::wherenull('deleted_by')->get(); 
+        return view('frontend.specification', compact('banners'));
     }
     
 }

@@ -74,6 +74,7 @@ Route::group(['prefix'=> '', 'middleware'=>[\App\Http\Middleware\PreventBackHist
 
     
     Route::get('/', [HomeController::class, 'index'])->name('home.page');
+    Route::get('/specifications', [HomeController::class, 'specifications'])->name('show.specifications');
     Route::get('/product-details/{slug}', [ProductDetailsController::class, 'show'])->name('product-details.show');
 
    

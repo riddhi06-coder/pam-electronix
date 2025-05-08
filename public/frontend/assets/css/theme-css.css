@@ -1867,7 +1867,7 @@ body.error404 .left-sidebar .content-area {
   padding: 180px 0px 50px;
   overflow: hidden;
   align-items: center;
-  /* background-image: url('../images/bg/2148882631.webp'); */
+  background-image: url('../images/bg/2148882631.webp');
   background-size: cover;
   background-position: center;
 }
@@ -2703,7 +2703,7 @@ body .enabled_custom_title .title_page .main_tit {
   display: inline-block;
   padding: 0px 25px;
   border-radius: 30px;
-  background: var(--primary-color-one);
+  background: #b78d52;
   color: #fff;
   line-height: 56px;
   min-height: 56px;
@@ -2732,7 +2732,7 @@ body .enabled_custom_title .title_page .main_tit {
   -moz-transition: all 0.5s ease;
   -ms-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
-  background: var(--primary-color-two);
+  background: #000000;
   z-index: -1;
 }
 .theme-btn.three::after {
@@ -2747,7 +2747,7 @@ body .enabled_custom_title .title_page .main_tit {
   -moz-transition: all 0.5s ease;
   -ms-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
-  background: var(--primary-color-two);
+  background: #000000;
   z-index: -1;
 }
 .theme-btn.three:hover {
@@ -18165,14 +18165,17 @@ header .flaticon-list {
 .icon_box_all.style_three .icon_content .txt_content ul li::before {
   position: absolute;
   content: "";
-  width: 12px;
-  height: 12px;
-  border-radius: 20px;
-  border: 2px solid var(--border-color-dark);
-  left: 0;
-  top: 0;
-  bottom: 0;
-  margin: auto;
+  display: inline-block;
+  width: 16px; /* adjust size */
+  height: 16px;
+  margin-right: 8px;
+  background-image: url('../images/icons/right-chevron-1.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  vertical-align: middle;
+  /* margin: auto; */
+  left: -2px;
+  top: 4px;
 }
 .icon_box_all.style_three .icon_content .txt_content .btn_left {
   text-align: left;
@@ -20587,7 +20590,7 @@ header .flaticon-list {
 }
 .social_media_v_one.style_two ul li a {
   background-color: var(--primary-color-three);
-  color: var(--primary-color-one);
+  color: #000000;
 }
 .social_media_v_one.style_three ul li a {
   background-color: var(--primary-color-one);
@@ -20655,7 +20658,7 @@ header .flaticon-list {
   width: 40px;
   height: 40px;
   border-radius: 50px;
-  background: var(--primary-color-one);
+  background: #b78d52;
   margin: auto;
   text-align: center;
   line-height: 40px;
@@ -27534,10 +27537,10 @@ select {
   width: 100px;
 }
 .woocommerce .woocommerce-cart-form table.shop_table td a.remove, .woocommerce .yith-wcwl-form.wishlist-fragment table.shop_table td a.remove, .woocommerce_plugin_on .woocommerce-cart-form table.shop_table td a.remove, .woocommerce_plugin_on .yith-wcwl-form.wishlist-fragment table.shop_table td a.remove {
-  color: var(--primary-color-one) !important;
+  color: #b78d52 !important;
 }
 .woocommerce .woocommerce-cart-form table.shop_table td a.remove:hover, .woocommerce .yith-wcwl-form.wishlist-fragment table.shop_table td a.remove:hover, .woocommerce_plugin_on .woocommerce-cart-form table.shop_table td a.remove:hover, .woocommerce_plugin_on .yith-wcwl-form.wishlist-fragment table.shop_table td a.remove:hover {
-  background: var(--primary-color-one) !important;
+  background: #b78d52 !important;
   color: #fff !important;
 }
 .woocommerce .woocommerce-cart-form table.shop_table td .coupon input, .woocommerce .yith-wcwl-form.wishlist-fragment table.shop_table td .coupon input, .woocommerce_plugin_on .woocommerce-cart-form table.shop_table td .coupon input, .woocommerce_plugin_on .yith-wcwl-form.wishlist-fragment table.shop_table td .coupon input {
@@ -27551,7 +27554,7 @@ select {
 .woocommerce .woocommerce-cart-form table.shop_table td button, .woocommerce .yith-wcwl-form.wishlist-fragment table.shop_table td button, .woocommerce_plugin_on .woocommerce-cart-form table.shop_table td button, .woocommerce_plugin_on .yith-wcwl-form.wishlist-fragment table.shop_table td button {
   font-size: 14px !important;
   line-height: 56px !important;
-  background: var(--primary-color-one) !important;
+  background: #b78d52 !important;
   color: #fff !important;
   line-height: 56px !important;
   font-weight: 600 !important;
@@ -27637,7 +27640,7 @@ select {
 .woocommerce-cart-form {
   margin-bottom: 50px;
   overflow-x: auto;
-  border-right: 1px solid #e4e7ee;
+  /* border-right: 1px solid #e4e7ee; */
 }
 
 .quantity,
@@ -27696,7 +27699,7 @@ select {
 .woocommerce_plugin_on .cart-collaterals .checkout-button {
   font-size: 14px !important;
   line-height: 56px !important;
-  background: var(--primary-color-one) !important;
+  background: #b78d52 !important;
   color: #fff !important;
   line-height: 56px !important;
   font-weight: 600 !important;
@@ -27710,7 +27713,7 @@ select {
 }
 .woocommerce .cart-collaterals .checkout-button:hover,
 .woocommerce_plugin_on .cart-collaterals .checkout-button:hover {
-  background: var(--primary-color-two) !important;
+  background: #000000 !important;
   color: #fff;
 }
 .woocommerce .shop_table td::before,
@@ -27801,7 +27804,7 @@ select {
 }
 
 #add_payment_method #payment, .woocommerce-cart #payment, .woocommerce-checkout #payment {
-  background: var(--primary-color-three) !important;
+  background: #fff7ea;
   padding: 40px;
   margin-top: 40px;
   margin-bottom: 30px;
@@ -27860,8 +27863,8 @@ select {
   border-radius: 5px;
   border-radius: 10px !important;
   padding: 40px 40px 20px;
-  border: 1px solid var(--border-color-dark);
-  background: var(--primary-color-three);
+  border: 1px solid #b78d5261;
+  background: #fff7ea;
 }
 .woocommerce-checkout-review-order .shop_table {
   border-collapse: collapse !important;
@@ -27899,7 +27902,7 @@ select {
 }
 .woocommerce-checkout-review-order .shop_table tfoot .woocommerce-Price-amount.amount {
   font-size: 16px;
-  color: var(--primary-color-one);
+  color: #b78d52;
   font-family: var(--creote-family-one);
   font-weight: 600;
 }
@@ -28796,7 +28799,7 @@ select {
   padding: 20px 25px 15px;
   background: #fff;
   list-style: none;
-  border: 1px solid var(--border-color-dark);
+  border: 1px solid #b78d5291;
 }
 .accordion-box .accordion h4 {
   font-size: 18px;

@@ -63,24 +63,37 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($specs as $index => $spec)
+                            @php
+                                $groupedSpecs = collect($specs)->groupBy(function($item) {
+                                    return $item->product->product_name ?? 'Unknown Product';
+                                });
+                                $row = 1;
+                            @endphp
+
+                            @foreach ($groupedSpecs as $productName => $specGroup)
                                 <tr>
-                                    <td>{{ $index + 1 }}</td>
-                                    <td>{{ $spec->product->product_name ?? 'N/A' }}</td>
-                                    <td>{{ $spec->name }}</td>
-                                    <td>{{ $spec->manufacturer }}</td>
-                                    <td>
-                                        <a href="{{ route('product-specifications.edit', $spec->id) }}" class="btn btn-sm btn-primary">Edit</a>
-                                        <form action="{{ route('product-specifications.destroy', $spec->id) }}" method="POST" style="display:inline-block;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
-                                        </form>
-                                    </td>
+                                    <td colspan="5" style="font-weight: bold; background-color: #f2f2f2;">{{ $productName }}</td>
                                 </tr>
+                                @foreach ($specGroup as $spec)
+                                    <tr>
+                                        <td>{{ $row++ }}</td>
+                                        <td>{{ $productName }}</td>
+                                        <td>{{ $spec->name }}</td>
+                                        <td>{{ $spec->manufacturer }}</td>
+                                        <td>
+                                            <a href="{{ route('product-specifications.edit', $spec->id) }}" class="btn btn-sm btn-primary">Edit</a>
+                                            <form action="{{ route('product-specifications.destroy', $spec->id) }}" method="POST" style="display:inline-block;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             @endforeach
                         </tbody>
                     </table>
+
 
                     </div>
                   </div>

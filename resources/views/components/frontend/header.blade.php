@@ -102,7 +102,7 @@
                                         <div class="navigation_menu">
                                             <ul id="myNavbar" class="navbar_nav">
                                                 <li class="menu-item nav-item">
-                                                    <a href="#" class="nav-link">
+                                                    <a href="{{ route('home.page') }}" class="nav-link">
                                                         <span>Home</span>
                                                     </a>
                                                 </li>
@@ -129,7 +129,7 @@
 
 
                                                 <li class="menu-item nav-item">
-                                                    <a href="#" class="nav-link" aria-label="View">
+                                                    <a href="{{ route('show.specifications') }}" class="nav-link" aria-label="View">
                                                         <span>Specifications</span>
                                                     </a>
                                                 </li>
