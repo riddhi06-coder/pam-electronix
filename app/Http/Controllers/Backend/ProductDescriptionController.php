@@ -224,7 +224,7 @@ class ProductDescriptionController extends Controller
         // Prepare Information Headers & Details
         $infoHeaders = $request->input('info_header', []);
         $infoDetails = [];
-        $detailCount = count($request->input('d1', [])); // Assuming all d1..d8 have same count
+        $detailCount = count($request->input('d1', [])); 
 
         for ($i = 0; $i < $detailCount; $i++) {
             $infoDetails[] = [
@@ -298,6 +298,12 @@ class ProductDescriptionController extends Controller
     public function edit($id)
     {
         $details = ProductDescription::findOrFail($id);
+        $details->header = json_decode($details->header, true); 
+        $details->case_style = json_decode($details->case_style, true); 
+        $details->info_header = json_decode($details->info_header, true); 
+        $details->info_details = json_decode($details->info_details, true); 
+        $details->print_image = json_decode($details->print_image, true); 
+
         $products = Product::orderBy('id', 'asc')->wherenull('deleted_by')->get();
         return view('backend.store.product-desc.edit', compact('details', 'products'));
     }
