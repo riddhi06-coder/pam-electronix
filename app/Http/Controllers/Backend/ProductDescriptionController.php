@@ -302,7 +302,7 @@ class ProductDescriptionController extends Controller
         $details->print_image = json_decode($details->print_image, true); 
 
         $products = Product::orderBy('id', 'asc')->wherenull('deleted_by')->get();
-        
+
         return view('backend.store.product-desc.edit', compact('details', 'products'));
     }
 
@@ -542,7 +542,6 @@ class ProductDescriptionController extends Controller
 
         return redirect()->route('product-descriptions.index')->with('message', 'Product description updated successfully.');
     }
-
 
 
     public function destroy(string $id)
