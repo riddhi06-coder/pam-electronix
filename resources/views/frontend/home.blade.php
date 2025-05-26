@@ -119,7 +119,7 @@
                                             </div>
                                             <div class="txt_content">
                                                 <h3>
-                                                    <a href="#" target="_blank" rel="nofollow">{{ $product->product_name }}</a>
+                                                    <a href="{{ route('product-details.show', $product->slug) }}" target="_blank" rel="nofollow">{{ $product->product_name }}</a>
                                                 </h3>
                                             </div>
                                         </div>

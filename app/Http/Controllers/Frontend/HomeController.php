@@ -27,6 +27,7 @@ class HomeController extends Controller
         $homeIntro = HomeIntro::whereNull('deleted_by')->latest()->first();
         $homeWhyChoose = HomeWhyChoose::whereNull('deleted_by')->latest()->first(); 
         $products = Product::orderBy('id', 'asc')->get();
+        // dd($products);
 
         return view('frontend.home', compact('banners','homeIntro','homeWhyChoose','products'));
     }
