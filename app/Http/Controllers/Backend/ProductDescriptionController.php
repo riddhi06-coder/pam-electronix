@@ -292,9 +292,6 @@ class ProductDescriptionController extends Controller
     }
 
 
-
-
-
     public function edit($id)
     {
         $details = ProductDescription::findOrFail($id);
@@ -305,6 +302,7 @@ class ProductDescriptionController extends Controller
         $details->print_image = json_decode($details->print_image, true); 
 
         $products = Product::orderBy('id', 'asc')->wherenull('deleted_by')->get();
+        
         return view('backend.store.product-desc.edit', compact('details', 'products'));
     }
 
@@ -371,7 +369,6 @@ class ProductDescriptionController extends Controller
             'style_description' => 'required|string',
 
         ], [
-            // Custom validation messages
             'product_id.required' => 'Please select a product.',
             'product_id.exists' => 'The selected product is invalid.',
 
@@ -439,7 +436,6 @@ class ProductDescriptionController extends Controller
         $product = ProductDescription::findOrFail($id);
 
 
-        // Upload logic — reuse existing images if new ones aren't uploaded
         $bannerImageName = $product->banner_image;
         if ($request->hasFile('banner_image')) {
             $banner = $request->file('banner_image');
