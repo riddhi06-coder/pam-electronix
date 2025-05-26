@@ -46,6 +46,7 @@
                             <!-- Removed empty col div -->
                             <div class="col-12">
                             <div class="tab-content" id="wizard-tabContent">
+
                                 <div class="tab-pane fade show active" id="wizard-contact" role="tabpanel" aria-labelledby="wizard-contact-tab">
                                     <form class="row g-3 needs-validation custom-input" novalidate action="{{ route('product-descriptions.store') }}" method="POST" enctype="multipart/form-data">
                                         @csrf
@@ -491,8 +492,8 @@
                                             <button class="btn btn-primary" type="submit">Submit</button>
                                         </div>
                                     </form>
-
                                 </div>
+                                
                             </div>
                             </div>
                         </div>
