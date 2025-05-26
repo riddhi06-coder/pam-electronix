@@ -863,20 +863,18 @@
 
         <!--Product Prints Image Preview & Add More Option-->
         <script>
-
             document.addEventListener("DOMContentLoaded", function () {
-                let rowIndex = 1; // Start row index for new rows
+                let rowIndex = document.querySelectorAll("#printsTable tbody tr").length;
 
-                // Add row functionality
                 document.getElementById("addPrintRow").addEventListener("click", function () {
                     const tableBody = document.querySelector("#printsTable tbody");
                     const newRow = document.createElement("tr");
 
+                    // Use the current rowIndex to uniquely identify elements
                     newRow.innerHTML = `
                         <td>
-                            <input type="file" onchange="previewPrintImage(this, ${rowIndex})" accept=".png, .jpg, .jpeg, .webp" name="print_image[]" id="print_image_${rowIndex}" class="form-control" placeholder="Upload Print Image" required>
-                            <small class="text-secondary"><b>Note: The file size should be less than 2MB.</b></small>
-                            <br>
+                            <input type="file" onchange="previewPrintImage(this, ${rowIndex})" accept=".png, .jpg, .jpeg, .webp" name="print_image[]" id="print_image_${rowIndex}" class="form-control" required>
+                            <small class="text-secondary"><b>Note: The file size should be less than 2MB.</b></small><br>
                             <small class="text-secondary"><b>Note: Only files in .jpg, .jpeg, .png, .webp format can be uploaded.</b></small>
                         </td>
                         <td>
@@ -888,7 +886,7 @@
                     `;
 
                     tableBody.appendChild(newRow);
-                    rowIndex++; // Increment row index for unique IDs
+                    rowIndex++; // increment to keep IDs unique
                 });
 
                 // Remove row functionality
@@ -900,26 +898,28 @@
                 });
             });
 
-            // Image preview function
             function previewPrintImage(input, index) {
                 const previewContainer = document.getElementById(`print-preview-container-${index}`);
-                previewContainer.innerHTML = ""; // Clear previous preview
+                previewContainer.innerHTML = ""; // Clear existing previews
+
                 if (input.files) {
                     Array.from(input.files).forEach((file) => {
                         const reader = new FileReader();
                         reader.onload = (e) => {
                             const img = document.createElement("img");
                             img.src = e.target.result;
-                            img.style.width = "100px";
-                            img.style.marginRight = "10px";
+                            img.className = "img-fluid";
+                            img.style.maxHeight = "150px";
+                            img.style.border = "1px solid #ddd";
+                            img.style.padding = "5px";
                             previewContainer.appendChild(img);
                         };
                         reader.readAsDataURL(file);
                     });
                 }
             }
-
         </script>
+
 
 
 
