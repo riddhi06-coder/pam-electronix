@@ -68,6 +68,9 @@ Route::resource('product-specifications', ProductSpecificationsController::class
 // ==== Manage Specifications
 Route::resource('manage-specifications', SpecificationsController::class);
 
+Route::get('/get-case-styles/{productId}', [ProductSpecificationsController::class, 'getCaseStyles']);
+
+
 
 // ===================================================================Frontend================================================================
 
@@ -78,6 +81,8 @@ Route::group(['prefix'=> '', 'middleware'=>[\App\Http\Middleware\PreventBackHist
     Route::get('/specifications', [HomeController::class, 'specifications'])->name('show.specifications');
     Route::get('/contact-us', [ContactController::class, 'contact'])->name('contact.us');
     Route::get('/product-details/{slug}', [ProductDetailsController::class, 'show'])->name('product-details.show');
+    Route::get('/{product_slug}/{case_style_slug}', [ProductDetailsController::class, 'case_style'])->name('productcase.style');
+
 
    
 });

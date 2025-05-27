@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
 use App\Models\Product; 
 use App\Models\ProductSpecification;
+use App\Models\ProductDescription;
 
 
 class ProductSpecificationsController extends Controller
@@ -37,6 +38,7 @@ class ProductSpecificationsController extends Controller
         // dd($request);
         $validator = Validator::make($request->all(), [
             'product_id' => 'required|exists:master_product,id',
+            'case_style' => 'required|string|max:255',
             'product_image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
 
             'name' => 'nullable|string|max:255',
@@ -87,8 +89,12 @@ class ProductSpecificationsController extends Controller
             $banner->move(public_path('uploads/product/specifications/'), $bannerImageName);
         }
 
+        $caseStyleSlug = Str::slug($request->case_style, '-');
+
         ProductSpecification::create([
             'product_id' => $request->product_id,
+            'case_style' => $request->case_style,
+            'case_style_slug' => $caseStyleSlug,
             'product_image' => $bannerImageName,
 
             'name' => $request->name,
@@ -132,9 +138,10 @@ class ProductSpecificationsController extends Controller
     {
         $details = ProductSpecification::findOrFail($id);
         $products = Product::orderBy('id', 'asc')->wherenull('deleted_by')->get();
-        return view('backend.store.product-spec.edit', compact('details', 'products'));
-    }
+        $caseStyles = ProductSpecification::all();
 
+        return view('backend.store.product-spec.edit', compact('details', 'products','caseStyles'));
+    }
 
     public function update(Request $request, $id)
     {
@@ -143,6 +150,8 @@ class ProductSpecificationsController extends Controller
         $validator = Validator::make($request->all(), [
             'product_id' => 'required|exists:master_product,id',
             'product_image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'case_style' => 'required|string|max:255',
+
 
             'name' => 'nullable|string|max:255',
             'manufacturer' => 'nullable|string|max:255',
@@ -189,9 +198,15 @@ class ProductSpecificationsController extends Controller
             $spec->product_image = $bannerImageName;
         }
 
+        $caseStyleSlug = Str::slug($request->case_style, '-');
+
+
         // Update all fields
         $spec->update([
             'product_id' => $request->product_id,
+            'case_style' => $request->case_style,
+            'case_style_slug' => $caseStyleSlug,
+
             'name' => $request->name,
             'manufacturer' => $request->manufacturer,
             'product_description' => $request->product_description,
@@ -242,4 +257,19 @@ class ProductSpecificationsController extends Controller
             return redirect()->back()->with('error', 'Something Went Wrong - ' . $ex->getMessage());
         }
     }
+
+
+    public function getCaseStyles($productId)
+    {
+        $description = ProductDescription::where('product_id', $productId)->whereNull('deleted_by')->first();
+
+        if ($description) {
+            $caseStyles = json_decode($description->case_style, true); // decode JSON
+            return response()->json($caseStyles);
+        }
+
+        return response()->json([]);
+    }
+
+
 }

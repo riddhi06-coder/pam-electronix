@@ -66,10 +66,72 @@ class ProductDetailsController extends Controller
         $Specifications = ProductSpecification::where('product_id', $product->id)
                     ->whereNull('deleted_by')
                     ->get();
+
+                // dd($Specifications);
     
-                    // dd($banners);
         return view('frontend.product-detail', compact('product', 'banners', 'Specifications', 'capHeaders', 'capacitances' , 'infoHeader', 'infoDetails','images'));
     }
+
+
+    public function case_style($product_slug, $case_style_slug)
+    {
+        // Step 1: Find the product by slug
+        $product = Product::where('slug', $product_slug)
+                    ->whereNull('deleted_by')
+                    ->firstOrFail();
+
+        // Step 2: Get specifications for the product with the matching case_style_slug
+   
+        $specification = ProductSpecification::where('product_id', $product->id)
+                        ->where('case_style_slug', $case_style_slug)
+                        ->whereNull('deleted_by')
+                        ->get();
+
+        // dd($specification);
+
+        // Step 3: Get product descriptions
+        $banners = ProductDescription::where('product_id', $product->id)
+                    ->whereNull('deleted_by')
+                    ->get();
+
+        $capHeaders = [];
+        $capacitances = [];
+
+        foreach ($banners as $banner) {
+            if (!empty($banner->header) && !empty($banner->case_style)) {
+                $capHeaders = json_decode($banner->header, true); 
+                $capacitances = json_decode($banner->case_style, true);
+                break; 
+            }
+        }
+
+        $infoHeader = [];
+        $infoDetails = [];
+
+        if ($banners->isNotEmpty()) {
+            $firstBanner = $banners->first();
+            $infoHeader = json_decode($firstBanner->info_header ?? '[]', true);
+            $infoDetails = json_decode($firstBanner->info_details ?? '[]', true);
+        }
+
+        $images = [];
+        if ($banners->isNotEmpty()) {
+            $firstBanner = $banners->first();
+            $images = json_decode($firstBanner->print_image ?? '[]', true);
+        }
+
+        return view('frontend.case_style_details', compact(
+            'product',
+            'banners',
+            'specification',
+            'capHeaders',
+            'capacitances',
+            'infoHeader',
+            'infoDetails',
+            'images'
+        ));
+    }
+
     
     
 }

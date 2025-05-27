@@ -64,6 +64,17 @@
                                             <div class="invalid-feedback">Please select a product.</div>
                                         </div>
 
+
+                                       <!-- Case Style Dropdown -->
+                                        <div class="col-md-6">
+                                            <label class="form-label" for="case_style_select">Select Case Type <span class="txt-danger">*</span></label>
+                                            <select class="form-control" id="case_style_select" name="case_style" required>
+                                                <option value="">-- Select Case Type --</option>
+                                            </select>
+                                            <div class="invalid-feedback">Please select a case type.</div>
+                                        </div>
+
+
                                         <!-- Product Image-->
                                         <div class="col-md-6 mb-3">
                                             <label class="form-label" for="product_image">Product Image </label>
@@ -322,6 +333,34 @@
                 }
             }
         </script>
+
+
+        <script>
+            document.getElementById('product_select').addEventListener('change', function() {
+                let productId = this.value;
+                let caseStyleDropdown = document.getElementById('case_style_select');
+
+                // Clear previous options
+                caseStyleDropdown.innerHTML = '<option value="">-- Select Case Type --</option>';
+
+                if (productId) {
+                    fetch(`/get-case-styles/${productId}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            data.forEach(function(item) {
+                                let option = document.createElement('option');
+                                option.value = item.case_style;
+                                option.text = item.case_style;
+                                caseStyleDropdown.appendChild(option);
+                            });
+                        })
+                        .catch(error => {
+                            console.error('Error fetching case styles:', error);
+                        });
+                }
+            });
+        </script>
+
 
 </body>
 

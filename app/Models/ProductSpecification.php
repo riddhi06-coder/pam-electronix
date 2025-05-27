@@ -14,6 +14,8 @@ class ProductSpecification extends Model
 
     protected $fillable = [
         'product_id',
+        'case_style',
+        'case_style_slug',
         'product_image',
         'name',
         'manufacturer',

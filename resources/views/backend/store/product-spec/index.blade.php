@@ -56,6 +56,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Product Name</th>
+                                <th>Case Style</th>
                                 <th>Specification Part</th>
                                 <th>Manufacturer</th>
                                 <th>Action</th>
@@ -71,12 +72,13 @@
 
                             @foreach ($groupedSpecs as $productName => $specGroup)
                                 <tr>
-                                    <td colspan="5" style="font-weight: bold; background-color: #f2f2f2;">{{ $productName }}</td>
+                                    <td colspan="6" style="font-weight: bold; background-color: #f2f2f2;">{{ $productName }}</td>
                                 </tr>
                                 @foreach ($specGroup as $spec)
                                     <tr>
                                         <td>{{ $row++ }}</td>
                                         <td>{{ $productName }}</td>
+                                        <td>{{ $spec->case_style }}</td>
                                         <td>{{ $spec->name }}</td>
                                         <td>{{ $spec->manufacturer }}</td>
                                         <td>

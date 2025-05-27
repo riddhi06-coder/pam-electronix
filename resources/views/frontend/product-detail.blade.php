@@ -94,13 +94,30 @@
                                             </thead>
                                             <tbody>
                                                 @foreach($capacitances as $row)
-                                                <tr>
-                                                    @foreach($row as $cell)
-                                                        <td>{{ !empty($cell) ? $cell : '-----' }}</td>
-                                                    @endforeach
-                                                </tr>
+                                                    <tr>
+                                                        @foreach($row as $index => $cell)
+                                                            @if ($loop->first)
+                                                                @php
+                                                                    // Try to find matching spec by case_style
+                                                                    $matchedSpec = $Specifications->firstWhere('case_style', $cell);
+                                                                @endphp
+                                                                <td>
+                                                                    @if ($matchedSpec)
+                                                                        <a href="{{ route('productcase.style', [$product->slug, $matchedSpec->case_style_slug]) }}">
+                                                                            {{ !empty($cell) ? $cell : '-----' }}
+                                                                        </a>
+                                                                    @else
+                                                                        {{ !empty($cell) ? $cell : '-----' }}
+                                                                    @endif
+                                                                </td>
+                                                            @else
+                                                                <td>{{ !empty($cell) ? $cell : '-----' }}</td>
+                                                            @endif
+                                                        @endforeach
+                                                    </tr>
                                                 @endforeach
                                             </tbody>
+
                                         </table>
                                     </form>
                                 @endif
