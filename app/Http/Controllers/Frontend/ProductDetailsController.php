@@ -132,6 +132,10 @@ class ProductDetailsController extends Controller
         ));
     }
 
+    public function cart_details(Request $request)
+    {
+        return view('frontend.cart');
+    }
     
     
 }

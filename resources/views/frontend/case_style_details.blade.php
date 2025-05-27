@@ -107,7 +107,7 @@
                                                         </div>
                                                     </td>
 
-                                                    <td><a href="cart.html" target="_blank" rel="nofollow" class="theme-btn product-page five">Add To Cart</a></td>
+                                                    <td><a href="{{ route('cart.details') }}" target="_blank" rel="nofollow" class="theme-btn product-page five">Add To Cart</a></td>
 
                                                     <td>{{ $spec->rohs ?? 'N/A' }}</td>
                                                     <td>{{ $spec->capacitance ?? 'N/A' }}</td>
@@ -125,7 +125,7 @@
                                                     <td>{{ $spec->operating_temp ?? 'N/A' }} C</td>
                                                     <td>{{ $spec->max_operating_temp ?? 'N/A' }} C</td>
                                                     <td>{{ $spec->series ?? 'N/A' }}</td>
-                                                    <td>{{ $spec->qualification ?? 'N/A' }}</td>
+                                                    <td>{{ $spec->qualification ?? '' }}</td>
                                                     <td>{{ $spec->packaging ?? 'N/A' }}</td>
                                                 </tr>
                                             @endforeach
