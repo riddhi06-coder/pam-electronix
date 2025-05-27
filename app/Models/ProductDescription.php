@@ -23,6 +23,10 @@ class ProductDescription extends Model
         'characteristics_description',
         'capacitance_heading',
         'capacitance_description',
+
+        'capacitance_range_heading',
+        'capacitance_range_description',
+        
         'voltage_heading',
         'voltage_description',
         'leads_heading',

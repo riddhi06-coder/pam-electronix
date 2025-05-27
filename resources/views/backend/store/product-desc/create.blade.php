@@ -162,15 +162,15 @@
                                         
                                         <!-- Capacitance Heading-->
                                         <div class="col-md-6">
-                                            <label class="form-label" for="capacitance_heading">Heading <span class="txt-danger">*</span></label>
-                                            <input class="form-control" id="capacitance_heading" type="text" name="capacitance_heading" placeholder="Enter Heading" value="{{ old('capacitance_heading') }}" required>
+                                            <label class="form-label" for="capacitance_range_heading">Heading <span class="txt-danger">*</span></label>
+                                            <input class="form-control" id="capacitance_range_heading" type="text" name="capacitance_range_heading" placeholder="Enter Heading" value="{{ old('capacitance_range_heading') }}" required>
                                             <div class="invalid-feedback">Please enter a Heading.</div>
                                         </div>
 
                                         <!-- Description Name with Summernote -->
                                         <div class="col-md-12">
-                                            <label class="form-label" for="capacitance_description">Description <span class="txt-danger">*</span></label>
-                                            <textarea class="form-control" id="capacitance_description" name="capacitance_description" placeholder="Enter Description" required>{{ old('capacitance_description') }}</textarea>
+                                            <label class="form-label" for="capacitance_range_description">Description <span class="txt-danger">*</span></label>
+                                            <textarea class="form-control" id="capacitance_range_description" name="capacitance_range_description" placeholder="Enter Description" required>{{ old('capacitance_range_description') }}</textarea>
                                             <div class="invalid-feedback">Please enter a Description.</div>
                                         </div>
 

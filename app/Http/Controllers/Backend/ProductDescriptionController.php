@@ -43,6 +43,8 @@ class ProductDescriptionController extends Controller
             'product_description' => 'required|string',
 
             // Existing capacitance and voltage fields
+            'capacitance_range_heading' => 'required|string',
+            'capacitance_range_description' => 'required|string',
             'capacitance_heading' => 'required|string',
             'capacitance_description' => 'required|string',
             'voltage_heading' => 'required|string',
@@ -111,6 +113,9 @@ class ProductDescriptionController extends Controller
             'product_image.max' => 'Product image must not exceed 2MB.',
 
             'product_description.required' => 'Please enter a product description.',
+
+            'capacitance_range_heading.required' => 'Please enter a heading for Capacitance Range.',
+            'capacitance_range_description.required' => 'Please enter a description for Capacitance Range.',
 
             'capacitance_heading.required' => 'Please enter a heading for Capacitance Range.',
             'capacitance_description.required' => 'Please enter a description for Capacitance Range.',
@@ -249,6 +254,9 @@ class ProductDescriptionController extends Controller
             'characteristics_heading' => $validatedData['characteristics_heading'],
             'characteristics_description' => $validatedData['characteristics_description'],
 
+            'capacitance_range_heading' => $validatedData['capacitance_range_heading'],
+            'capacitance_range_description' => $validatedData['capacitance_range_description'],
+
             'capacitance_heading' => $validatedData['capacitance_heading'],
             'capacitance_description' => $validatedData['capacitance_description'],
             'voltage_heading' => $validatedData['voltage_heading'],
@@ -309,6 +317,7 @@ class ProductDescriptionController extends Controller
 
     public function update(Request $request, $id)
     {
+        // dd($request);
           $validatedData = $request->validate([
             'product_id' => 'required|exists:master_product,id',
             'banner_image' => 'sometimes|image|mimes:jpg,jpeg,png,webp|max:2048',
@@ -316,6 +325,8 @@ class ProductDescriptionController extends Controller
             'product_description' => 'required|string',
 
             // Existing capacitance and voltage fields
+            'capacitance_range_heading' => 'required|string',
+            'capacitance_range_description' => 'required|string',
             'capacitance_heading' => 'required|string',
             'capacitance_description' => 'required|string',
             'voltage_heading' => 'required|string',
@@ -386,6 +397,8 @@ class ProductDescriptionController extends Controller
 
             'capacitance_heading.required' => 'Please enter a heading for Capacitance Range.',
             'capacitance_description.required' => 'Please enter a description for Capacitance Range.',
+            'capacitance_range_heading.required' => 'Please enter a heading for Capacitance Range.',
+            'capacitance_range_description.required' => 'Please enter a description for Capacitance Range.',
             'voltage_heading.required' => 'Please enter a heading for Voltage Range.',
             'voltage_description.required' => 'Please enter a description for Voltage Range.',
 
@@ -516,6 +529,8 @@ class ProductDescriptionController extends Controller
             'characteristics_description' => $validatedData['characteristics_description'],
             'capacitance_heading' => $validatedData['capacitance_heading'],
             'capacitance_description' => $validatedData['capacitance_description'],
+            'capacitance_range_heading' => $validatedData['capacitance_range_heading'],
+            'capacitance_range_description' => $validatedData['capacitance_range_description'],
             'voltage_heading' => $validatedData['voltage_heading'],
             'voltage_description' => $validatedData['voltage_description'],
             'leads_heading' => $validatedData['leads_heading'],

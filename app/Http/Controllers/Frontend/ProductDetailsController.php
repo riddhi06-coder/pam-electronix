@@ -32,15 +32,43 @@ class ProductDetailsController extends Controller
         $banners = ProductDescription::where('product_id', $product->id)
                     ->whereNull('deleted_by')
                     ->get();
+
+        $capHeaders = [];
+        $capacitances = [];
+
+        foreach ($banners as $banner) {
+            if (!empty($banner->header) && !empty($banner->case_style)) {
+                $capHeaders = json_decode($banner->header, true); 
+                $capacitances = json_decode($banner->case_style, true);
+                break; 
+            }
+        }
     
-        // dd($banners);          
+        $infoHeader = [];
+        $infoDetails = [];
+
+        if ($banners->isNotEmpty()) {
+            // Get the first banner
+            $firstBanner = $banners->first();
+
+            // Decode info_header and info_details JSON strings from the first banner
+            $infoHeader = json_decode($firstBanner->info_header ?? '[]', true);
+            $infoDetails = json_decode($firstBanner->info_details ?? '[]', true);
+        }
+
+        $images = [];
+        if ($banners->isNotEmpty()) {
+            $firstBanner = $banners->first();
+            $images = json_decode($firstBanner->print_image ?? '[]', true);
+        }
+
         // Fetch specifications for that product
         $Specifications = ProductSpecification::where('product_id', $product->id)
                     ->whereNull('deleted_by')
                     ->get();
     
                     // dd($banners);
-        return view('frontend.product-detail', compact('product', 'banners', 'Specifications'));
+        return view('frontend.product-detail', compact('product', 'banners', 'Specifications', 'capHeaders', 'capacitances' , 'infoHeader', 'infoDetails','images'));
     }
     
     

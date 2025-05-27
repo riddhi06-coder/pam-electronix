@@ -71,230 +71,181 @@
                 </div>
 
 
-                
+
                 <div class="product-contain">
                     <div class="container-fluid">
                     <div class="row">
                         <div class="service_box style_one dipped-sec dark_color">
                         <div class="service_content">
                             <div class="content_inner">
-                            <form class="woocommerce-cart-form" action="#" method="post">
-                                <table class="zui-table shop_table_responsive" cellspacing="0">
-                                <thead>
-                                    <tr>
-                                    <th colspan="3">Capacitance Range</th>
-                                    <th colspan="2">MIL Equivalent</th>
-                                    </tr>
-                                    <tr>
-                                    <th>Case Style</th>
-                                    <th>Commercial </th>
-                                    <th>MIL </th>
-                                    <th>Straight Leads</th>
-                                    <th>Crimped Leads</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                    <td class="product-name" data-title="Product">
-                                        <a href="DM5.html">DM5</a>
-                                    </td>
-                                    <td>1-390</td>
-                                    <td>-----</td>
-                                    <td>none </td>
-                                    <td>none</td>
-                                    </tr>
-                                    <tr>
-                                    <td class="product-name" data-title="Product">
-                                        <a href="#l">DM10</a>
-                                    </td>
-                                    <td>1-470</td>
-                                    <td>1-390 </td>
-                                    <td>CM04 </td>
-                                    <td>CM09</td>
-                                    </tr>
-                                    <tr>
-                                    <td class="product-name" data-title="Product">
-                                        <a href="#l">DM12</a>
-                                    </td>
-                                    <td>1-1500 </td>
-                                    <td>----- </td>
-                                    <td>none </td>
-                                    <td>none</td>
-                                    </tr>
-                                    <tr>
-                                    <td class="product-name" data-title="Product">
-                                        <a href="#l">DM15</a>
-                                    </td>
-                                    <td>1-1200 </td>
-                                    <td>1-390 </td>
-                                    <td>CM05 </td>
-                                    <td>CM10</td>
-                                    </tr>
-                                    <tr>
-                                    <td class="product-name" data-title="Product">
-                                        <a href="#l">DM19</a>
-                                    </td>
-                                    <td>100-8200 </td>
-                                    <td>430-4700 </td>
-                                    <td>CM06 </td>
-                                    <td>CM11</td>
-                                    </tr>
-                                    <tr>
-                                    <td class="product-name" data-title="Product">
-                                        <a href="#l">DM20</a>
-                                    </td>
-                                    <td>680-12000 </td>
-                                    <td>----- </td>
-                                    <td>none </td>
-                                    <td>none</td>
-                                    </tr>
-                                    <tr>
-                                    <td class="product-name" data-title="Product">
-                                        <a href="#l">DM30</a>
-                                    </td>
-                                    <td>5100-20000 </td>
-                                    <td>5100-20000 </td>
-                                    <td>CM07 </td>
-                                    <td>CM12</td>
-                                    </tr>
-                                    <tr>
-                                    <td class="product-name" data-title="Product">
-                                        <a href="#l">DM42</a>
-                                    </td>
-                                    <td>16000-100000 </td>
-                                    <td>22000-62000 </td>
-                                    <td>CM08 </td>
-                                    <td>CM13</td>
-                                    </tr>
-                                    <tr>
-                                    <td class="product-name" data-title="Product">
-                                        <a href="#l">VDM16</a>
-                                    </td>
-                                    <td>1-1000 </td>
-                                    <td>----- </td>
-                                    <td>none </td>
-                                    <td>none</td>
-                                    </tr>
-                                </tbody>
-                                </table>
-                            </form>
-                            <h4>Capacitance Range</h4>
+
+
+                            @if(!empty($capacitances) && !empty($capHeaders))
+                                <form class="woocommerce-cart-form" action="#" method="post">
+                                    <table class="zui-table shop_table_responsive" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th colspan="3">Capacitance Range</th>
+                                                <th colspan="2">MIL Equivalent</th>
+                                            </tr>
+                                            <tr>
+                                                @foreach($capHeaders as $header)
+                                                    <th>{{ $header }}</th>
+                                                @endforeach
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach($capacitances as $row)
+                                            <tr>
+                                                @foreach($row as $cell)
+                                                    <td>{{ !empty($cell) ? $cell : '-----' }}</td>
+                                                @endforeach
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </form>
+                            @endif
+
+
+                            @foreach ($banners as $desc)
+                                @if(!empty($desc->capacitance_range_description))
+                                    <h4>{{ $desc->capacitance_range_heading ?? 'Capacitance Range' }}</h4>
+                                    <div class="pd_top_20"></div>
+                                    <p>{{ $desc->capacitance_range_description }}</p>
+                                @endif
+
+                                @if(!empty($desc->voltage_description))
+                                    <h4>{{ $desc->voltage_heading ?? 'Voltage Range' }}</h4>
+                                    <div class="pd_top_20"></div>
+                                    <p>{{ $desc->voltage_description }}</p>
+                                @endif
+
+                                @if(!empty($desc->operating_description))
+                                    <h4>{{ $desc->operating_heading ?? 'Operating Temperature' }}</h4>
+                                    <div class="pd_top_20"></div>
+                                    <p>{{ $desc->operating_description }}</p>
+                                @endif
+
+                                @if(!empty($desc->marking_description))
+                                    <h4>{{ $desc->marking_heading ?? 'Marking' }}</h4>
+                                    <div class="pd_top_20"></div>
+                                    {!! $desc->marking_description !!}
+                                @endif
+
+                                @if(!empty($desc->ordering_heading) || !empty($desc->image))
+                                    <h4>{{ $desc->ordering_heading ?? 'Ordering Code' }}</h4>
+                                    <div class="pd_top_20"></div>
+                                    @if(!empty($desc->image))
+                                        <img src="{{ asset('uploads/product/' . $desc->image) }}" alt="Ordering Code">
+                                    @endif
+                                    <div class="pd_top_20"></div>
+                                @endif
+
+                                @if(!empty($desc->style_description))
+                                    <h4>{{ $desc->style_heading ?? 'Style' }}</h4>
+                                    <div class="pd_top_20"></div>
+                                    <p>{{ $desc->style_description }}</p>
+                                @endif
+
+                                @if(!empty($desc->characteristics_description))
+                                    <h4>{{ $desc->characteristics_heading ?? 'Characteristic' }}</h4>
+                                    <div class="pd_top_20"></div>
+                                    <p>{{ $desc->characteristics_description }}</p>
+                                @endif
+
+                                @if(!empty($desc->capacitance_description)) {{-- Repeated for Capacitance block --}}
+                                    <h4>{{ $desc->capacitance_heading ?? 'Capacitance' }}</h4>
+                                    <div class="pd_top_20"></div>
+                                    <p>{{ $desc->capacitance_description }}</p>
+                                @endif
+
+                                @if(!empty($desc->leads_description))
+                                    <h4>{{ $desc->leads_heading ?? 'Leads' }}</h4>
+                                    <div class="pd_top_20"></div>
+                                    {!! $desc->leads_description !!}
+                                @endif
+                            @endforeach
+                            
+                            <br>
+                            <br>
+
+                            <h4>{{ $desc->special_heading ?? 'Special Features' }}</h4>
+
                             <div class="pd_top_20"></div>
-                            <p> 1pF through 100000pF in case styles DM5 through DM42 </p>
-                            <h4>Voltage Range</h4>
-                            <div class="pd_top_20"></div>
-                            <p> 50VDCW through 500 VDCW higher voltages on request </p>
-                            <h4>Operating Temperature</h4>
-                            <div class="pd_top_20"></div>
-                            <p>150°C at full rated voltage</p>
-                            <h4>Marking</h4>
-                            <div class="pd_top_20"></div>
-                            <p>Simic dipped micas are permanently marked in a manner designed to withstand the environment requirements of the applicable MIL and EIA specifications, as also the permanency and durability requirements of MIL-M-13231.</p>
-                            <p>As a minimum, markings will consist of capacitance in picofarad, capacitance tolerance in percent, and manufacture identifying symbol. Where space does not permit, the capacitance tolerance will be expressed as a single letter.</p>
-                            <p>Parts supplied to the military specification will bear full, or abbreviated, military designation as required by MIL-C-5.</p>
-                            <h4>Ordering Code</h4>
-                            <div class="pd_top_20"></div>
-                            <img src="assets/images/products/dipped-mica.jpg" alt="Dipped Mica Capacitors">
-                            <div class="pd_top_20"></div>
-                            <h4>Style</h4>
-                            <div class="pd_top_20"></div>
-                            <p>Indicated by letters CM or DM followed by two digits identifying case size.</p>
-                            <h4>Characteristic</h4>
-                            <div class="pd_top_20"></div>
-                            <p>Identified by a single letter indicating stability with change in temperature.</p>
-                            <h4>Capacitance</h4>
-                            <div class="pd_top_20"></div>
-                            <p>Normal capacitance is expressed in pF and is identified by a three number digit. The first two digits represent significant figures. The third digit indicates the number of digits to follow (sometimes referred to as the decimal multiplier). Where a third significant figure is required a four-digit number would be applied. The first three would indicate significant figures.</p>
-                            <h4>Leads</h4>
-                            <div class="pd_top_20"></div>
-                            <p>All Simic dipped mica capacitors are manufactured with copper-clad steel leads. The copper-clad leads are annealed and manufactured with steel wire SAE 1010 or SAE 1006; having a 30% minimum conductivity copper coating. The leads are finished with 100% tin coating, having a minimum thickness of 0.0001" (0.00254mm).</p>
-                            <p>Normal production is supplied with straight radial leads. Crimped and/or cut variations are available on order. Capacitors with working voltage of 1000 VDC, 2500 VDC are available on order.</p>
-                            <h4>Special Features</h4>
-                            <div class="pd_top_20"></div>
-                            <p>Features provided at our customer's request.</p>
-                            <div class="row align-items-center">
-                                <div class="col-md-6">
-                                <div class="icon_box_all style_three dark_color_one">
-                                    <div class="icon_content ">
-                                    <div class="txt_content">
-                                        <ul>
-                                        <li>Metallurgical bonding.</li>
-                                        <li>Thin coat (single dip)for high installation density.</li>
-                                        <li>Crimped and cut leads.</li>
-                                        <li>Crimped and cutleads with tape and reel package. </li>
-                                        </ul>
+
+                            @foreach ($banners as $desc)
+                                @if(!empty($desc->special_description) || !empty($desc->special_image))
+                                    <p>Features provided at our customer's request.</p>
+                                    <div class="row align-items-center">
+                                        <div class="col-md-6">
+                                            <div class="icon_box_all style_three dark_color_one">
+                                                <div class="icon_content">
+                                                    <div class="txt_content">
+                                                        {!! $desc->special_description !!}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        @if(!empty($desc->special_image))
+                                            <div class="col-md-6">
+                                                <div class="img-sec text-center">
+                                                    <img src="{{ asset('uploads/product/' . $desc->special_image) }}" alt="Dipped Mica Capacitors">
+                                                </div>
+                                            </div>
+                                        @endif
                                     </div>
-                                    </div>
-                                </div>
-                                </div>
-                                <div class="col-md-6">
-                                <div class="img-sec text-center">
-                                    <img src="assets/images/products/dipped2.jpg" alt="Dipped Mica Capacitors">
-                                </div>
-                                </div>
-                            </div>
+                                    <div class="pd_top_40"></div>
+                                @endif
+                            @endforeach
+
+    
                             <div class="pd_top_40"></div>
-                            <form class="woocommerce-cart-form" action="#" method="post">
-                                <table class="zui-table shop_table_responsive" cellspacing="0">
-                                <thead>
-                                    <tr>
-                                    <th>DIM</th>
-                                    <th>DM5</th>
-                                    <th>DM10</th>
-                                    <th>DM15</th>
-                                    <th>DM19</th>
-                                    <th>DM20</th>
-                                    <th>DM30</th>
-                                    <th>DM42</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                    <td>B</td>
-                                    <td>3.05 ±.79</td>
-                                    <td>3.57 ±.79</td>
-                                    <td>5.95 ±.79</td>
-                                    <td>8.73 ±.79</td>
-                                    <td>11.11 ±.79</td>
-                                    <td>11.11 ±.79</td>
-                                    <td>26.99 ±.79</td>
-                                    </tr>
-                                    <tr>
-                                    <td>C </td>
-                                    <td>#26 (0.4039)</td>
-                                    <td>#26 (0.4039)</td>
-                                    <td>#22 (0.635)</td>
-                                    <td>#20 (0.813)</td>
-                                    <td>#20 (0.813)</td>
-                                    <td>#18 (1.016)</td>
-                                    <td>#18 (1.016)</td>
-                                    </tr>
-                                    <tr>
-                                    <td>R </td>
-                                    <td>1.98 MAX</td>
-                                    <td>1.98 MAX</td>
-                                    <td>1.98 MAX</td>
-                                    <td>3.18 MAX</td>
-                                    <td>3.18 MAX</td>
-                                    <td>3.18 MAX</td>
-                                    <td>3.18 MAX</td>
-                                    </tr>
-                                </tbody>
-                                </table>
-                            </form>
+
+
+                            @php
+                                $headers = $infoHeader;
+                                $rows = $infoDetails;
+                                $headerCount = count($headers);
+                            @endphp
+
+                            @if(!empty($headers) && !empty($rows))
+                                <form class="woocommerce-cart-form" action="#" method="post">
+                                    <table class="zui-table shop_table_responsive" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                @foreach($headers as $header)
+                                                    <th>{{ $header }}</th>
+                                                @endforeach
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach($rows as $row)
+                                                <tr>
+                                                    @for($i = 1; $i <= $headerCount; $i++)
+                                                        <td>{{ $row['d' . $i] ?? '-' }}</td>
+                                                    @endfor
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </form>
+                            @endif
+
+
                             <div class="row align-items-center">
-                                <div class="col-md-6">
-                                <div class="img-sec text-center">
-                                    <img src="assets/images/products/dipped1.jpg" alt="Dipped Mica Capacitors">
-                                </div>
-                                </div>
-                                <div class="col-md-6">
-                                <div class="img-sec text-center">
-                                    <img src="assets/images/products/dipped1_1.jpg" alt="Dipped Mica Capacitors">
-                                </div>
-                                </div>
+                                @foreach($images as $image)
+                                    <div class="col-md-6">
+                                        <div class="img-sec text-center">
+                                            <img src="{{ asset('uploads/product/' . $image) }}" alt="{{ $product->name }}">
+                                        </div>
+                                    </div>
+                                @endforeach
                             </div>
+
                             <div class="pd_top_20"></div>
+
                             </div>
                         </div>
                         </div>
