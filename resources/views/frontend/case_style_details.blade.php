@@ -101,14 +101,12 @@
                                                         <td class="product-quantity" data-title="Quantity">
                                                             <div class="quantity">
                                                                 <input type="button" value="-" class="qty_button minus">
-                                                                <input type="text"
+                                                                <input type="number"
                                                                     class="input-text qty text"
                                                                     name="quantity[{{ $spec->id }}]"
-                                                                    value="1"
                                                                     title="Qty"
-                                                                    size="4"
-                                                                    pattern="[0-9]*"
-                                                                    inputmode="numeric">
+                                                                    inputmode="numeric"
+                                                                    readonly>
                                                                 <input type="button" value="+" class="qty_button plus">
                                                             </div>
                                                         </td>

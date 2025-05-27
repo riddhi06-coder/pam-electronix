@@ -135,7 +135,6 @@ class ProductDetailsController extends Controller
    
     public function cart_details(Request $request)
     {
-        // dd($request);
         $productId = $request->get('add_to_cart'); 
         $quantity = $request->input("quantity.$productId");
 
@@ -158,7 +157,7 @@ class ProductDetailsController extends Controller
             'product_name' => $product->product_name ?? 'N/A', 
         ];
 
-        dd($quantity);
+        // dd($item);
 
         return view('frontend.cart', [
             'cartItems' => [$item],
