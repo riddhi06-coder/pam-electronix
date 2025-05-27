@@ -145,7 +145,7 @@
                                         <!-- <li>
                                             <button type="button" class="search-toggler"><i class="icon-search"></i></button>
                                         </li> -->
-                                        <li>
+                                        <!-- <li>
                                             <div class="mini_cart_togglers header_side_cart">
                                                 <div class="mini-cart-count">
                                                     0 </div>
@@ -154,7 +154,7 @@
                                         </li>
                                         <li class="header-button">
                                             <a href="" target="_blank" rel="" class="theme-btn four">Login <i class="icon-right-arrow"></i></a>
-                                        </li>
+                                        </li> -->
                                     </ul>
                                 </div>
                             </nav>
