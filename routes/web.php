@@ -80,7 +80,7 @@ Route::group(['prefix'=> '', 'middleware'=>[\App\Http\Middleware\PreventBackHist
     Route::get('/', [HomeController::class, 'index'])->name('home.page');
     Route::get('/specifications', [HomeController::class, 'specifications'])->name('show.specifications');
     Route::get('/contact-us', [ContactController::class, 'contact'])->name('contact.us');
-    Route::get('/cart', [ProductDetailsController::class, 'cart_details'])->name('cart.details');
+    Route::post('/cart', [ProductDetailsController::class, 'cart_details'])->name('cart.details');
     Route::get('/product-details/{slug}', [ProductDetailsController::class, 'show'])->name('product-details.show');
     Route::get('/{product_slug}/{case_style_slug}', [ProductDetailsController::class, 'case_style'])->name('productcase.style');
 

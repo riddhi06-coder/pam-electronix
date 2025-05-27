@@ -47,92 +47,110 @@
                             <div class="full_width_box zui-wrapper">
                                 <!--===============spacing==============-->
                                 <!--===============spacing==============-->
-                                <form class="woocommerce-cart-form" action="#" method="post">
-                                <div class="freeze-table">
-                                    <table class="zui-table shop_table_responsive" cellspacing="0">
-                                        <thead>
-                                            <tr>
-                                            <th>Sr. No.</th>
-                                            <th>Image</th>
-                                            <th>Part #</th>
-                                            <th>Mfr.</th>
-                                            <th>Description</th>
-                                            <!-- <th>Availability</th> -->
-                                            <!-- <th>Pricing (INR)</th> -->
-                                            <th>Qty.</th>
-                                            <th></th>
-                                            <th>RoHS</th>
-                                            <th>Capacitance</th>
-                                            <th>Voltage Rating</th>
-                                            <th>Termination Style</th>
-                                            <th>PF</th>
-                                            <th>VOLTAGE</th>
-                                            <th>Lead Spacing</th>
-                                            <th>Length</th>
-                                            <th>Width</th>
-                                            <th>Height</th>
-                                            <th>Lead wire Diameter</th>
-                                            <th>Tolerance</th>
-                                            <th>Package/Case IN PLASTIC BAG</th>
-                                            <th>Minimum Operating Temperature</th>
-                                            <th>Maximum Operating Temperature</th>
-                                            <th>Series</th>
-                                            <th>Qualification</th>
-                                            <th>Packaging</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach($specification as $spec)
+                                <form class="woocommerce-cart-form" action="{{ route('cart.details') }}" method="POST">
+                                    @csrf
+                                    <div class="freeze-table">
+                                        <table class="zui-table shop_table_responsive" cellspacing="0">
+                                            <thead>
                                                 <tr>
-                                                    <td>{{ $loop->iteration }}</td>
-
-                                                    <td class="product-thumbnail">
-                                                        <a href="#">
-                                                            <img width="300" height="300" src="{{ asset('uploads/product/specifications/' . $spec->product_image) }}" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="img" />
-                                                        </a>
-                                                    </td>
-
-                                                    <td>{{ $spec->name }}</td>
-                                                    <td class="product-name" data-title="Product">
-                                                        <a href="#">{{ $spec->manufacturer }}</a>                      
-                                                    </td>
-
-                                                    <td>{!! $spec->product_description !!}</td>
-
-                                                    <td class="product-quantity" data-title="Quantity">
-                                                        <div class="quantity">
-                                                            <input type="button" value="-" class="qty_button minus">
-                                                            <input type="text" class="input-text qty text" name="quantity[{{ $spec->id }}]" value="1" title="Qty" size="4" pattern="[0-9]*" inputmode="numeric">
-                                                            <input type="button" value="+" class="qty_button plus">
-                                                        </div>
-                                                    </td>
-
-                                                    <td><a href="{{ route('cart.details') }}" target="_blank" rel="nofollow" class="theme-btn product-page five">Add To Cart</a></td>
-
-                                                    <td>{{ $spec->rohs ?? 'N/A' }}</td>
-                                                    <td>{{ $spec->capacitance ?? 'N/A' }}</td>
-                                                    <td>{{ $spec->voltage_rating ?? 'N/A' }} V</td>
-                                                    <td>{{ $spec->termination ?? 'N/A' }}</td>
-                                                    <td>{{ $spec->pf ?? 'N/A' }} PF</td>
-                                                    <td>{{ $spec->voltage ?? 'N/A' }} V</td>
-                                                    <td>{{ $spec->lead_spacing ?? 'N/A' }} MM</td>
-                                                    <td>{{ $spec->length ?? 'N/A' }}</td>
-                                                    <td>{{ $spec->width ?? 'N/A' }}</td>
-                                                    <td>{{ $spec->height ?? 'N/A' }}</td>
-                                                    <td>{{ $spec->lead_wire ?? 'N/A' }} MM</td>
-                                                    <td>{{ $spec->tolerance ?? 'N/A' }} %</td>
-                                                    <td>{{ $spec->package_case ?? 'N/A' }}</td>
-                                                    <td>{{ $spec->operating_temp ?? 'N/A' }} C</td>
-                                                    <td>{{ $spec->max_operating_temp ?? 'N/A' }} C</td>
-                                                    <td>{{ $spec->series ?? 'N/A' }}</td>
-                                                    <td>{{ $spec->qualification ?? '' }}</td>
-                                                    <td>{{ $spec->packaging ?? 'N/A' }}</td>
+                                                <th>Sr. No.</th>
+                                                <th>Image</th>
+                                                <th>Part #</th>
+                                                <th>Mfr.</th>
+                                                <th>Description</th>
+                                                <!-- <th>Availability</th> -->
+                                                <!-- <th>Pricing (INR)</th> -->
+                                                <th>Qty.</th>
+                                                <th></th>
+                                                <th>RoHS</th>
+                                                <th>Capacitance</th>
+                                                <th>Voltage Rating</th>
+                                                <th>Termination Style</th>
+                                                <th>PF</th>
+                                                <th>VOLTAGE</th>
+                                                <th>Lead Spacing</th>
+                                                <th>Length</th>
+                                                <th>Width</th>
+                                                <th>Height</th>
+                                                <th>Lead wire Diameter</th>
+                                                <th>Tolerance</th>
+                                                <th>Package/Case IN PLASTIC BAG</th>
+                                                <th>Minimum Operating Temperature</th>
+                                                <th>Maximum Operating Temperature</th>
+                                                <th>Series</th>
+                                                <th>Qualification</th>
+                                                <th>Packaging</th>
                                                 </tr>
-                                            @endforeach
-                                        </tbody>
+                                            </thead>
 
-                                    </table>
-                                </div>
+                                            <tbody>
+                                                @foreach($specification as $spec)
+                                                    <tr>
+                                                        <td>{{ $loop->iteration }}</td>
+                                                        <td class="product-thumbnail">
+                                                            <a href="#">
+                                                                <img width="300" height="300" src="{{ asset('uploads/product/specifications/' . $spec->product_image) }}" alt="img" />
+                                                            </a>
+                                                        </td>
+                                                        <td>{{ $spec->name }}</td>
+                                                        <td class="product-name" data-title="Product">
+                                                            <a href="#">{{ $spec->manufacturer }}</a>
+                                                        </td>
+                                                        <td>{!! $spec->product_description !!}</td>
+
+                                                        <td class="product-quantity" data-title="Quantity">
+                                                            <div class="quantity">
+                                                                <input type="button" value="-" class="qty_button minus">
+                                                                <input type="text"
+                                                                    class="input-text qty text"
+                                                                    name="quantity[{{ $spec->id }}]"
+                                                                    value="1"
+                                                                    title="Qty"
+                                                                    size="4"
+                                                                    pattern="[0-9]*"
+                                                                    inputmode="numeric">
+                                                                <input type="button" value="+" class="qty_button plus">
+                                                            </div>
+                                                        </td>
+
+                                                        <td>
+                                                            <button type="submit" name="add_to_cart" value="{{ $spec->id }}" class="theme-btn product-page five">
+                                                                Add To Cart
+                                                            </button>
+                                                        </td>
+
+                                                        <td>{{ $spec->rohs ?? 'N/A' }}</td>
+                                                        <td>{{ $spec->capacitance ?? 'N/A' }}</td>
+                                                        <td>{{ $spec->voltage_rating ?? 'N/A' }} V</td>
+                                                        <td>{{ $spec->termination ?? 'N/A' }}</td>
+                                                        <td>{{ $spec->pf ?? 'N/A' }} PF</td>
+                                                        <td>{{ $spec->voltage ?? 'N/A' }} V</td>
+                                                        <td>{{ $spec->lead_spacing ?? 'N/A' }} MM</td>
+                                                        <td>{{ $spec->length ?? 'N/A' }}</td>
+                                                        <td>{{ $spec->width ?? 'N/A' }}</td>
+                                                        <td>{{ $spec->height ?? 'N/A' }}</td>
+                                                        <td>{{ $spec->lead_wire ?? 'N/A' }} MM</td>
+                                                        <td>{{ $spec->tolerance ?? 'N/A' }} %</td>
+                                                        <td>{{ $spec->package_case ?? 'N/A' }}</td>
+                                                        <td>{{ $spec->operating_temp ?? 'N/A' }} C</td>
+                                                        <td>{{ $spec->max_operating_temp ?? 'N/A' }} C</td>
+                                                        <td>{{ $spec->series ?? 'N/A' }}</td>
+                                                        <td>{{ $spec->qualification ?? '' }}</td>
+                                                        <td>{{ $spec->packaging ?? 'N/A' }}</td>
+
+                                                        <!-- Hidden inputs for extra data -->
+                                                        <input type="hidden" name="product_image[{{ $spec->id }}]" value="{{ $spec->product_image }}">
+                                                        <input type="hidden" name="name[{{ $spec->id }}]" value="{{ $spec->name }}">
+                                                        <input type="hidden" name="manufacturer[{{ $spec->id }}]" value="{{ $spec->manufacturer }}">
+                                                        <input type="hidden" name="description[{{ $spec->id }}]" value="{{ strip_tags($spec->product_description) }}">
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+
+
+
+                                        </table>
+                                    </div>
                                 </form>
                                 <!--===============spacing==============-->
                                 <div class="pd_bottom_60"></div>
@@ -153,23 +171,28 @@
             <script>
                 document.addEventListener('DOMContentLoaded', function () {
                     document.querySelectorAll('.quantity').forEach(function (container) {
-                        const minusBtn = container.querySelector('.minus');
-                        const plusBtn = container.querySelector('.plus');
+                        const minusBtn = container.querySelector('.qty_button.minus');
+                        const plusBtn = container.querySelector('.qty_button.plus');
                         const input = container.querySelector('.qty');
 
                         minusBtn.addEventListener('click', function () {
-                            let value = parseInt(input.value) || 0;
+                            let value = parseInt(input.value) || 1;
+                            console.log('Minus clicked, current value:', value);
                             if (value > 1) {
                                 input.value = value - 1;
+                                console.log('Updated value:', input.value);
                             }
                         });
 
                         plusBtn.addEventListener('click', function () {
-                            let value = parseInt(input.value) || 0;
+                            let value = parseInt(input.value) || 1;
+                            console.log('Plus clicked, current value:', value);
                             input.value = value + 1;
+                            console.log('Updated value:', input.value);
                         });
                     });
                 });
+
             </script>
 
 

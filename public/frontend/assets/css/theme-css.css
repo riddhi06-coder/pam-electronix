@@ -3949,8 +3949,8 @@ body .enabled_custom_title .title_page .main_tit {
 .modal_popup::before {
   position: absolute;
   content: "";
-  background: #fff;
-  opacity: 0.3;
+  background: #000000;
+  opacity: 0.6;
   width: 100%;
   height: 100%;
   left: 0;
@@ -3978,7 +3978,7 @@ body .enabled_custom_title .title_page .main_tit {
   line-height: 40px;
   text-align: center;
   border-radius: 50px;
-  background: var(--primary-color-one);
+  background: #b78d52;
   color: #fff;
   font-size: 16px;
   z-index: 3;
@@ -26473,17 +26473,42 @@ input[type=checkbox], input[type=radio] {
   top: 2px;
 }
 
-input[type=checkbox]:after {
-  content: "";
-  border-bottom: 8px solid var(--primary-color-three);
-  border-top: 8px solid var(--primary-color-three);
-  display: block;
-  opacity: 1;
+/* Hide native checkbox style */
+input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #ccc;
+  border-radius: 3px;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  background-color: #fff; /* default background */
+  transition: background-color 0.3s ease;
 }
 
-input[type=checkbox]:checked:after {
-  border-bottom: 8px solid var(--primary-color-one);
-  border-top: 8px solid var(--primary-color-one);
+/* Background and tick when checked */
+input[type="checkbox"]:checked {
+  background-color: #b78d52; /* new background on click */
+  border-color: #b78d52;
+}
+
+/* Tick icon */
+input[type="checkbox"]::after {
+  content: "âœ“";
+  position: absolute;
+  top: -4px;
+  left: 2px;
+  font-size: 16px;
+  color: white; /* tick color */
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+/* Show tick only when checked */
+input[type="checkbox"]:checked::after {
+  opacity: 1;
 }
 
 b, strong {
@@ -27773,6 +27798,7 @@ select {
   height: 56px;
   border-radius: 5px;
   border: 1px solid var(--border-color-dark) !important;
+  margin-bottom: 0px;
 }
 .woocommerce-checkout label {
   font-size: 16px;
@@ -27786,7 +27812,7 @@ select {
   padding-bottom: 15px !important;
 }
 .woocommerce-checkout textarea {
-  height: 300px !important;
+  height: 100px !important;
 }
 
 .woocommerce .col2-set .col-1, .woocommerce-page .col2-set .col-1 {
@@ -27862,7 +27888,7 @@ select {
   position: relative;
   border-radius: 5px;
   border-radius: 10px !important;
-  padding: 40px 40px 20px;
+  padding: 30px 30px 30px;
   border: 1px solid #b78d5261;
   background: #fff7ea;
 }
@@ -27872,7 +27898,7 @@ select {
   margin-bottom: 0px !important;
 }
 .woocommerce-checkout-review-order .shop_table thead th {
-  padding: 0px 0px 20px !important;
+  padding: 0px 0px 10px !important;
   font-size: 18px;
   line-height: 28px;
   font-weight: 600;
@@ -27891,7 +27917,7 @@ select {
   padding: 20px 0px !important;
 }
 .woocommerce-checkout-review-order .shop_table tfoot th, .woocommerce-checkout-review-order .shop_table tfoot td {
-  padding: 20px 0px !important;
+  padding: 20px 0px 0px !important;
 }
 .woocommerce-checkout-review-order .shop_table tfoot .cart-subtotal th, .woocommerce-checkout-review-order .shop_table tfoot .order-total th {
   font-size: 18px;
@@ -27907,7 +27933,8 @@ select {
   font-weight: 600;
 }
 .woocommerce-checkout-review-order .shop_table tbody td {
-  padding: 20px 0px !important;
+  padding: 5px 0px !important;
+  /* border-bottom: 1px solid #e4cfb0; */
 }
 .woocommerce-checkout-review-order .shop_table tbody td .product-name {
   padding: 0px;
@@ -30671,29 +30698,3 @@ body.side_menu_toggled .style-switcher {
     display: inline-block;
   }
 }/*# sourceMappingURL=theme-css.css.map */
-
-
-table .test1 {
-  position: relative !important;
-  padding: 5px 15px !important;
-  font-family: var(--creote-family-two) !important;
-  line-height: 28px !important;
-  font-size: 16px !important;
-  font-weight: 400;
-  border: 1px solid var(--border-color-dark) !important;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-table .test {
-  font-size: 15px;
-  font-weight: 600;
-  color: #ffffff;
-  padding: 6px 9px !important;
-  font-family: var(--creote-family-one) !important;
-  line-height: 23px !important;
-  background-color: #b78d52;
-  border: 1px solid #ffffff33;
-
-}

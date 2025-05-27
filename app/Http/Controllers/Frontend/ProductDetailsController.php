@@ -132,10 +132,42 @@ class ProductDetailsController extends Controller
         ));
     }
 
+   
     public function cart_details(Request $request)
     {
-        return view('frontend.cart');
+        // dd($request);
+        $productId = $request->get('add_to_cart'); 
+        $quantity = $request->input("quantity.$productId");
+
+        $spec = ProductSpecification::find($productId);
+
+        if (!$spec) {
+            return redirect()->back()->with('error', 'Specification not found.');
+        }
+
+        $product = Product::find($spec->product_id); 
+
+        $item = [
+            'id' => $productId,
+            'image' => $request->input("product_image.$productId"),
+            'name' => $request->input("name.$productId"),
+            'manufacturer' => $request->input("manufacturer.$productId"),
+            'description' => $request->input("description.$productId"),
+            'quantity' => $quantity,
+            'part_number' => $request->input("part_number.$productId", 'N/A'),
+            'product_name' => $product->product_name ?? 'N/A', 
+        ];
+
+        dd($quantity);
+
+        return view('frontend.cart', [
+            'cartItems' => [$item],
+        ]);
+
+
+        
+        
     }
-    
-    
+
+
 }
