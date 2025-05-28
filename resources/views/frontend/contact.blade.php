@@ -126,6 +126,7 @@
                         <div class="contact_form_box_all type_one">
                            <div class="contact_form_box_inner">
                               <div class="contact_form_shortcode">
+                                
                                  <form id="contact-form" method="post" action="contact.php" role="form">
                                     <div class="messages"></div>
 

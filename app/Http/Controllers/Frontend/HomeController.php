@@ -64,6 +64,13 @@ class HomeController extends Controller
                     ->subject('Enquiry Details: ' . $emailData['name']);
         });
 
+
+        // Confirmation Email to User
+        Mail::send('frontend.confirmation_mail', $emailData, function ($message) use ($emailData) {
+            $message->to($emailData['email'])
+                    ->subject('Thanks for Reaching Out!');
+        });
+
         return redirect()->route('home.page')->with('message', 'Enquiry sent successfully.');
     }
 
