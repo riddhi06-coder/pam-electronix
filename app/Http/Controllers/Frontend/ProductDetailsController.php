@@ -152,6 +152,9 @@ class ProductDetailsController extends Controller
                 ];
             });
 
+            // dd($cartItems);
+            // dd(session()->getId());
+
         return view('frontend.cart', [
             'cartItems' => $cartItems,
         ]);

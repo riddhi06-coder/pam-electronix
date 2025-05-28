@@ -106,7 +106,7 @@
                                                                     name="quantity"
                                                                     value="1"
                                                                     inputmode="numeric"
-                                                                    readonly>
+                                                                    >
                                                                 <input type="button" value="+" class="qty_button plus">
                                                             </div>
                                                         </td>
