@@ -27,9 +27,14 @@
     </style>
 </head>
 <body>
-    <div class="header">
-        <img alt="Logo" src="{{ asset('frontend/assets/images/logo.webp') }}"/>
-    </div>
+    <div class="header" style="text-align: center;">
+        <div style="background-color: black; display: inline-block; padding: 10px; border-radius: 8px;">
+            <a class="logo" href="#">
+                <img class="img-fluid for-dark" src="{{ asset('admin/assets/images/logo/logo.webp') }}" alt="loginpage" style="max-width: 180px;">
+                <img class="img-fluid for-light" src="{{ asset('admin/assets/images/logo/logo.webp') }}" alt="loginpage" style="max-width: 180px;">
+            </a>
+        </div>
+    </div><br>
 
     <h2>Quote Form Submission</h2>
     <p><strong>Company Name:</strong> {{ $emailData['company_name'] }}</p>
