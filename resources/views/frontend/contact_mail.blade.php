@@ -40,7 +40,7 @@
     <p><strong>Name:</strong> {{ $name }}</p>
     <p><strong>Email:</strong> {{ $email }}</p>
     <p><strong>Subject:</strong> {{ $subject }}</p>
-    <p><strong>Message:</strong><br>{{ $user_message }}</p>
+    <p><strong>Message:</strong> {{ $user_message }}</p>
 
     <hr>
     <!-- Footer Section -->
