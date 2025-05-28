@@ -81,6 +81,7 @@ Route::group(['prefix'=> '', 'middleware'=>[\App\Http\Middleware\PreventBackHist
     Route::get('/specifications', [HomeController::class, 'specifications'])->name('show.specifications');
     Route::post('/connect-experts', [HomeController::class, 'connect_experts'])->name('connect.experts');
     Route::get('/contact-us', [ContactController::class, 'contact'])->name('contact.us');
+    Route::post('/contact-submit', [ContactController::class, 'sendContactForm'])->name('contact.submit');
     Route::post('/add-to-cart', [ProductDetailsController::class, 'add_to_cart'])->name('add.cart');
     Route::post('/cart', [ProductDetailsController::class, 'cart_details'])->name('cart.details');
     Route::delete('/cart/remove/{id}', [ProductDetailsController::class, 'remove_from_cart'])->name('cart.remove');

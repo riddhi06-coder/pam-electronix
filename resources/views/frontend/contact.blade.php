@@ -126,8 +126,9 @@
                         <div class="contact_form_box_all type_one">
                            <div class="contact_form_box_inner">
                               <div class="contact_form_shortcode">
-                                
-                                 <form id="contact-form" method="post" action="contact.php" role="form">
+
+                                <form id="contact-form" method="POST" action="{{ route('contact.submit') }}" role="form">
+                                    @csrf
                                     <div class="messages"></div>
 
                                     <div class="controls">
@@ -135,21 +136,21 @@
                                             <div class="col-sm-12">
                                                 <div class="form-group">
                                                    <label> Your Name<br /></label>
-                                                    <input type="text" name="name" placeholder="Your Name *" required="required" data-error="Enter Your Name">
+                                                    <input type="text" name="name" placeholder="Your Name *" data-error="Enter Your Name">
                                                     <div class="help-block with-errors"></div>
                                                 </div>
                                             </div>
                                             <div class="col-sm-12">
                                                 <div class="form-group">
                                                    <label> Your Email<br /></label>
-                                                    <input type="text" name="email" required="required" placeholder="Email *" data-error="Enter Your Email Id">
+                                                    <input type="text" name="email" placeholder="Email *" data-error="Enter Your Email Id">
                                                     <div class="help-block with-errors"></div>
                                                 </div>
                                             </div>
                                             <div class="col-sm-12">
                                                 <div class="form-group">
                                                    <label> Your Subject<br /></label>
-                                                    <input type="text" name="subject" required="required" placeholder=" Subject ">
+                                                    <input type="text" name="subject" placeholder=" Subject ">
                                                 </div>
                                             </div>
                                            
@@ -157,7 +158,7 @@
                                             <div class="col-sm-12">
                                                 <div class="form-group">
                                                    <label> Your Message<br /></label>
-                                                    <textarea name="message" placeholder="Additional Information... " rows="2" required="required" data-error="Please, leave us a message."></textarea>
+                                                    <textarea name="message" placeholder="Additional Information... " rows="2" data-error="Please, leave us a message."></textarea>
                                                     <div class="help-block with-errors"></div>
                                                 </div>
                                             </div>
@@ -203,6 +204,70 @@
 @include('components.frontend.footer')
 
 @include('components.frontend.main-js')
+
+
+<script>
+    document.getElementById('contact-form').addEventListener('submit', function (e) {
+        e.preventDefault(); // Prevent form submission
+        let form = e.target;
+        let isValid = true;
+
+        // Clear all previous error messages
+        form.querySelectorAll('.error-message').forEach(el => el.remove());
+
+        // Helper to show error
+        const showError = (input, message) => {
+            const error = document.createElement('div');
+            error.classList.add('error-message');
+            error.style.color = 'red';
+            error.style.marginTop = '5px';
+            error.textContent = message;
+            input.parentElement.appendChild(error);
+        };
+
+
+        // Validate name
+        const name = form.querySelector('input[name="name"]');
+        const namePattern = /^[A-Za-z\s]+$/;
+        if (!name.value.trim()) {
+            showError(name, 'Please enter your name.');
+            isValid = false;
+        } else if (!namePattern.test(name.value.trim())) {
+            showError(name, 'Name can only contain letters and spaces.');
+            isValid = false;
+        }
+
+        // Validate email
+        const email = form.querySelector('input[name="email"]');
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!email.value.trim()) {
+            showError(email, 'Please enter your email.');
+            isValid = false;
+        } else if (!emailPattern.test(email.value)) {
+            showError(email, 'Please enter a valid email address.');
+            isValid = false;
+        }
+
+        // Validate subject
+        const subject = form.querySelector('input[name="subject"]');
+        if (!subject.value.trim()) {
+            showError(subject, 'Please enter a subject.');
+            isValid = false;
+        }
+
+        // Validate message
+        const message = form.querySelector('textarea[name="message"]');
+        if (!message.value.trim()) {
+            showError(message, 'Please enter your message.');
+            isValid = false;
+        }
+
+        if (isValid) {
+            form.submit(); // Submit only if all fields are valid
+        }
+    });
+</script>
+
 
 </body>
 </html>
