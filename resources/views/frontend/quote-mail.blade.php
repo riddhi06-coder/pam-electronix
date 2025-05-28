@@ -30,7 +30,7 @@
     <div class="header" style="text-align: center;">
         <div style="background-color: black; display: inline-block; padding: 10px; border-radius: 8px;">
             <a class="logo" href="#">
-                <img class="img-fluid for-dark" src="{{ asset('admin/assets/images/logo/logo.webp') }}" alt="loginpage" style="max-width: 180px;">
+                <img class="img-fluid for-dark" src="{{ asset('admin/assets/images/logo/logo.webp') }}" alt="loginpage" style="max-width: 120px;">
             </a>
         </div>
     </div><br>
