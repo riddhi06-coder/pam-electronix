@@ -20,8 +20,8 @@
 <script>
     // Initialize Notyf
     var notyf = new Notyf({
-        duration: 3000, // Notification duration
-        ripple: true, // Adds a ripple effect
+        duration: 7000,
+        ripple: true,
         position: {
             x: 'right',
             y: 'top',
@@ -30,11 +30,38 @@
         types: [
             {
                 type: 'custom-success',
-                background: 'black',  // Black background
+                background: 'black',
                 icon: {
-                    className: 'fa fa-check-circle', // FontAwesome success icon
+                    className: 'fa fa-check-circle',
                     tagName: 'i',
-                    color: 'white'  // White icon color
+                    color: 'white'
+                }
+            },
+            {
+                type: 'custom-error',
+                background: 'black',
+                icon: {
+                    className: 'fa fa-times-circle',
+                    tagName: 'i',
+                    color: 'white'
+                }
+            },
+            {
+                type: 'custom-info',
+                background: '#0dcaf0',
+                icon: {
+                    className: 'fa fa-info-circle',
+                    tagName: 'i',
+                    color: 'white'
+                }
+            },
+            {
+                type: 'custom-warning',
+                background: '#ffc107',
+                icon: {
+                    className: 'fa fa-exclamation-triangle',
+                    tagName: 'i',
+                    color: 'white'
                 }
             }
         ]
@@ -44,25 +71,28 @@
     @if(Session::has('message'))
         notyf.open({
             type: 'custom-success',
-            message: " {{ session('message') }}",
+            message: "{{ session('message') }}"
         });
     @endif
 
     @if(Session::has('error'))
-        notyf.error("{{ session('error') }}");
+        notyf.open({
+            type: 'custom-error',
+            message: "{{ session('error') }}"
+        });
     @endif
 
     @if(Session::has('info'))
         notyf.open({
-            type: 'info',
-            message: "<strong>ℹ Info:</strong> {{ session('info') }}"
+            type: 'custom-info',
+            message: "{{ session('info') }}"
         });
     @endif
 
     @if(Session::has('warning'))
         notyf.open({
-            type: 'warning',
-            message: " {{ session('warning') }}"
+            type: 'custom-warning',
+            message: "{{ session('warning') }}"
         });
     @endif
 </script>

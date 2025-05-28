@@ -135,38 +135,90 @@ class ProductDetailsController extends Controller
    
     public function cart_details(Request $request)
     {
-        $productId = $request->get('add_to_cart'); 
-        $quantity = $request->input("quantity.$productId");
-
-        $spec = ProductSpecification::find($productId);
-
-        if (!$spec) {
-            return redirect()->back()->with('error', 'Specification not found.');
-        }
-
-        $product = Product::find($spec->product_id); 
-
-        $item = [
-            'id' => $productId,
-            'image' => $request->input("product_image.$productId"),
-            'name' => $request->input("name.$productId"),
-            'manufacturer' => $request->input("manufacturer.$productId"),
-            'description' => $request->input("description.$productId"),
-            'quantity' => $quantity,
-            'part_number' => $request->input("part_number.$productId", 'N/A'),
-            'product_name' => $product->product_name ?? 'N/A', 
-        ];
-
-        // dd($item);
+        // Example for session-based cart
+        $cartItems = DB::table('carts')
+            ->where('session_id', session()->getId())
+            ->get()
+            ->map(function ($item) {
+                return [
+                    'id' => $item->id,
+                    'image' => $item->product_image,
+                    'name' => $item->name,
+                    'manufacturer' => $item->manufacturer,
+                    'description' => $item->description,
+                    'quantity' => $item->quantity,
+                    'part_number' => $item->name, 
+                    'product_name' => $item->product_name,
+                ];
+            });
 
         return view('frontend.cart', [
-            'cartItems' => [$item],
+            'cartItems' => $cartItems,
+        ]);
+    }
+
+
+    public function add_to_cart(Request $request)
+    {
+        $request->validate([
+            'spec_id' => 'required|exists:product_specification,id',
+            'product_id' => 'required|exists:master_product,id',
+            'quantity' => 'required|integer|min:1',
         ]);
 
+        try {
 
-        
-        
+            $sessionId = session()->getId();
+
+            $existingCart = DB::table('carts')
+                ->where('product_id', $request->product_id)
+                ->where('spec_id', $request->spec_id)
+                ->where('session_id', $sessionId) // important
+                ->first();
+
+            if ($existingCart) {
+                // Update quantity by adding the new quantity
+                DB::table('carts')
+                    ->where('id', $existingCart->id)
+                    ->update([
+                        'quantity' => $existingCart->quantity + $request->quantity,
+                        'updated_at' => Carbon::now(),
+                    ]);
+
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Quantity updated in cart!'
+                ]);
+
+            } else {
+                // Insert new record
+                DB::table('carts')->insert([
+                    'spec_id' => $request->spec_id,
+                    'product_id' => $request->product_id,
+                    'name' => $request->name,
+                    'manufacturer' => $request->manufacturer,
+                    'description' => $request->description,
+                    'quantity' => $request->quantity,
+                    'product_name' => $request->product_name,
+                    'product_image' => $request->product_image,
+                    'session_id' => $sessionId,
+                    'created_at' => Carbon::now(),
+                ]);
+
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Product added to cart!'
+                ]);
+            }
+            
+        } catch (Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to add to cart.'
+            ], 500);
+        }
     }
+
 
 
 }

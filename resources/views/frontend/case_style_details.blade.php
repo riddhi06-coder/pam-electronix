@@ -85,7 +85,7 @@
 
                                             <tbody>
                                                 @foreach($specification as $spec)
-                                                    <tr>
+                                                    <tr class="cart-row" data-id="{{ $spec->id }}">
                                                         <td>{{ $loop->iteration }}</td>
                                                         <td class="product-thumbnail">
                                                             <a href="#">
@@ -98,13 +98,13 @@
                                                         </td>
                                                         <td>{!! $spec->product_description !!}</td>
 
-                                                        <td class="product-quantity" data-title="Quantity">
+                                                        <td class="product-quantity">
                                                             <div class="quantity">
                                                                 <input type="button" value="-" class="qty_button minus">
                                                                 <input type="number"
                                                                     class="input-text qty text"
-                                                                    name="quantity[{{ $spec->id }}]"
-                                                                    title="Qty"
+                                                                    name="quantity"
+                                                                    value="1"
                                                                     inputmode="numeric"
                                                                     readonly>
                                                                 <input type="button" value="+" class="qty_button plus">
@@ -112,7 +112,7 @@
                                                         </td>
 
                                                         <td>
-                                                            <button type="submit" name="add_to_cart" value="{{ $spec->id }}" class="theme-btn product-page five">
+                                                            <button type="button" class="add-to-cart-btn theme-btn product-page five" value="{{ $spec->id }}">
                                                                 Add To Cart
                                                             </button>
                                                         </td>
@@ -137,10 +137,14 @@
                                                         <td>{{ $spec->packaging ?? 'N/A' }}</td>
 
                                                         <!-- Hidden inputs for extra data -->
-                                                        <input type="hidden" name="product_image[{{ $spec->id }}]" value="{{ $spec->product_image }}">
-                                                        <input type="hidden" name="name[{{ $spec->id }}]" value="{{ $spec->name }}">
-                                                        <input type="hidden" name="manufacturer[{{ $spec->id }}]" value="{{ $spec->manufacturer }}">
-                                                        <input type="hidden" name="description[{{ $spec->id }}]" value="{{ strip_tags($spec->product_description) }}">
+                                                        <input type="hidden" name="spec_id" value="{{ $spec->id }}">
+                                                        <input type="hidden" name="product_id" value="{{ $spec->product_id }}">
+                                                        <input type="hidden" name="product_image" value="{{ $spec->product_image }}">
+                                                        <input type="hidden" name="name" value="{{ $spec->name }}">
+                                                        <input type="hidden" name="manufacturer" value="{{ $spec->manufacturer }}">
+                                                        <input type="hidden" name="description" value="{{ strip_tags($spec->product_description) }}">
+                                                        <input type="hidden" name="product_name" value="{{ $spec->product->product_name ?? 'N/A' }}">
+     
                                                     </tr>
                                                 @endforeach
                                             </tbody>
@@ -164,34 +168,96 @@
             @include('components.frontend.footer')
             
             @include('components.frontend.main-js')
+            
             <script type="text/javascript" src="{{ asset('frontend/assets/js/freeze-table.min.js') }}" defer></script>
+
 
             <script>
                 document.addEventListener('DOMContentLoaded', function () {
-                    document.querySelectorAll('.quantity').forEach(function (container) {
-                        const minusBtn = container.querySelector('.qty_button.minus');
-                        const plusBtn = container.querySelector('.qty_button.plus');
+                    // Quantity buttons
+                    document.querySelectorAll('.quantity').forEach(container => {
+                        const minus = container.querySelector('.minus');
+                        const plus = container.querySelector('.plus');
                         const input = container.querySelector('.qty');
 
-                        minusBtn.addEventListener('click', function () {
-                            let value = parseInt(input.value) || 1;
-                            console.log('Minus clicked, current value:', value);
-                            if (value > 1) {
-                                input.value = value - 1;
-                                console.log('Updated value:', input.value);
-                            }
+                        minus.addEventListener('click', () => {
+                            let val = parseInt(input.value) || 1;
+                            if (val > 1) input.value = val - 1;
                         });
 
-                        plusBtn.addEventListener('click', function () {
-                            let value = parseInt(input.value) || 1;
-                            console.log('Plus clicked, current value:', value);
-                            input.value = value + 1;
-                            console.log('Updated value:', input.value);
+                        plus.addEventListener('click', () => {
+                            let val = parseInt(input.value) || 1;
+                            input.value = val + 1;
                         });
                     });
                 });
-
             </script>
+
+
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    console.log("DOM fully loaded");
+
+                    document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+                        button.addEventListener('click', (event) => {
+                            event.preventDefault();
+                            console.log('Add to cart clicked');
+
+                            const row = button.closest('.cart-row');
+                            if (!row) {
+                                console.error('Cart row not found.');
+                                notyf.open({
+                                    type: 'custom-error',
+                                    message: 'Cart row missing. Please refresh.'
+                                });
+                                return;
+                            }
+
+                            const formData = new FormData();
+                            row.querySelectorAll('input[name]').forEach(input => {
+                                formData.append(input.name, input.value);
+                            });
+
+                            console.log('FormData prepared', [...formData.entries()]);
+
+                            fetch("{{ route('add.cart') }}", {
+                                method: 'POST',
+                                headers: {
+                                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                },
+                                body: formData
+                            })
+                            .then(response => response.json())
+
+                            .then(data => {
+                                console.log('Response:', data);
+                                if (data.success) {
+                                    notyf.open({
+                                        type: 'custom-success',
+                                        message: data.message || 'Added to cart!'
+                                    });
+                                    setTimeout(() => {
+                                        location.reload();
+                                    }, 500); 
+                                } else {
+                                    notyf.open({
+                                        type: 'custom-error',
+                                        message: data.message || 'Could not add to cart.'
+                                    });
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Fetch error:', error);
+                                notyf.open({
+                                    type: 'custom-error',
+                                    message: 'An error occurred. Try again.'
+                                });
+                            });
+                        });
+                    });
+                });
+            </script>
+
 
 
 </body>

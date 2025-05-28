@@ -145,14 +145,24 @@
                                         <!-- <li>
                                             <button type="button" class="search-toggler"><i class="icon-search"></i></button>
                                         </li> -->
-                                        <!-- <li>
-                                            <div class="mini_cart_togglers header_side_cart">
-                                                <div class="mini-cart-count">
-                                                    0 </div>
-                                                <i class="icon-shopping-bag1"></i>
-                                            </div>
+                                        @php
+                                            $cartCount = DB::table('carts')->count(); 
+                                        @endphp
+                                        
+                                        <li>
+                                            <form action="{{ route('cart.details') }}" method="POST" id="cartForm">
+                                                @csrf
+                                                <div class="mini_cart_togglers header_side_cart" onclick="document.getElementById('cartForm').submit()" style="cursor: pointer;">
+                                                    <div class="mini-cart-count">
+                                                        {{ $cartCount }}
+                                                    </div>
+                                                    <i class="icon-shopping-bag1"></i>
+                                                </div>
+                                            </form>
                                         </li>
-                                        <li class="header-button">
+
+
+                                        <!-- <li class="header-button">
                                             <a href="" target="_blank" rel="" class="theme-btn four">Login <i class="icon-right-arrow"></i></a>
                                         </li> -->
                                     </ul>
