@@ -39,7 +39,7 @@
                                             <div class="col-lg-12">
                                                 <div class="breadcrumbs creote">
                                                     <ul class="breadcrumb m-auto">
-                                                        <li><a href="index.html">Home</a></li>
+                                                        <li><a href="{{ route('home.page') }}">Home</a></li>
                                                         <li class="active">Cart</li>
                                                     </ul>
                                                 </div>
@@ -182,7 +182,7 @@
             
                 @include('components.frontend.main-js')
 
-                
+
                 <!---- Add to cart functionality----->
                 <script>
                     document.addEventListener('DOMContentLoaded', function () {
