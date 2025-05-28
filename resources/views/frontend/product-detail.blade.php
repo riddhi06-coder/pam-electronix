@@ -152,7 +152,7 @@
                                         <h4>{{ $desc->ordering_heading ?? 'Ordering Code' }}</h4>
                                         <div class="pd_top_20"></div>
                                         @if(!empty($desc->image))
-                                            <img src="{{ asset('uploads/product/' . $desc->image) }}" alt="Ordering Code">
+                                            <img src="{{ asset('uploads/product/' . $desc->image) }}">
                                         @endif
                                         <div class="pd_top_20"></div>
                                     @endif

@@ -81,7 +81,7 @@
                                                                             <td>{{ $index + 1 }}</td>
                                                                             <td>
                                                                                 <a href="#">
-                                                                                    <img src="{{ asset('uploads/product/specifications/' . $item['image']) }}" alt="Image" width="80">
+                                                                                    <img src="{{ asset('uploads/product/specifications/' . $item['image']) }}" width="80">
                                                                                 </a>
                                                                             </td>
                                                                             <td>{{ $item['product_name'] }}</td>
