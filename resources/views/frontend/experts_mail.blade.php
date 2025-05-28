@@ -33,10 +33,9 @@
                 <img class="img-fluid for-dark" src="{{ asset('admin/assets/images/logo/logo.webp') }}" alt="loginpage" style="max-width: 180px;">
             </a>
         </div>
-    </div><br>
+    </div>
 
-
-    <h2 style="text-align: center;">Enquiry Details</h2><br>
+    <h2 style="text-align: center;">Enquiry Details</h2>
 
     <p><strong>Name:</strong> {{ $name }}</p>
     <p><strong>Email:</strong> {{ $email }}</p>
