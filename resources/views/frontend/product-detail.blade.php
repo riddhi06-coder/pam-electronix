@@ -184,8 +184,10 @@
                                 
                                 <br>
                                 <br>
+                                @if(!empty($desc->special_heading))
+                                    <h4>{{ $desc->special_heading }}</h4>
+                                @endif
 
-                                <h4>{{ $desc->special_heading ?? 'Special Features' }}</h4>
 
                                 <div class="pd_top_20"></div>
 
