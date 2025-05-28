@@ -171,7 +171,7 @@
             
             <script type="text/javascript" src="{{ asset('frontend/assets/js/freeze-table.min.js') }}" defer></script>
 
-
+            <!----Qunatity ------>
             <script>
                 document.addEventListener('DOMContentLoaded', function () {
                     // Quantity buttons
@@ -193,7 +193,7 @@
                 });
             </script>
 
-
+            <!----addd to cartttt------>
             <script>
                 document.addEventListener('DOMContentLoaded', function () {
                     console.log("DOM fully loaded");

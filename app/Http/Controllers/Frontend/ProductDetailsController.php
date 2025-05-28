@@ -220,5 +220,23 @@ class ProductDetailsController extends Controller
     }
 
 
+    public function remove_from_cart($id)
+    {
+        try {
+            DB::table('carts')->where('id', $id)->delete();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Item removed from cart.'
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to remove item.'
+            ], 500);
+        }
+    }
+
+
 
 }

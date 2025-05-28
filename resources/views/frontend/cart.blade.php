@@ -77,8 +77,11 @@
                                                                             </div>
                                                                         </td>
                                                                         <td>
-                                                                            <button><i class="fa fa-trash"></i></button>
+                                                                            <button class="remove-from-cart-btn" data-id="{{ $item['id'] }}">
+                                                                                <i class="fa fa-trash"></i>
+                                                                            </button>
                                                                         </td>
+
                                                                     </tr>
                                                                 @endforeach
                                                             </tbody>
@@ -166,6 +169,51 @@
                 @include('components.frontend.footer')
             
                 @include('components.frontend.main-js')
+
+
+                <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+                        document.querySelectorAll('.remove-from-cart-btn').forEach(button => {
+                            button.addEventListener('click', function () {
+                                const itemId = this.getAttribute('data-id');
+
+                                if (!confirm('Are you sure you want to remove this item from the cart?')) {
+                                    return;
+                                }
+
+                                fetch(`/cart/remove/${itemId}`, {
+                                    method: 'DELETE',
+                                    headers: {
+                                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                                        'Accept': 'application/json'
+                                    }
+                                })
+                                .then(response => response.json())
+                                .then(data => {
+                                    if (data.success) {
+                                        notyf.open({
+                                            type: 'custom-success',
+                                            message: data.message
+                                        });
+                                        location.reload(); // reload page to reflect change
+                                    } else {
+                                        notyf.open({
+                                            type: 'custom-error',
+                                            message: data.message
+                                        });
+                                    }
+                                })
+                                .catch(error => {
+                                    console.error('Error removing item:', error);
+                                    notyf.open({
+                                        type: 'custom-error',
+                                        message: 'Something went wrong.'
+                                    });
+                                });
+                            });
+                        });
+                    });
+                </script>
 
               
 
