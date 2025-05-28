@@ -35,7 +35,7 @@
         </div>
     </div><br>
 
-    <h2>Quote Form Submission</h2>
+    <h2 style="text-align: center;">Quote Form Details</h2><br>
     <p><strong>Company Name:</strong> {{ $emailData['company_name'] }}</p>
     <p><strong>Contact Person:</strong> {{ $emailData['name'] }}</p>
     <p><strong>Designation:</strong> {{ $emailData['designation'] }}</p>

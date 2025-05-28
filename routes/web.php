@@ -79,13 +79,12 @@ Route::group(['prefix'=> '', 'middleware'=>[\App\Http\Middleware\PreventBackHist
     
     Route::get('/', [HomeController::class, 'index'])->name('home.page');
     Route::get('/specifications', [HomeController::class, 'specifications'])->name('show.specifications');
+    Route::post('/connect-experts', [HomeController::class, 'connect_experts'])->name('connect.experts');
     Route::get('/contact-us', [ContactController::class, 'contact'])->name('contact.us');
     Route::post('/add-to-cart', [ProductDetailsController::class, 'add_to_cart'])->name('add.cart');
     Route::post('/cart', [ProductDetailsController::class, 'cart_details'])->name('cart.details');
     Route::delete('/cart/remove/{id}', [ProductDetailsController::class, 'remove_from_cart'])->name('cart.remove');
-
     Route::post('/contact/send', [ProductDetailsController::class, 'sendContact'])->name('contact.send');
-    
     Route::get('/product-details/{slug}', [ProductDetailsController::class, 'show'])->name('product-details.show');
     Route::get('/{product_slug}/{case_style_slug}', [ProductDetailsController::class, 'case_style'])->name('productcase.style');
 

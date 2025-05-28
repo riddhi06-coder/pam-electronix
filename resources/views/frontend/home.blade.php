@@ -219,7 +219,9 @@
                                                         <p role="status" aria-live="polite" aria-atomic="true"></p>
                                                         <ul></ul>
                                                     </div>
-                                                    <form action="#" method="post" class="wpcf7-form init" novalidate>
+
+                                                    <form action="{{ route('connect.experts') }}" method="POST" class="wpcf7-form init" novalidate>
+                                                        @csrf
                                                         <div class="row">
                                                             <div class="col-lg-6">
                                                                 <input type="text" id="your-name" name="your-name" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" aria-required="true" aria-invalid="false" placeholder="Your Name">
@@ -241,6 +243,7 @@
                                                             </div>
                                                         </div>
                                                     </form>
+
                                                 </div>
                                             </div>
                                         </div>
@@ -257,6 +260,83 @@
 @include('components.frontend.footer')
 
 @include('components.frontend.main-js')
+
+
+
+<!----- formm validations---->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const form = document.querySelector('.wpcf7-form');
+
+        form.addEventListener('submit', function (e) {
+            // Remove previous errors
+            const oldErrors = form.querySelectorAll('.error-message');
+            oldErrors.forEach(el => el.remove());
+
+            let hasError = false;
+
+            function showError(input, message) {
+                const error = document.createElement('div');
+                error.className = 'error-message';
+                error.style.color = 'red';
+                error.style.fontSize = '0.85em';
+                error.textContent = message;
+                input.insertAdjacentElement('afterend', error);
+            }
+
+            // Your Name
+            const name = form.querySelector('#your-name');
+            if (!name.value.trim()) {
+                showError(name, 'Name is required.');
+                hasError = true;
+            } else if (/\d/.test(name.value)) {
+                showError(name, 'Name should not contain numbers.');
+                hasError = true;
+            }
+
+            // Email
+            const email = form.querySelector('#your-email');
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!email.value.trim()) {
+                showError(email, 'Email is required.');
+                hasError = true;
+            } else if (!emailRegex.test(email.value)) {
+                showError(email, 'Invalid email format.');
+                hasError = true;
+            }
+
+            // Phone
+            const phone = form.querySelector('#tel-922');
+            const phoneRegex = /^\d{7,15}$/;
+            if (!phone.value.trim()) {
+                showError(phone, 'Phone number is required.');
+                hasError = true;
+            } else if (!phoneRegex.test(phone.value.trim())) {
+                showError(phone, 'Phone number must be between 7 to 15 digits.');
+                hasError = true;
+            }
+
+            // Subject
+            const subject = form.querySelector('#your-subject');
+            if (!subject.value.trim()) {
+                showError(subject, 'Subject is required.');
+                hasError = true;
+            }
+
+            // Message
+            const message = form.querySelector('#your-message');
+            if (!message.value.trim()) {
+                showError(message, 'Message is required.');
+                hasError = true;
+            }
+
+            if (hasError) {
+                e.preventDefault();
+            }
+        });
+    });
+</script>
+
 
 </body>
 </html>
