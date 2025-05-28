@@ -137,39 +137,39 @@
                         <div class="close-modal"><i class="fa fa-times"></i></div>
                         <div class="modal_box">
                             <div class="row">
-                            <div class="col-lg-12 col-md-12 form_inner">
-                                    <div class="form_content">
+                                <div class="col-lg-12 col-md-12 form_inner">
+                                        <div class="form_content">
+                                        <h3 class="modal-title">Ask to Quote</h3><br>
+                                            <form class="contact-form" method="POST" action="{{ route('contact.send') }}">
+                                                @csrf
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <input type="text" name="company_name" placeholder="Company Name">
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <input type="text" name="contact_person" placeholder="Contact Person">
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <input type="text" name="designation" placeholder="Designation">
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <input type="text" name="phone" placeholder="Phone No">
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <input type="email" name="email" placeholder="Enter Your Email">
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <textarea name="message" placeholder="Enter Your Message"></textarea>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <p><input type="submit" value="Submit"></p>
+                                                    </div>
+                                                </div>
+                                            </form>
 
-                                        <form class="contact-form" method="POST" action="{{ route('contact.send') }}">
-                                            @csrf
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <input type="text" name="company_name" placeholder="Company Name">
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <input type="text" name="contact_person" placeholder="Contact Person">
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <input type="text" name="designation" placeholder="Designation">
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <input type="text" name="phone" placeholder="Phone No">
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <input type="email" name="email" placeholder="Enter Your Email">
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <textarea name="message" placeholder="Enter Your Message"></textarea>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <p><input type="submit" value="Submit"></p>
-                                                </div>
-                                            </div>
-                                        </form>
 
-
-                                    </div>
-                            </div>
+                                        </div>
+                                </div>
                             </div>
                         </div>
                     </div>
