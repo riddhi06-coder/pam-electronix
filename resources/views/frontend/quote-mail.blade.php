@@ -28,8 +28,7 @@
 </head>
 <body>
     <div class="header">
-        <img src="{{ asset('frontend/assets/images/logo.webp') }}" alt="PAM Electronix" class="logo">
-        <img src="{{ asset('frontend/assets/images/logo.webp') }}" alt="Logo" class="logo__sticky">
+        <img alt="Logo" src="{{ asset('frontend/assets/images/logo.webp') }}"/>
     </div>
 
     <h2>Quote Form Submission</h2>
