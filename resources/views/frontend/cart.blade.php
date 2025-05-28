@@ -123,39 +123,35 @@
                             <div class="row">
                             <div class="col-lg-12 col-md-12 form_inner">
                                     <div class="form_content">
-                                        <form class="contact-form" method="post" action="sendemail.php">
+
+                                        <form class="contact-form" method="POST" action="{{ route('contact.send') }}">
+                                            @csrf
                                             <div class="row">
                                                 <div class="col-md-6">
-                                                    <input type="text" name="name" value="" size="40" aria-required="true"
-                                                    aria-invalid="false" placeholder="Company Name" />
+                                                    <input type="text" name="company_name" placeholder="Company Name" required>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <input type="text" name="name" value="" size="40" aria-required="true"
-                                                    aria-invalid="false" placeholder="Contact Person" />
-                                                </div> 
-                                                <div class="col-md-6">
-                                                    <input type="text" name="name" value="" size="40" aria-required="true"
-                                                    aria-invalid="false" placeholder="Designation" />
+                                                    <input type="text" name="contact_person" placeholder="Contact Person" required>
                                                 </div>
                                                 <div class="col-md-6">
-                                                <input type="text" name="name" value="" size="40" aria-required="true"
-                                                    aria-invalid="false" placeholder="Phone No" />
+                                                    <input type="text" name="designation" placeholder="Designation" required>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <input type="text" name="phone" placeholder="Phone No" required>
                                                 </div>
                                                 <div class="col-md-12">
-                                                    <input type="email" name="email" value="" size="40" aria-required="true"
-                                                    aria-invalid="false" placeholder="Enter Your Email" />
+                                                    <input type="email" name="email" placeholder="Enter Your Email" required>
                                                 </div>
                                                 <div class="col-md-12">
-                                                    <textarea name="message" cols="40" rows="10" class="wpcf7-form-control wpcf7-textarea"
-                                                    aria-invalid="false" placeholder="Enter Your Message"></textarea>
+                                                    <textarea name="message" placeholder="Enter Your Message" required></textarea>
                                                 </div>
                                                 <div class="col-md-12">
-                                            <p><input type="submit" value="Submit" /></p>
-
+                                                    <p><input type="submit" value="Submit"></p>
                                                 </div>
                                             </div>
-
                                         </form>
+
+
                                     </div>
                             </div>
                             </div>

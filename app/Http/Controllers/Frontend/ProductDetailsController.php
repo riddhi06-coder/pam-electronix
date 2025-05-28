@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
 
 use App\Models\ProductDescription;
 use App\Models\ProductSpecification;
@@ -135,7 +137,6 @@ class ProductDetailsController extends Controller
    
     public function cart_details(Request $request)
     {
-        // Example for session-based cart
         $cartItems = DB::table('carts')
             ->where('session_id', session()->getId())
             ->get()
@@ -151,9 +152,6 @@ class ProductDetailsController extends Controller
                     'product_name' => $item->product_name,
                 ];
             });
-
-            // dd($cartItems);
-            // dd(session()->getId());
 
         return view('frontend.cart', [
             'cartItems' => $cartItems,
@@ -240,6 +238,58 @@ class ProductDetailsController extends Controller
         }
     }
 
+
+    public function sendContact(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'company_name' => 'required|string|max:255',
+            'contact_person' => 'required|string|max:255',
+            'designation' => 'required|string|max:255',
+            'phone' => 'required|string|max:20',
+            'email' => 'required|email',
+            'message' => 'required|string|max:2000',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->route('home.page')->withErrors($validator)->withInput();
+        }
+
+        $emailData = [
+            'company_name' => $request->company_name,
+            'name' => $request->contact_person,
+            'designation' => $request->designation,
+            'phone' => $request->phone,
+            'email' => $request->email,
+            'message' => $request->message,
+        ];
+
+        // Retrieve cart items from session or however you're storing them
+        $sessionId = session()->getId();
+
+        $cartItems = DB::table('carts')->where('session_id', $sessionId)->get();
+
+
+        try {
+            Mail::send('frontend.quote-mail', [
+                'emailData' => $emailData,
+                'cartItems' => $cartItems, 
+            ], function ($message) use ($emailData) {
+                $subject = "Quote Form - " . ($emailData['name'] ?? 'Unknown');
+                $message->to('riddhi@matrixbricks.com')
+                        ->cc('shweta@matrixbricks.com')
+                        ->subject($subject);
+            });
+
+        // Delete cart items after successful mail sending
+        DB::table('carts')->where('session_id', $sessionId)->delete();
+
+
+            return redirect()->route('home.page')->with('message', 'Your message has been sent successfully.');
+        } catch (\Exception $e) {
+            \Log::error('Mail sending failed: ' . $e->getMessage());
+            return redirect()->route('home.page')->with('error', 'Failed to send the message: ' . $e->getMessage());
+        }
+    }
 
 
 }
