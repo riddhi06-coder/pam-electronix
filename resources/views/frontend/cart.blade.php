@@ -4,6 +4,17 @@
 
 <head>
     @include('components.frontend.head')
+
+    <style>
+        .error-message {
+            margin-top: 5px;
+            color: red;
+            font-size: 0.9em;
+        }
+
+
+    </style>
+
 </head>
 
 
@@ -60,30 +71,35 @@
                                                                 </tr>
                                                             </thead>
                                                             <tbody class="align-middle">
-                                                                @foreach($cartItems as $index => $item)
+                                                                @if($cartItems->isEmpty())
                                                                     <tr>
-                                                                        <td>{{ $index + 1 }}</td>
-                                                                        <td>
-                                                                            <a href="#"><img src="{{ asset('uploads/product/specifications/' . $item['image']) }}" alt="Image" width="80"></a>
-                                                                        </td>
-                                                                        <td>
-                                                                        {{ $item['product_name'] }}
-                                                                        </td>
-                                                                        <td>{{ $item['name'] }}</td>
-                                                                        <td>{{ $item['description'] }}</td>
-                                                                        <td>
-                                                                            <div class="qty">
-                                                                                <input type="text" value="{{ $item['quantity'] }}" style="width: 60px;">
-                                                                            </div>
-                                                                        </td>
-                                                                        <td>
-                                                                            <button class="remove-from-cart-btn" data-id="{{ $item['id'] }}">
-                                                                                <i class="fa fa-trash"></i>
-                                                                            </button>
-                                                                        </td>
-
+                                                                        <td colspan="7" class="text-center">No items found in the cart.</td>
                                                                     </tr>
-                                                                @endforeach
+                                                                @else
+                                                                    @foreach($cartItems as $index => $item)
+                                                                        <tr>
+                                                                            <td>{{ $index + 1 }}</td>
+                                                                            <td>
+                                                                                <a href="#">
+                                                                                    <img src="{{ asset('uploads/product/specifications/' . $item['image']) }}" alt="Image" width="80">
+                                                                                </a>
+                                                                            </td>
+                                                                            <td>{{ $item['product_name'] }}</td>
+                                                                            <td>{{ $item['name'] }}</td>
+                                                                            <td>{{ $item['description'] }}</td>
+                                                                            <td>
+                                                                                <div class="qty">
+                                                                                    <input type="text" value="{{ $item['quantity'] }}" style="width: 60px;">
+                                                                                </div>
+                                                                            </td>
+                                                                            <td>
+                                                                                <button class="remove-from-cart-btn" data-id="{{ $item['id'] }}">
+                                                                                    <i class="fa fa-trash"></i>
+                                                                                </button>
+                                                                            </td>
+                                                                        </tr>
+                                                                    @endforeach
+                                                                @endif
                                                             </tbody>
 
 
@@ -128,22 +144,22 @@
                                             @csrf
                                             <div class="row">
                                                 <div class="col-md-6">
-                                                    <input type="text" name="company_name" placeholder="Company Name" required>
+                                                    <input type="text" name="company_name" placeholder="Company Name">
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <input type="text" name="contact_person" placeholder="Contact Person" required>
+                                                    <input type="text" name="contact_person" placeholder="Contact Person">
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <input type="text" name="designation" placeholder="Designation" required>
+                                                    <input type="text" name="designation" placeholder="Designation">
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <input type="text" name="phone" placeholder="Phone No" required>
+                                                    <input type="text" name="phone" placeholder="Phone No">
                                                 </div>
                                                 <div class="col-md-12">
-                                                    <input type="email" name="email" placeholder="Enter Your Email" required>
+                                                    <input type="email" name="email" placeholder="Enter Your Email">
                                                 </div>
                                                 <div class="col-md-12">
-                                                    <textarea name="message" placeholder="Enter Your Message" required></textarea>
+                                                    <textarea name="message" placeholder="Enter Your Message"></textarea>
                                                 </div>
                                                 <div class="col-md-12">
                                                     <p><input type="submit" value="Submit"></p>
@@ -166,7 +182,8 @@
             
                 @include('components.frontend.main-js')
 
-
+                
+                <!---- Add to cart functionality----->
                 <script>
                     document.addEventListener('DOMContentLoaded', function () {
                         document.querySelectorAll('.remove-from-cart-btn').forEach(button => {
@@ -210,6 +227,95 @@
                         });
                     });
                 </script>
+
+
+                <!---- Form Validations----->
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const form = document.querySelector('.contact-form');
+
+                        form.addEventListener('submit', function(e) {
+                            // Clear previous errors
+                            const errorMessages = form.querySelectorAll('.error-message');
+                            errorMessages.forEach(el => el.remove());
+
+                            let hasError = false;
+
+                            // Helper function to show error below input
+                            function showError(input, message) {
+                                const error = document.createElement('div');
+                                error.className = 'error-message';
+                                error.style.color = 'red';
+                                error.style.fontSize = '0.9em';
+                                error.textContent = message;
+                                input.insertAdjacentElement('afterend', error);
+                            }
+
+                            // Validate company_name (required)
+                            const companyName = form.company_name;
+                            if (!companyName.value.trim()) {
+                                showError(companyName, 'Company Name is required.');
+                                hasError = true;
+                            }
+
+                            // Validate contact_person (required, no numbers)
+                            const contactPerson = form.contact_person;
+                            if (!contactPerson.value.trim()) {
+                                showError(contactPerson, 'Contact Person is required.');
+                                hasError = true;
+                            } else if (/\d/.test(contactPerson.value.trim())) {
+                                showError(contactPerson, 'Contact Person should not contain numbers.');
+                                hasError = true;
+                            }
+
+                            // Validate designation (required)
+                            const designation = form.designation;
+                            if (!designation.value.trim()) {
+                                showError(designation, 'Designation is required.');
+                                hasError = true;
+                            }
+
+                            // Validate phone (required, up to 15 digits, optional leading +)
+                            const phone = form.phone;
+                            if (!phone.value.trim()) {
+                                showError(phone, 'Phone number is required.');
+                                hasError = true;
+                            } else if (!/^\+?\d{1,15}$/.test(phone.value.trim())) {
+                                showError(phone, 'Please enter a valid phone number up to 15 digits (optional leading +).');
+                                hasError = true;
+                            }
+
+                            // Validate email (required, valid format)
+                            const email = form.email;
+                            if (!email.value.trim()) {
+                                showError(email, 'Email is required.');
+                                hasError = true;
+                            } else {
+                                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                                if (!emailRegex.test(email.value.trim())) {
+                                    showError(email, 'Please enter a valid email address.');
+                                    hasError = true;
+                                }
+                            }
+
+                            // Validate message (required, max 2000 chars)
+                            const message = form.message;
+                            if (!message.value.trim()) {
+                                showError(message, 'Message is required.');
+                                hasError = true;
+                            } else if (message.value.trim().length > 2000) {
+                                showError(message, 'Message should not exceed 2000 characters.');
+                                hasError = true;
+                            }
+
+                            if (hasError) {
+                                e.preventDefault(); // Prevent form submission
+                            }
+                        });
+                    });
+                </script>
+
+
 
               
 
