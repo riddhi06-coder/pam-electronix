@@ -64,7 +64,7 @@
                         $row = 1;
                     @endphp
 
-                    <table class="display" id="basic-1">
+                    <table class="table table-bordered display" id="basic-1">
                         <thead>
                             <tr>
                                 <th>#</th>
