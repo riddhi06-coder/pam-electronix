@@ -4,6 +4,34 @@
 
 <head>
     @include('components.frontend.head')
+
+
+    <style>
+        .test{
+            font-size: 15px;
+            font-weight: 600;
+            color: #ffffff;
+            padding: 6px 9px !important;
+            font-family: var(--creote-family-one) !important;
+            line-height: 23px !important;
+            background-color: #b78d52;
+            border: 1px solid #ffffff33;
+        }
+
+        .test1{
+            position: relative !important;
+            padding: 5px 15px !important;
+            font-family: var(--creote-family-two) !important;
+            line-height: 28px !important;
+            font-size: 16px !important;
+            font-weight: 400;
+            border: 1px solid var(--border-color-dark) !important;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        </style>
 </head>
 
 
