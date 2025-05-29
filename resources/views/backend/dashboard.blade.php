@@ -21,29 +21,37 @@
               <div class="row">
                   <div class="col-xl-3 col-sm-6">
                     <div class="card o-hidden small-widget">
-                      <div class="card-body total-project border-b-primary border-2"><span class="f-light f-w-500 f-14">Total Project</span>
+                    @php
+                        use App\Models\Product;
+                        $products = Product::count();
+                    @endphp
+
+                    <div class="card-body total-project border-b-primary border-2">
+                        <span class="f-light f-w-500 f-14">Total Products</span>
                         <div class="project-details"> 
-                          <div class="project-counter"> 
-                            <h2 class="f-w-600">1,523</h2><span class="f-12 f-w-400">(This month)</span>
-                          </div>
-                          <div class="product-sub bg-primary-light">
-                            <svg class="invoice-icon">
-                              <use href="../assets/svg/icon-sprite.svg#color-swatch"></use>
-                            </svg>
-                          </div>
+                            <div class="project-counter"> 
+                                <h2 class="f-w-600">{{ number_format($products) }}</h2> {{-- Dynamically display count --}}
+                                <span class="f-12 f-w-400"></span>
+                            </div>
+                            <div class="product-sub bg-primary-light">
+                                <svg class="invoice-icon">
+                                    <use href="{{ asset('admin/assets/svg/icon-sprite.svg#color-swatch') }}"></use>
+                                </svg>
+                            </div>
                         </div>
                         <ul class="bubbles">
-                          <li class="bubble"></li>
-                          <li class="bubble"></li>
-                          <li class="bubble"></li>
-                          <li class="bubble"></li>
-                          <li class="bubble"></li>
-                          <li class="bubble"></li>
-                          <li class="bubble"></li>
-                          <li class="bubble"></li>
-                          <li class="bubble"></li>
+                            <li class="bubble"></li>
+                            <li class="bubble"></li>
+                            <li class="bubble"></li>
+                            <li class="bubble"></li>
+                            <li class="bubble"></li>
+                            <li class="bubble"></li>
+                            <li class="bubble"></li>
+                            <li class="bubble"></li>
+                            <li class="bubble"></li>
                         </ul>
-                      </div>
+                    </div>
+                    
                     </div>
                   </div>
               </div>
