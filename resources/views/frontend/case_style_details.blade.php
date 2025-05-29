@@ -119,19 +119,19 @@
 
                                                         <td>{{ $spec->rohs ?? ' ' }}</td>
                                                         <td>{{ $spec->capacitance ?? ' ' }}</td>
-                                                        <td>{{ $spec->voltage_rating ?? ' ' }} V</td>
+                                                        <td>{{ $spec->voltage_rating ?? ' ' }} </td>
                                                         <td>{{ $spec->termination ?? ' ' }}</td>
-                                                        <td>{{ $spec->pf ?? ' ' }} PF</td>
-                                                        <td>{{ $spec->voltage ?? ' ' }} V</td>
-                                                        <td>{{ $spec->lead_spacing ?? ' ' }} MM</td>
+                                                        <td>{{ $spec->pf ?? ' ' }} </td>
+                                                        <td>{{ $spec->voltage ?? ' ' }} </td>
+                                                        <td>{{ $spec->lead_spacing ?? ' ' }} </td>
                                                         <td>{{ $spec->length ?? ' ' }}</td>
                                                         <td>{{ $spec->width ?? ' ' }}</td>
                                                         <td>{{ $spec->height ?? ' ' }}</td>
-                                                        <td>{{ $spec->lead_wire ?? ' ' }} MM</td>
-                                                        <td>{{ $spec->tolerance ?? ' ' }} %</td>
+                                                        <td>{{ $spec->lead_wire ?? ' ' }} </td>
+                                                        <td>{{ $spec->tolerance ?? ' ' }} </td>
                                                         <td>{{ $spec->package_case ?? ' ' }}</td>
-                                                        <td>{{ $spec->operating_temp ?? ' ' }} C</td>
-                                                        <td>{{ $spec->max_operating_temp ?? ' ' }} C</td>
+                                                        <td>{{ $spec->operating_temp ?? ' ' }} </td>
+                                                        <td>{{ $spec->max_operating_temp ?? ' ' }} </td>
                                                         <td>{{ $spec->series ?? ' ' }}</td>
                                                         <td>{{ $spec->qualification ?? '' }}</td>
                                                         <td>{{ $spec->packaging ?? ' ' }}</td>

@@ -123,7 +123,7 @@
                                         <!-- Pricing -->
                                         <div class="col-md-6">
                                             <label class="form-label" for="pricing">Pricing </label>
-                                            <input class="form-control" id="pricing" type="number" name="pricing" placeholder="Enter Pricing" value="{{ old('pricing', $details->pricing) }}"  min="0" step="any">
+                                            <input class="form-control" id="pricing" type="string" name="pricing" placeholder="Enter Pricing" value="{{ old('pricing', $details->pricing) }}"  min="0" step="any">
                                             <div class="invalid-feedback">Please enter a valid Pricing amount.</div>
                                         </div>
 
@@ -139,14 +139,14 @@
                                         <!-- Capacitance -->
                                         <div class="col-md-6">
                                             <label class="form-label" for="capacitance">Capacitance </label>
-                                            <input class="form-control" id="capacitance" type="number" name="capacitance" placeholder="Enter Capacitance" value="{{ old('capacitance', $details->capacitance) }}"  min="0" step="any">
+                                            <input class="form-control" id="capacitance" type="string" name="capacitance" placeholder="Enter Capacitance" value="{{ old('capacitance', $details->capacitance) }}"  min="0" step="any">
                                             <div class="invalid-feedback">Please enter a valid Capacitance.</div>
                                         </div>
 
                                         <!-- Voltage Rating -->
                                         <div class="col-md-6">
                                             <label class="form-label" for="voltage_rating">Voltage Rating </label>
-                                            <input class="form-control" id="voltage_rating" type="number" name="voltage_rating" placeholder="Enter Voltage Rating" value="{{ old('voltage_rating', $details->voltage_rating) }}"  min="0" step="any">
+                                            <input class="form-control" id="voltage_rating" type="string" name="voltage_rating" placeholder="Enter Voltage Rating" value="{{ old('voltage_rating', $details->voltage_rating) }}"  min="0" step="any">
                                             <div class="invalid-feedback">Please enter a valid Voltage Rating.</div>
                                         </div>
 
@@ -167,7 +167,7 @@
                                         <!-- Voltage---->
                                         <div class="col-md-6">
                                             <label class="form-label" for="voltage">Voltage </label>
-                                            <input class="form-control" id="voltage" type="number" name="voltage" placeholder="Enter Voltage" value="{{ old('voltage', $details->voltage) }}"  min="0" step="any">
+                                            <input class="form-control" id="voltage" type="string" name="voltage" placeholder="Enter Voltage" value="{{ old('voltage', $details->voltage) }}"  min="0" step="any">
                                             <div class="invalid-feedback">Please enter a Voltage.</div>
                                         </div>
 
@@ -182,21 +182,21 @@
                                         <!-- Length -->
                                         <div class="col-md-6">
                                             <label class="form-label" for="length">Length </label>
-                                            <input class="form-control" id="length" type="number" name="length" placeholder="Enter Length" value="{{ old('length', $details->length) }}"  min="0" step="any">
+                                            <input class="form-control" id="length" type="string" name="length" placeholder="Enter Length" value="{{ old('length', $details->length) }}"  min="0" step="any">
                                             <div class="invalid-feedback">Please enter a valid Length.</div>
                                         </div>
 
                                          <!-- Width -->
                                          <div class="col-md-6">
                                             <label class="form-label" for="width">Width </label>
-                                            <input class="form-control" id="width" type="number" name="width" placeholder="Enter Width" value="{{ old('width', $details->width) }}"  min="0" step="any">
+                                            <input class="form-control" id="width" type="string" name="width" placeholder="Enter Width" value="{{ old('width', $details->width) }}"  min="0" step="any">
                                             <div class="invalid-feedback">Please enter a valid Width.</div>
                                         </div>
 
                                          <!-- Height -->
                                          <div class="col-md-6">
                                             <label class="form-label" for="height">Height </label>
-                                            <input class="form-control" id="height" type="number" name="height" placeholder="Enter Height" value="{{ old('height', $details->height) }}"  min="0" step="any">
+                                            <input class="form-control" id="height" type="string" name="height" placeholder="Enter Height" value="{{ old('height', $details->height) }}"  min="0" step="any">
                                             <div class="invalid-feedback">Please enter a valid Height.</div>
                                         </div>
 
@@ -219,7 +219,7 @@
                                         <!-- Package/Case IN PLASTIC BAG -->
                                         <div class="col-md-6">
                                             <label class="form-label" for="package_case">Package/Case IN PLASTIC BAG </label>
-                                            <input class="form-control" id="package_case" type="number" name="package_case" placeholder="Enter Package/Case IN PLASTIC BAG" value="{{ old('package_case', $details->package_case) }}"  min="0" step="any">
+                                            <input class="form-control" id="package_case" type="string" name="package_case" placeholder="Enter Package/Case IN PLASTIC BAG" value="{{ old('package_case', $details->package_case) }}"  min="0" step="any">
                                             <div class="invalid-feedback">Please enter a valid Package/Case IN PLASTIC BAG.</div>
                                         </div>
 

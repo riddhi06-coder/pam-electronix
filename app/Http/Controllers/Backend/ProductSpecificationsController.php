@@ -46,23 +46,23 @@ class ProductSpecificationsController extends Controller
             'product_description' => 'nullable|string',
 
             'availability' => 'nullable|string|max:255',
-            'pricing' => 'nullable|numeric|min:0',
+            'pricing' => 'nullable|string|min:0',
 
             'rohs' => 'nullable|string|max:255',
-            'capacitance' => 'nullable|numeric|min:0',
-            'voltage' => 'nullable|numeric|min:0',
+            'capacitance' => 'nullable|string|min:0',
+            'voltage' => 'nullable|string|min:0',
 
             'termination' => 'nullable|string|max:255',
             'pf' => 'nullable|string|max:255',
 
             'lead_spacing' => 'nullable|string|max:255',
-            'length' => 'nullable|numeric|min:0',
-            'width' => 'nullable|numeric|min:0',
-            'height' => 'nullable|numeric|min:0',
+            'length' => 'nullable|string|min:0',
+            'width' => 'nullable|string|min:0',
+            'height' => 'nullable|string|min:0',
 
             'lead_wire' => 'nullable|string|max:255',
             'tolerance' => 'nullable|string|max:255',
-            'package_case' => 'nullable|numeric|min:0',
+            'package_case' => 'nullable|string|min:0',
 
             'operating_temp' => 'nullable|string|max:255',
             'max_operating_temp' => 'nullable|string|max:255',
@@ -72,7 +72,7 @@ class ProductSpecificationsController extends Controller
             'packaging' => 'nullable|string|max:255',
         ], [
             'required' => 'The :attribute field is required.',
-            'numeric' => 'The :attribute must be a number.',
+            'string' => 'The :attribute must be a string.',
             'image' => 'The :attribute must be an image.',
             'mimes' => 'The :attribute must be a file of type: jpg, jpeg, png, webp.',
             'max' => 'The :attribute must not be greater than :max kilobytes.',
@@ -158,24 +158,24 @@ class ProductSpecificationsController extends Controller
             'product_description' => 'nullable|string',
 
             'availability' => 'nullable|string|max:255',
-            'pricing' => 'nullable|numeric|min:0',
+            'pricing' => 'nullable|string|min:0',
 
             'rohs' => 'nullable|string|max:255',
-            'capacitance' => 'nullable|numeric|min:0',
-            'voltage' => 'nullable|numeric|min:0',
+            'capacitance' => 'nullable|string|min:0',
+            'voltage' => 'nullable|string|min:0',
             'voltage_rating' => 'nullable|string|max:255',
 
             'termination' => 'nullable|string|max:255',
             'pf' => 'nullable|string|max:255',
 
             'lead_spacing' => 'nullable|string|max:255',
-            'length' => 'nullable|numeric|min:0',
-            'width' => 'nullable|numeric|min:0',
-            'height' => 'nullable|numeric|min:0',
+            'length' => 'nullable|string|min:0',
+            'width' => 'nullable|string|min:0',
+            'height' => 'nullable|string|min:0',
 
             'lead_wire' => 'nullable|string|max:255',
             'tolerance' => 'nullable|string|max:255',
-            'package_case' => 'nullable|numeric|min:0',
+            'package_case' => 'nullable|string|min:0',
 
             'operating_temp' => 'nullable|string|max:255',
             'max_operating_temp' => 'nullable|string|max:255',
