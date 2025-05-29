@@ -80,6 +80,7 @@ Route::group(['prefix'=> '', 'middleware'=>[\App\Http\Middleware\PreventBackHist
     Route::get('/', [HomeController::class, 'index'])->name('home.page');
     Route::get('/specifications', [HomeController::class, 'specifications'])->name('show.specifications');
     Route::post('/connect-experts', [HomeController::class, 'connect_experts'])->name('connect.experts');
+    Route::get('/thank-you', [HomeController::class, 'thankyou'])->name('thank.you');
     Route::get('/contact-us', [ContactController::class, 'contact'])->name('contact.us');
     Route::post('/contact-submit', [ContactController::class, 'sendContactForm'])->name('contact.submit');
     Route::post('/add-to-cart', [ProductDetailsController::class, 'add_to_cart'])->name('add.cart');

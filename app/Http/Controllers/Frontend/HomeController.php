@@ -71,7 +71,12 @@ class HomeController extends Controller
                     ->subject('Thanks for Reaching Out!');
         });
 
-        return redirect()->route('home.page')->with('message', 'Enquiry sent successfully.');
+        return redirect()->route('thank.you')->with('message', 'Enquiry sent successfully.');
     }
 
+
+    public function thankyou()
+    {
+        return view('frontend.thankyou');
+    }
 }

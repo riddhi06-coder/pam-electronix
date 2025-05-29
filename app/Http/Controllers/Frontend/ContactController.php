@@ -54,7 +54,7 @@ class ContactController extends Controller
                     ->subject('hanks for Reaching Out!');
         });
 
-        return redirect()->route('home.page')->with('message', 'Thank you for your enquiry. We will get back to you soon.');
+        return redirect()->route('thank.you')->with('message', 'Thank you for your enquiry. We will get back to you soon.');
     }
 
 }

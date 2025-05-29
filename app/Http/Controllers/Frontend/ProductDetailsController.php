@@ -174,7 +174,7 @@ class ProductDetailsController extends Controller
             $existingCart = DB::table('carts')
                 ->where('product_id', $request->product_id)
                 ->where('spec_id', $request->spec_id)
-                ->where('session_id', $sessionId) // important
+                ->where('session_id', $sessionId) 
                 ->first();
 
             if ($existingCart) {
@@ -287,7 +287,7 @@ class ProductDetailsController extends Controller
             return redirect()->route('home.page')->with('message', 'Quote sent successfully.');
         } catch (\Exception $e) {
             \Log::error('Mail sending failed: ' . $e->getMessage());
-            return redirect()->route('home.page')->with('error', 'Failed to send the message: ' . $e->getMessage());
+            return redirect()->route('thank.you')->with('error', 'Failed to send the message: ' . $e->getMessage());
         }
     }
 

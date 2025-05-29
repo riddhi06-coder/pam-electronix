@@ -651,7 +651,7 @@ input[type="password"] {
 }
 .zui-table thead th {
     background-color: #b78d52;
-    border: 1px solid #ffffff59;
+    border: none;
     color: #fff;
     padding: 10px;
     text-align: left;
@@ -802,50 +802,6 @@ input[type="password"] {
     margin: 0px 0 0px;
     padding: 0;
 }
-/* Thank You Page */
-.thank-you-sec {
-    text-align: center;
-}
-
-.thank-you-sec img {
-    width: 150px;
-    margin-bottom: 30px;
-}
-
-.thank-you-sec h2 {
-    font-size: 30px;
-    line-height: 40px;
-    font-weight: 700;
-    color: #a87e3f;
-    font-family: var(--creote-family-one);
-    padding-bottom: 10px;
-}
-
-.thank-you-sec p {
-    color: #4a4e56;
-    margin-bottom: 20px;
-}
-.theme-btn-new-one {
-    position: relative;
-    display: inline-block;
-    min-width: 160px;
-    min-height: 60px;
-    font-size: 14px;
-    line-height: 60px;
-    padding: 0px 20px;
-    border-radius: 10px 0px 10px 0px;
-    border: 1px solid var(--border-color-one);
-    background: #b78d52;
-    font-family: var(--creote-family-one);
-    color: #fff;
-    font-weight: 600;
-    text-transform: uppercase;
-}
-
-.theme-btn-new-one:hover {
-    color: #fff;
-}
-
 @media (max-width: 768px) {
     .mobile-scroll {
         overflow-x: auto;
