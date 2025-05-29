@@ -12,7 +12,7 @@
                 <div class="overlay"></div>
             </div>
             <div class="header_area" id="header_contents">
-                <header class="main-header  header style_two header_v13">
+                <header class="main-header  header header_style style_two header_v13">
                     @php
                         $contact = \App\Models\FooterContact::latest()->first();
                         $platforms = json_decode($contact->social_media_platforms ?? '[]', true);
@@ -46,7 +46,7 @@
                                             <div class="contntent phone">
                                                 <i class="icon-phone-call"></i>
                                                 <div class="text">
-                                                    <a href="tel:{{ $contact->phone }}">+91 {{ $contact->phone }}</a>
+                                                    <a href="tel:{{ $contact->phone }}">+1 {{ $contact->phone }}</a>
                                                 </div>
                                             </div>
                                             <div class="contntent media">

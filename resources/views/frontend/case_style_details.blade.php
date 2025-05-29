@@ -117,24 +117,24 @@
                                                             </button>
                                                         </td>
 
-                                                        <td>{{ $spec->rohs ?? 'N/A' }}</td>
-                                                        <td>{{ $spec->capacitance ?? 'N/A' }}</td>
-                                                        <td>{{ $spec->voltage_rating ?? 'N/A' }} V</td>
-                                                        <td>{{ $spec->termination ?? 'N/A' }}</td>
-                                                        <td>{{ $spec->pf ?? 'N/A' }} PF</td>
-                                                        <td>{{ $spec->voltage ?? 'N/A' }} V</td>
-                                                        <td>{{ $spec->lead_spacing ?? 'N/A' }} MM</td>
-                                                        <td>{{ $spec->length ?? 'N/A' }}</td>
-                                                        <td>{{ $spec->width ?? 'N/A' }}</td>
-                                                        <td>{{ $spec->height ?? 'N/A' }}</td>
-                                                        <td>{{ $spec->lead_wire ?? 'N/A' }} MM</td>
-                                                        <td>{{ $spec->tolerance ?? 'N/A' }} %</td>
-                                                        <td>{{ $spec->package_case ?? 'N/A' }}</td>
-                                                        <td>{{ $spec->operating_temp ?? 'N/A' }} C</td>
-                                                        <td>{{ $spec->max_operating_temp ?? 'N/A' }} C</td>
-                                                        <td>{{ $spec->series ?? 'N/A' }}</td>
+                                                        <td>{{ $spec->rohs ?? ' ' }}</td>
+                                                        <td>{{ $spec->capacitance ?? ' ' }}</td>
+                                                        <td>{{ $spec->voltage_rating ?? ' ' }} V</td>
+                                                        <td>{{ $spec->termination ?? ' ' }}</td>
+                                                        <td>{{ $spec->pf ?? ' ' }} PF</td>
+                                                        <td>{{ $spec->voltage ?? ' ' }} V</td>
+                                                        <td>{{ $spec->lead_spacing ?? ' ' }} MM</td>
+                                                        <td>{{ $spec->length ?? ' ' }}</td>
+                                                        <td>{{ $spec->width ?? ' ' }}</td>
+                                                        <td>{{ $spec->height ?? ' ' }}</td>
+                                                        <td>{{ $spec->lead_wire ?? ' ' }} MM</td>
+                                                        <td>{{ $spec->tolerance ?? ' ' }} %</td>
+                                                        <td>{{ $spec->package_case ?? ' ' }}</td>
+                                                        <td>{{ $spec->operating_temp ?? ' ' }} C</td>
+                                                        <td>{{ $spec->max_operating_temp ?? ' ' }} C</td>
+                                                        <td>{{ $spec->series ?? ' ' }}</td>
                                                         <td>{{ $spec->qualification ?? '' }}</td>
-                                                        <td>{{ $spec->packaging ?? 'N/A' }}</td>
+                                                        <td>{{ $spec->packaging ?? ' ' }}</td>
 
                                                         <!-- Hidden inputs for extra data -->
                                                         <input type="hidden" name="spec_id" value="{{ $spec->id }}">
