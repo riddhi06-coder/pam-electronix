@@ -44,14 +44,14 @@ class ContactController extends Controller
         // Send mail to admin
         Mail::send('frontend.contact_mail', $emailData, function ($message) use ($emailData) {
             $message->to('riddhi@matrixbricks.com')
-                    ->cc('shweta@matrixbricks.com')
+                    ->cc('shweta@matrixbricks.com','onkar@matrixbricks.com')
                     ->subject('New Contact Enquiry: ' . $emailData['subject']);
         });
 
         // Send confirmation mail to user
         Mail::send('frontend.confirmation_mail', $emailData, function ($message) use ($emailData) {
             $message->to($emailData['email'])
-                    ->subject('hanks for Reaching Out!');
+                    ->subject('Thanks for Reaching Out!');
         });
 
         return redirect()->route('thank.you')->with('message', 'Thank you for your enquiry. We will get back to you soon.');

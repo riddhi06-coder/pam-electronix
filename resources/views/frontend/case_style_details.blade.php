@@ -101,10 +101,10 @@
                                                         <td class="product-quantity">
                                                             <div class="quantity">
                                                                 <input type="button" value="-" class="qty_button minus">
-                                                                <input type="number"
+                                                                <input type="text"
                                                                     class="input-text qty text"
                                                                     name="quantity"
-                                                                    value="1"
+                                                                    value="0"
                                                                     inputmode="numeric"
                                                                     >
                                                                 <input type="button" value="+" class="qty_button plus">

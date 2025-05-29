@@ -152,6 +152,7 @@ class ProductDetailsController extends Controller
                     'product_name' => $item->product_name,
                 ];
             });
+        // dd($cartItems);
 
         return view('frontend.cart', [
             'cartItems' => $cartItems,
@@ -254,6 +255,7 @@ class ProductDetailsController extends Controller
             return redirect()->route('home.page')->withErrors($validator)->withInput();
         }
 
+        $quantities = $request->input('quantities', []);
         $emailData = [
             'company_name' => $request->company_name,
             'name' => $request->contact_person,
@@ -269,6 +271,14 @@ class ProductDetailsController extends Controller
         $cartItems = DB::table('carts')->where('session_id', $sessionId)->get();
 
 
+        $cartItems = $cartItems->map(function ($item) use ($quantities) {
+            $item->quantity = $quantities[$item->id] ?? $item->quantity;
+            return $item;
+        });
+
+        // dd($cartItems);
+        // dd($quantities);
+
         try {
             Mail::send('frontend.quote-mail', [
                 'emailData' => $emailData,
@@ -276,12 +286,18 @@ class ProductDetailsController extends Controller
             ], function ($message) use ($emailData) {
                 $subject = "Quote Form - " . ($emailData['name'] ?? 'Unknown');
                 $message->to('riddhi@matrixbricks.com')
-                        ->cc('shweta@matrixbricks.com')
+                        ->cc('shweta@matrixbricks.com','onkar@matrixbricks.com')
                         ->subject($subject);
             });
 
-        // Delete cart items after successful mail sending
-        DB::table('carts')->where('session_id', $sessionId)->delete();
+            // Send confirmation mail to user
+            Mail::send('frontend.confirmation_mail', $emailData, function ($message) use ($emailData) {
+                $message->to($emailData['email'])
+                        ->subject('Thanks for Reaching Out!');
+            });
+
+            // Delete cart items after successful mail sending
+            DB::table('carts')->where('session_id', $sessionId)->delete();
 
 
             return redirect()->route('thank.you')->with('message', 'Quote sent successfully.');
