@@ -51,7 +51,7 @@
                     </div>
 
                     <div class="table-responsive custom-scrollbar">
-                    <table class="display" id="basic-1">
+                    <!-- <table class="display" id="basic-1">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -93,7 +93,68 @@
                                 @endforeach
                             @endforeach
                         </tbody>
+                    </table> -->
+
+
+                    @php
+                        // Group by product name first
+                        $groupedByProduct = collect($specs)->groupBy(function($item) {
+                            return $item->product->product_name ?? 'Unknown Product';
+                        });
+                        $row = 1;
+                    @endphp
+
+                    <table class="display" id="basic-1">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Product Name</th>
+                                <th>Case Style</th>
+                                <th>Specification Part</th>
+                                <th>Manufacturer</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($groupedByProduct as $productName => $productGroup)
+                                <tr>
+                                    <td colspan="6" style="font-weight: bold; background-color: #f2f2f2;">{{ $productName }}</td>
+                                </tr>
+
+                                @php
+                                    // Within each product group, group by case style
+                                    $groupedByCaseStyle = $productGroup->groupBy('case_style');
+                                @endphp
+
+                                @foreach ($groupedByCaseStyle as $caseStyle => $caseGroup)
+                                    <tr>
+                                        <td colspan="6" style="font-weight: bold; padding-left: 20px; background-color: #e9ecef;">
+                                            Case Style: {{ $caseStyle }}
+                                        </td>
+                                    </tr>
+
+                                    @foreach ($caseGroup as $spec)
+                                        <tr>
+                                            <td>{{ $row++ }}</td>
+                                            <td>{{ $productName }}</td>
+                                            <td>{{ $caseStyle }}</td>
+                                            <td>{{ $spec->name }}</td>
+                                            <td>{{ $spec->manufacturer }}</td>
+                                            <td>
+                                                <a href="{{ route('product-specifications.edit', $spec->id) }}" class="btn btn-sm btn-primary">Edit</a>
+                                                <form action="{{ route('product-specifications.destroy', $spec->id) }}" method="POST" style="display:inline-block;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @endforeach
+                            @endforeach
+                        </tbody>
                     </table>
+
 
                     </div>
                   </div>
