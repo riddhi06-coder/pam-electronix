@@ -29,7 +29,7 @@
                                             <div class="contntent address">
                                                 <i class="icon-placeholder"></i>
                                                 <div class="text">
-                                                    <a href="{{ $contact->url }}" target="_blank" rel="noopener noreferrer">
+                                                    <a href="{{ $contact->map_url }}" target="_blank" rel="noopener noreferrer">
                                                         <span>{{ $contact->address }}</span>
                                                     </a>
                                                 </div>

@@ -60,7 +60,9 @@
                               </div>
                               <div class="contnet">
                                  <h3>Address </h3>
-                                 <p>{{ $contact->address ?? 'Address not available' }}</p>
+                                    <a href="{{ $contact->map_url }}" target="_blank" rel="noopener noreferrer">
+                                        {{ $contact->address }}
+                                    </a>
 
                               </div>
                            </div>

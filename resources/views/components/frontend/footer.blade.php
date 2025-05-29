@@ -71,7 +71,7 @@
                                     <div class="content">
                                         <h6 class="titles">Address</h6>
                                         <p>
-                                            <a href="{{ $contact->url }}" target="_blank" rel="noopener noreferrer">
+                                            <a href="{{ $contact->map_url }}" target="_blank" rel="noopener noreferrer">
                                                 {{ $contact->address }}
                                             </a>
                                         </p>
