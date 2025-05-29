@@ -51,6 +51,7 @@ class ProductSpecificationsController extends Controller
             'rohs' => 'nullable|string|max:255',
             'capacitance' => 'nullable|string|min:0',
             'voltage' => 'nullable|string|min:0',
+            'voltage_rating' => 'nullable|string|max:255',
 
             'termination' => 'nullable|string|max:255',
             'pf' => 'nullable|string|max:255',

@@ -49,7 +49,12 @@
 
                         <a href="{{ route('product-specifications.create') }}" class="btn btn-primary px-5 radius-30">+ Add Product Specifications</a>
                     </div>
-                    <input type="text" id="specSearch" placeholder="Search..." class="form-control mb-3" style="max-width: 300px;">
+
+                    <div class="text-end mb-3">
+                        <input type="text" id="specSearch" placeholder="Search..." class="form-control" style="max-width: 300px; display: inline-block;">
+                    </div>
+
+                    
                     <div class="table-responsive custom-scrollbar">
                     @php
                         // Group by product name first
@@ -72,7 +77,7 @@
                         </thead>
                         <tbody>
                             @foreach ($groupedByProduct as $productName => $productGroup)
-                                <tr class="group-header">
+                                <tr>
                                     <td colspan="6" style="font-weight: bold; background-color: #f2f2f2;">{{ $productName }}</td>
                                 </tr>
 
@@ -82,14 +87,14 @@
                                 @endphp
 
                                 @foreach ($groupedByCaseStyle as $caseStyle => $caseGroup)
-                                    <tr class="case-header">
+                                    <tr>
                                         <td colspan="6" style="font-weight: bold; padding-left: 20px; background-color: #e9ecef;">
                                             Case Style: {{ $caseStyle }}
                                         </td>
                                     </tr>
 
                                     @foreach ($caseGroup as $spec)
-                                        <tr class="data-row" data-search="{{ strtolower($productName . ' ' . $caseStyle . ' ' . $spec->name . ' ' . $spec->manufacturer) }}">>
+                                        <tr class="data-row" data-search="{{ strtolower($productName . ' ' . $caseStyle . ' ' . $spec->name . ' ' . $spec->manufacturer) }}">
                                             
                                             <td>{{ $row++ }}</td>
                                             <td>{{ $productName }}</td>
@@ -128,7 +133,34 @@
         
 
         <script>
-document.getElementById('specSearch').addEventListener('input', function () {
+            // document.getElementById('specSearch').addEventListener('input', function () {
+            //     const searchVal = this.value.trim().toLowerCase();
+            //     const rows = document.querySelectorAll('.data-row');
+
+            //     rows.forEach(row => {
+            //         const text = row.getAttribute('data-search');
+            //         row.style.display = text.includes(searchVal) ? '' : 'none';
+            //     });
+
+            //     // Optional: hide group headers if all their child rows are hidden
+            //     document.querySelectorAll('.group-header, .case-header').forEach(header => {
+            //         let nextRow = header.nextElementSibling;
+            //         let shouldShow = false;
+
+            //         while (nextRow && !nextRow.classList.contains('group-header') && !nextRow.classList.contains('case-header')) {
+            //             if (nextRow.classList.contains('data-row') && nextRow.style.display !== 'none') {
+            //                 shouldShow = true;
+            //                 break;
+            //             }
+            //             nextRow = nextRow.nextElementSibling;
+            //         }
+
+            //         header.style.display = shouldShow ? '' : 'none';
+            //     });
+            // });
+
+
+            document.getElementById('specSearch').addEventListener('input', function () {
     const searchVal = this.value.trim().toLowerCase();
     const rows = document.querySelectorAll('.data-row');
 
@@ -137,7 +169,7 @@ document.getElementById('specSearch').addEventListener('input', function () {
         row.style.display = text.includes(searchVal) ? '' : 'none';
     });
 
-    // Optional: hide group headers if all their child rows are hidden
+    // Hide headers if no matching rows
     document.querySelectorAll('.group-header, .case-header').forEach(header => {
         let nextRow = header.nextElementSibling;
         let shouldShow = false;
@@ -153,7 +185,8 @@ document.getElementById('specSearch').addEventListener('input', function () {
         header.style.display = shouldShow ? '' : 'none';
     });
 });
-</script>
+
+        </script>
 
 </body>
 

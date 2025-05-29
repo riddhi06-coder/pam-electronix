@@ -136,9 +136,9 @@
                                         </div>
 
                                         <!-- Voltage Rating -->
-                                        <div class="col-md-6">
-                                            <label class="form-label" for="voltage">Voltage Rating </label>
-                                            <input class="form-control" id="voltage" type="string" name="voltage" placeholder="Enter Voltage Rating" value="{{ old('voltage') }}"  min="0" step="any">
+                                         <div class="col-md-6">
+                                            <label class="form-label" for="voltage_rating">Voltage Rating </label>
+                                            <input class="form-control" id="voltage_rating" type="string" name="voltage_rating" placeholder="Enter Voltage Rating" value="{{ old('voltage_rating') }}"  min="0" step="any">
                                             <div class="invalid-feedback">Please enter a valid Voltage Rating.</div>
                                         </div>
 
