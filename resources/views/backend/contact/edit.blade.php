@@ -75,6 +75,17 @@
                                             <div class="invalid-feedback">Please enter a valid Phone Number (up to 12 digits only).</div>
                                         </div>
 
+
+                                        
+                                        <!-- Map URl -->
+                                        <div class="col-6">
+                                            <label class="form-label" for="url">Map URL <span class="txt-danger">*</span></label>
+                                            <input type="text" class="form-control" id="map_url" name="map_url" placeholder="Enter Map URL" value="{{ old('map_url', $details->map_url) }}" required>
+                                            <div class="invalid-feedback">Please enter a Map URl.</div>
+                                        </div>
+
+
+
                                         <!-- Address -->
                                         <div class="col-12">
                                             <label class="form-label" for="address">Address <span class="txt-danger">*</span></label>

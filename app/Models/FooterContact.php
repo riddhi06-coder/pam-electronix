@@ -18,6 +18,7 @@ class FooterContact extends Model
         'phone',
         'address',
         'url',
+        'map_url',
         'social_media_platforms',
         'social_media_urls',
         'created_at',
