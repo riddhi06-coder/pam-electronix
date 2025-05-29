@@ -68,7 +68,7 @@ Route::resource('product-specifications', ProductSpecificationsController::class
 // ==== Manage Specifications
 Route::resource('manage-specifications', SpecificationsController::class);
 
-Route::get('/get-case-styles/{productId}', [ProductSpecificationsController::class, 'getCaseStyles']);
+Route::get('/get-case-styles/{productId}', [ProductSpecificationsController::class, 'getCaseStyles'])->name('getCase.Styles');
 
 
 

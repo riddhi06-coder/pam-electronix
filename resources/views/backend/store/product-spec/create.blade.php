@@ -335,7 +335,7 @@
         </script>
 
 
-        <script>
+        <!-- <script>
             document.getElementById('product_select').addEventListener('change', function() {
                 let productId = this.value;
                 let caseStyleDropdown = document.getElementById('case_style_select');
@@ -359,7 +359,39 @@
                         });
                 }
             });
+        </script> -->
+
+
+        <script>
+            document.getElementById('product_select').addEventListener('change', function() {
+                let productId = this.value;
+                let caseStyleDropdown = document.getElementById('case_style_select');
+
+                // Clear previous options
+                caseStyleDropdown.innerHTML = '<option value="">-- Select Case Type --</option>';
+
+                if (productId) {
+                    // Use Laravel named route with placeholder replacement
+                    let routeTemplate = `{{ route('getCase.Styles', ['productId' => 'PLACEHOLDER']) }}`;
+                    let url = routeTemplate.replace('PLACEHOLDER', productId);
+
+                    fetch(url)
+                        .then(response => response.json())
+                        .then(data => {
+                            data.forEach(function(item) {
+                                let option = document.createElement('option');
+                                option.value = item.case_style;
+                                option.text = item.case_style;
+                                caseStyleDropdown.appendChild(option);
+                            });
+                        })
+                        .catch(error => {
+                            console.error('Error fetching case styles:', error);
+                        });
+                }
+            });
         </script>
+
 
 
 </body>
