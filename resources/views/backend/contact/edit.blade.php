@@ -62,7 +62,7 @@
                                         <!-- Email2 -->
                                         <div class="col-6">
                                             <label class="form-label" for="email2">Email 2 </label>
-                                            <input type="email2" class="form-control" id="email2" name="email2" placeholder="Enter Email Address">
+                                            <input type="email2" class="form-control" id="email2" name="email2" placeholder="Enter Email Address" value="{{ old('email2', $details->email2) }}">
                                             <div class="invalid-feedback">Please enter a valid Email address.</div>
                                         </div>
 
