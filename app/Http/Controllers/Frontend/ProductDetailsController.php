@@ -284,7 +284,7 @@ class ProductDetailsController extends Controller
         DB::table('carts')->where('session_id', $sessionId)->delete();
 
 
-            return redirect()->route('home.page')->with('message', 'Quote sent successfully.');
+            return redirect()->route('thank.you')->with('message', 'Quote sent successfully.');
         } catch (\Exception $e) {
             \Log::error('Mail sending failed: ' . $e->getMessage());
             return redirect()->route('thank.you')->with('error', 'Failed to send the message: ' . $e->getMessage());

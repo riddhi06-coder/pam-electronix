@@ -145,22 +145,22 @@
                                                 @csrf
                                                 <div class="row">
                                                     <div class="col-md-6">
-                                                        <input type="text" name="company_name" placeholder="Company Name">
+                                                        <input type="text" name="company_name" placeholder="Company Name*">
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <input type="text" name="contact_person" placeholder="Contact Person">
+                                                        <input type="text" name="contact_person" placeholder="Contact Person*">
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <input type="text" name="designation" placeholder="Designation">
+                                                        <input type="text" name="designation" placeholder="Designation*">
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <input type="text" name="phone" placeholder="Phone No">
+                                                        <input type="text" name="phone" placeholder="Phone No*">
                                                     </div>
                                                     <div class="col-md-12">
-                                                        <input type="email" name="email" placeholder="Enter Your Email">
+                                                        <input type="email" name="email" placeholder="Enter Your Email*">
                                                     </div>
                                                     <div class="col-md-12">
-                                                        <textarea name="message" placeholder="Enter Your Message"></textarea>
+                                                        <textarea name="message" placeholder="Enter Your Message*"></textarea>
                                                     </div>
                                                     <div class="col-md-12">
                                                         <p><input type="submit" value="Submit"></p>

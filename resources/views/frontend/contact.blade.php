@@ -152,7 +152,7 @@
                                             <div class="col-sm-12">
                                                 <div class="form-group">
                                                    <label> Your Subject<br /></label>
-                                                    <input type="text" name="subject" placeholder=" Subject ">
+                                                    <input type="text" name="subject" placeholder=" Subject *">
                                                 </div>
                                             </div>
                                            
@@ -160,7 +160,7 @@
                                             <div class="col-sm-12">
                                                 <div class="form-group">
                                                    <label> Your Message<br /></label>
-                                                    <textarea name="message" placeholder="Additional Information... " rows="2" data-error="Please, leave us a message."></textarea>
+                                                    <textarea name="message" placeholder="Additional Information...* " rows="2" data-error="Please, leave us a message."></textarea>
                                                     <div class="help-block with-errors"></div>
                                                 </div>
                                             </div>
