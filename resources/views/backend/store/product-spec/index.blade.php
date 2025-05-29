@@ -49,53 +49,8 @@
 
                         <a href="{{ route('product-specifications.create') }}" class="btn btn-primary px-5 radius-30">+ Add Product Specifications</a>
                     </div>
-
+                    <input type="text" id="specSearch" placeholder="Search..." class="form-control mb-3" style="max-width: 300px;">
                     <div class="table-responsive custom-scrollbar">
-                    <!-- <table class="display" id="basic-1">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Product Name</th>
-                                <th>Case Style</th>
-                                <th>Specification Part</th>
-                                <th>Manufacturer</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @php
-                                $groupedSpecs = collect($specs)->groupBy(function($item) {
-                                    return $item->product->product_name ?? 'Unknown Product';
-                                });
-                                $row = 1;
-                            @endphp
-
-                            @foreach ($groupedSpecs as $productName => $specGroup)
-                                <tr>
-                                    <td colspan="6" style="font-weight: bold; background-color: #f2f2f2;">{{ $productName }}</td>
-                                </tr>
-                                @foreach ($specGroup as $spec)
-                                    <tr>
-                                        <td>{{ $row++ }}</td>
-                                        <td>{{ $productName }}</td>
-                                        <td>{{ $spec->case_style }}</td>
-                                        <td>{{ $spec->name }}</td>
-                                        <td>{{ $spec->manufacturer }}</td>
-                                        <td>
-                                            <a href="{{ route('product-specifications.edit', $spec->id) }}" class="btn btn-sm btn-primary">Edit</a>
-                                            <form action="{{ route('product-specifications.destroy', $spec->id) }}" method="POST" style="display:inline-block;">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            @endforeach
-                        </tbody>
-                    </table> -->
-
-
                     @php
                         // Group by product name first
                         $groupedByProduct = collect($specs)->groupBy(function($item) {
@@ -117,7 +72,7 @@
                         </thead>
                         <tbody>
                             @foreach ($groupedByProduct as $productName => $productGroup)
-                                <tr>
+                                <tr class="group-header">
                                     <td colspan="6" style="font-weight: bold; background-color: #f2f2f2;">{{ $productName }}</td>
                                 </tr>
 
@@ -127,14 +82,15 @@
                                 @endphp
 
                                 @foreach ($groupedByCaseStyle as $caseStyle => $caseGroup)
-                                    <tr>
+                                    <tr class="case-header">
                                         <td colspan="6" style="font-weight: bold; padding-left: 20px; background-color: #e9ecef;">
                                             Case Style: {{ $caseStyle }}
                                         </td>
                                     </tr>
 
                                     @foreach ($caseGroup as $spec)
-                                        <tr>
+                                        <tr class="data-row" data-search="{{ strtolower($productName . ' ' . $caseStyle . ' ' . $spec->name . ' ' . $spec->manufacturer) }}">>
+                                            
                                             <td>{{ $row++ }}</td>
                                             <td>{{ $productName }}</td>
                                             <td>{{ $caseStyle }}</td>
@@ -169,6 +125,35 @@
     </div>
 
         @include('components.backend.main-js')
+        
+
+        <script>
+document.getElementById('specSearch').addEventListener('input', function () {
+    const searchVal = this.value.trim().toLowerCase();
+    const rows = document.querySelectorAll('.data-row');
+
+    rows.forEach(row => {
+        const text = row.getAttribute('data-search');
+        row.style.display = text.includes(searchVal) ? '' : 'none';
+    });
+
+    // Optional: hide group headers if all their child rows are hidden
+    document.querySelectorAll('.group-header, .case-header').forEach(header => {
+        let nextRow = header.nextElementSibling;
+        let shouldShow = false;
+
+        while (nextRow && !nextRow.classList.contains('group-header') && !nextRow.classList.contains('case-header')) {
+            if (nextRow.classList.contains('data-row') && nextRow.style.display !== 'none') {
+                shouldShow = true;
+                break;
+            }
+            nextRow = nextRow.nextElementSibling;
+        }
+
+        header.style.display = shouldShow ? '' : 'none';
+    });
+});
+</script>
 
 </body>
 

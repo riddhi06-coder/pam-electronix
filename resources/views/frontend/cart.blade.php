@@ -92,15 +92,17 @@
                                                                                         <td>
 
                                                                                         <div class="qty" style="display: flex; align-items: center;">
-                                                                                            <input type="button" value="-" class="qty_button minus">
+                                                                                            <!-- <input type="button" value="-" class="qty_button minus"> -->
+                                                                                            <button class="btn-minus qty_button minus"><i class="fa fa-minus"></i></button>
                                                                                             <input type="text"
                                                                                                 class="input-text qty text"
-                                                                                            name="quantities[{{ $item['id'] }}]"
+                                                                                                name="quantities[{{ $item['id'] }}]"
                                                                                                 value="{{ $item['quantity'] }}"
 
                                                                                                 inputmode="numeric"
                                                                                                 style="width: 60px; padding: 5px; font-size: 16px; color: #000;">
-                                                                                            <input type="button" value="+" class="qty_button plus">
+                                                                                            <!-- <input type="button" value="+" class="qty_button plus"> -->
+                                                                                             <button class="qty_button plus"><i class="fa fa-plus"></i></button>
                                                                                         </div>
 
 

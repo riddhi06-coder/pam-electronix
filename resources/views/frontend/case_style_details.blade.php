@@ -94,7 +94,7 @@
                                                         </td>
                                                         <td>{{ $spec->name }}</td>
                                                         <td class="product-name" data-title="Product">
-                                                            <a href="#">{{ $spec->manufacturer }}</a>
+                                                            {{ $spec->manufacturer }}
                                                         </td>
                                                         <td>{!! $spec->product_description !!}</td>
 
