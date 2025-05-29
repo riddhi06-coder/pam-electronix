@@ -22,7 +22,7 @@ class ProductSpecificationsController extends Controller
 
     public function index()
     {
-        $specs = ProductSpecification::with('product')->wherenull('deleted_by')->latest()->get(); 
+        $specs = ProductSpecification::with('product')->wherenull('deleted_by')->orderby('case_style' , 'asc')->latest()->get(); 
         return view('backend.store.product-spec.index', compact('specs'));
     }
     

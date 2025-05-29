@@ -265,7 +265,6 @@ class ProductDetailsController extends Controller
             'message' => $request->message,
         ];
 
-        // Retrieve cart items from session or however you're storing them
         $sessionId = session()->getId();
 
         $cartItems = DB::table('carts')->where('session_id', $sessionId)->get();
@@ -275,9 +274,6 @@ class ProductDetailsController extends Controller
             $item->quantity = $quantities[$item->id] ?? $item->quantity;
             return $item;
         });
-
-        // dd($cartItems);
-        // dd($quantities);
 
         try {
             Mail::send('frontend.quote-mail', [
