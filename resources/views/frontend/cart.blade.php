@@ -115,7 +115,8 @@
                                                         <div class="col-offset-6 col-md-6">
                                                             <div class="cart-summary">
                                                                 <div class="cart-btn">
-                                                                    <button class="contact-toggler">Ask to Quote</button>
+                                                                    <button class="contact-toggler" {{ $cartItems->isEmpty() ? 'disabled' : '' }}>
+                                                                        Ask to Quote
                                                                 </div>
                                                             </div>
                                                         </div>
