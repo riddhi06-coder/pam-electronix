@@ -89,7 +89,7 @@
                                                                             <td>{{ $item['description'] }}</td>
                                                                             <td>
                                                                                 <div class="qty">
-                                                                                    <input type="text" value="{{ $item['quantity'] }}" style="width: 60px;">
+                                                                                    <input type="text" value="{{ $item['quantity'] }}" style="width: 60px;" readonly>
                                                                                 </div>
                                                                             </td>
                                                                             <td>

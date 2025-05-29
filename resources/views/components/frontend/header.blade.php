@@ -146,7 +146,7 @@
                                             <button type="button" class="search-toggler"><i class="icon-search"></i></button>
                                         </li> -->
                                         @php
-                                            $cartCount = DB::table('carts')->count(); 
+                                            $cartCount = DB::table('carts')->where('session_id', session()->getId())->count(); 
                                         @endphp
                                         
                                         <li>
