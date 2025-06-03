@@ -50,12 +50,16 @@
                                     <form class="row g-3 needs-validation custom-input" novalidate action="{{ route('product-specifications.store') }}" method="POST" enctype="multipart/form-data">
                                         @csrf
 
-                                        <!-- Fixed Product Display -->
+                                    <!-- Fixed Product Display -->
                                         <div class="col-md-6">
                                             <label class="form-label">Product Name</label>
-                                            <input type="hidden" id="product_id" name="product_id" value="{{ $details->product_id }}">
-                                            <input type="text" class="form-control" value="{{ $details->product->product_name ?? 'N/A' }}" readonly>
+                                            <input type="hidden" id="product_id" name="product_id" 
+                                                value="{{ isset($details) ? $details->product_id : $product->id }}">
+                                            <input type="text" class="form-control" 
+                                                value="{{ isset($details) ? ($details->product->product_name ?? 'N/A') : ($product->product_name ?? 'N/A') }}" 
+                                                readonly>
                                         </div>
+
 
 
                                         <!-- Case Style Dropdown -->
@@ -330,31 +334,31 @@
         </script>
 
         <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const productId = document.getElementById('product_id').value;
+            document.addEventListener('DOMContentLoaded', function () {
+                const productId = document.getElementById('product_id').value;
 
-            fetch(`/get-case-styles/${productId}`)
-                .then(response => response.json())
-                .then(data => {
-                    const select = document.getElementById('case_style_select');
-                    select.innerHTML = '<option value="">-- Select Case Type --</option>';
+                fetch(`/get-case-styles/${productId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const select = document.getElementById('case_style_select');
+                        select.innerHTML = '<option value="">-- Select Case Type --</option>';
 
-                    if (Array.isArray(data)) {
-                        data.forEach(style => {
-                            const option = document.createElement('option');
+                        if (Array.isArray(data)) {
+                            data.forEach(style => {
+                                const option = document.createElement('option');
 
-                            // Use 'case_style' field for both value and display
-                            option.value = style.case_style || '';
-                            option.textContent = style.case_style || 'Unnamed';
+                                // Use 'case_style' field for both value and display
+                                option.value = style.case_style || '';
+                                option.textContent = style.case_style || 'Unnamed';
 
-                            select.appendChild(option);
-                        });
-                    }
-                })
-                .catch(error => {
-                    console.error('Error fetching case styles:', error);
-                });
-        });
+                                select.appendChild(option);
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error fetching case styles:', error);
+                    });
+            });
         </script>
 
 
