@@ -21,9 +21,6 @@ use App\Http\Controllers\Frontend\ContactController;
 
 // =========================================================================== Backend Routes
 
-// Route::get('/', function () {
-//     return view('frontend.index');
-// });
   
 
 // Authentication Routes
