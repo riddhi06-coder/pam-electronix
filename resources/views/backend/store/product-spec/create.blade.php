@@ -50,29 +50,24 @@
                                     <form class="row g-3 needs-validation custom-input" novalidate action="{{ route('product-specifications.store') }}" method="POST" enctype="multipart/form-data">
                                         @csrf
 
-                                        <!-- Product Name Dropdown -->
+                                        <!-- Fixed Product Display -->
                                         <div class="col-md-6">
-                                            <label class="form-label" for="product_select">Select Product <span class="txt-danger">*</span></label>
-                                            <select class="form-control" id="product_select" name="product_id" required>
-                                                <option value="">-- Select Product --</option>
-                                                @foreach ($products as $product)
-                                                    <option value="{{ $product->id }}" {{ old('product_id') == $product->id ? 'selected' : '' }}>
-                                                        {{ $product->product_name }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                            <div class="invalid-feedback">Please select a product.</div>
+                                            <label class="form-label">Product Name</label>
+                                            <input type="hidden" id="product_id" name="product_id" value="{{ $details->product_id }}">
+                                            <input type="text" class="form-control" value="{{ $details->product->product_name ?? 'N/A' }}" readonly>
                                         </div>
 
 
-                                       <!-- Case Style Dropdown -->
+                                        <!-- Case Style Dropdown -->
                                         <div class="col-md-6">
                                             <label class="form-label" for="case_style_select">Select Case Type <span class="txt-danger">*</span></label>
                                             <select class="form-control" id="case_style_select" name="case_style" required>
                                                 <option value="">-- Select Case Type --</option>
+                                                <!-- Options will be loaded by JS -->
                                             </select>
                                             <div class="invalid-feedback">Please select a case type.</div>
                                         </div>
+
 
 
                                         <!-- Product Image-->
@@ -334,63 +329,36 @@
             }
         </script>
 
-
-        <!-- <script>
-            document.getElementById('product_select').addEventListener('change', function() {
-                let productId = this.value;
-                let caseStyleDropdown = document.getElementById('case_style_select');
-
-                // Clear previous options
-                caseStyleDropdown.innerHTML = '<option value="">-- Select Case Type --</option>';
-
-                if (productId) {
-                    fetch(`/get-case-styles/${productId}`)
-                        .then(response => response.json())
-                        .then(data => {
-                            data.forEach(function(item) {
-                                let option = document.createElement('option');
-                                option.value = item.case_style;
-                                option.text = item.case_style;
-                                caseStyleDropdown.appendChild(option);
-                            });
-                        })
-                        .catch(error => {
-                            console.error('Error fetching case styles:', error);
-                        });
-                }
-            });
-        </script> -->
-
-
         <script>
-            document.getElementById('product_select').addEventListener('change', function() {
-                let productId = this.value;
-                let caseStyleDropdown = document.getElementById('case_style_select');
+        document.addEventListener('DOMContentLoaded', function () {
+            const productId = document.getElementById('product_id').value;
 
-                // Clear previous options
-                caseStyleDropdown.innerHTML = '<option value="">-- Select Case Type --</option>';
+            fetch(`/get-case-styles/${productId}`)
+                .then(response => response.json())
+                .then(data => {
+                    const select = document.getElementById('case_style_select');
+                    select.innerHTML = '<option value="">-- Select Case Type --</option>';
 
-                if (productId) {
-                    // Use Laravel named route with placeholder replacement
-                    let routeTemplate = `{{ route('getCase.Styles', ['productId' => 'PLACEHOLDER']) }}`;
-                    let url = routeTemplate.replace('PLACEHOLDER', productId);
+                    if (Array.isArray(data)) {
+                        data.forEach(style => {
+                            const option = document.createElement('option');
 
-                    fetch(url)
-                        .then(response => response.json())
-                        .then(data => {
-                            data.forEach(function(item) {
-                                let option = document.createElement('option');
-                                option.value = item.case_style;
-                                option.text = item.case_style;
-                                caseStyleDropdown.appendChild(option);
-                            });
-                        })
-                        .catch(error => {
-                            console.error('Error fetching case styles:', error);
+                            // Use 'case_style' field for both value and display
+                            option.value = style.case_style || '';
+                            option.textContent = style.case_style || 'Unnamed';
+
+                            select.appendChild(option);
                         });
-                }
-            });
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching case styles:', error);
+                });
+        });
         </script>
+
+
+
 
 
 

@@ -29,8 +29,9 @@ class ProductSpecificationsController extends Controller
     
     public function create(Request $request)
     { 
-        $products = Product::orderBy('id', 'asc')->wherenull('deleted_by')->get();
-        return view('backend.store.product-spec.create', compact('products'));
+        // $products = Product::orderBy('id', 'asc')->wherenull('deleted_by')->get();
+        $product = Product::find(1);
+        return view('backend.store.product-spec.create', compact('product'));
     }
 
     public function store(Request $request)
@@ -138,7 +139,8 @@ class ProductSpecificationsController extends Controller
     public function edit($id)
     {
         $details = ProductSpecification::findOrFail($id);
-        $products = Product::orderBy('id', 'asc')->wherenull('deleted_by')->get();
+        // $products = Product::orderBy('id', 'asc')->wherenull('deleted_by')->get();
+        $products = Product::find(1);
         $caseStyles = ProductSpecification::all();
 
         return view('backend.store.product-spec.edit', compact('details', 'products','caseStyles'));
@@ -263,14 +265,16 @@ class ProductSpecificationsController extends Controller
     public function getCaseStyles($productId)
     {
         $description = ProductDescription::where('product_id', $productId)->whereNull('deleted_by')->first();
-
+        // dd($description);
         if ($description) {
-            $caseStyles = json_decode($description->case_style, true); // decode JSON
-            return response()->json($caseStyles);
+            $caseStyles = json_decode($description->case_style, true);
+            return response()->json($caseStyles); // Check this in browser's DevTools > Network > Preview
         }
 
+        
         return response()->json([]);
     }
+
 
 
 }

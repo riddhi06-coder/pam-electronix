@@ -82,12 +82,12 @@
 
                     <li>
                       <a class="submenu-title" href="#">
-                        Product Details
+                        Dipped Mica Capacitor
                         <span class="sub-arrow"><i class="fa fa-angle-right"></i></span>
                       </a>
                       <ul class="nav-sub-childmenu submenu-content">
                         <li><a href="{{ route('product-descriptions.index') }}" class="{{ request()->routeIs('product-descriptions.index') ? 'active' : '' }}">Details</a></li>
-                        <li><a href="{{ route('product-specifications.index') }}" class="{{ request()->routeIs('product-specifications.index') ? 'active' : '' }}">Case Style Details</a></li>
+                        <li><a href="{{ route('product-specifications.index') }}" class="{{ request()->routeIs('product-specifications.index') ? 'active' : '' }}">Case Style</a></li>
                       </ul>
                     </li>
 

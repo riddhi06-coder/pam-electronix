@@ -53,16 +53,9 @@
 
                                         <!-- Product Name Dropdown -->
                                         <div class="col-md-6">
-                                            <label class="form-label" for="product_select">Select Product <span class="txt-danger">*</span></label>
-                                            <select class="form-control" id="product_select" name="product_id" required>
-                                                <option value="">-- Select Product --</option>
-                                                @foreach ($products as $product)
-                                                    <option value="{{ $product->id }}" {{ old('product_id', $details->product_id) == $product->id ? 'selected' : '' }}>
-                                                        {{ $product->product_name }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                            <div class="invalid-feedback">Please select a product.</div>
+                                            <label class="form-label">Product Name</label>
+                                            <input type="hidden" id="product_id" name="product_id" value="{{ $details->product_id }}">
+                                            <input type="text" class="form-control" value="{{ $details->product->product_name ?? 'N/A' }}" readonly>
                                         </div>
 
 
@@ -71,14 +64,15 @@
                                             <label class="form-label" for="case_style_select">Select Case Type <span class="txt-danger">*</span></label>
                                             <select class="form-control" id="case_style_select" name="case_style" required>
                                                 <option value="">-- Select Case Type --</option>
-                                                @foreach ($caseStyles as $style)
-                                                    <option value="{{ $style->case_style }}" {{ old('case_style', $details->case_style) == $style->case_style ? 'selected' : '' }}>
-                                                        {{ $style->case_style }}
-                                                    </option>
-                                                @endforeach
+                                                {{-- Options will be filled dynamically via JS --}}
                                             </select>
                                             <div class="invalid-feedback">Please select a case type.</div>
                                         </div>
+
+                                        <!-- Hidden input to store pre-selected case style -->
+                                        <input type="hidden" id="selected_case_style" value="{{ old('case_style', $details->case_style) }}">
+
+
 
 
                                         <!-- Product Image-->
@@ -343,32 +337,53 @@
         </script>
 
 
-
         <script>
-            document.getElementById('product_select').addEventListener('change', function() {
-                let productId = this.value;
-                let caseStyleDropdown = document.getElementById('case_style_select');
+            document.addEventListener('DOMContentLoaded', function () {
+                const productId = document.getElementById('product_id').value;
+                const selectedCaseStyle = document.getElementById('selected_case_style')?.value;
 
-                // Clear previous options
-                caseStyleDropdown.innerHTML = '<option value="">-- Select Case Type --</option>';
+                fetch(`/get-case-styles/${productId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const select = document.getElementById('case_style_select');
+                        select.innerHTML = '<option value="">-- Select Case Type --</option>';
 
-                if (productId) {
-                    fetch(`/get-case-styles/${productId}`)
-                        .then(response => response.json())
-                        .then(data => {
-                            data.forEach(function(item) {
-                                let option = document.createElement('option');
-                                option.value = item.case_style;
-                                option.text = item.case_style;
-                                caseStyleDropdown.appendChild(option);
+                        if (Array.isArray(data)) {
+                            data.forEach(style => {
+                                const option = document.createElement('option');
+                                let value = '';
+                                let label = '';
+
+                                if (typeof style === 'object') {
+                                    value = style.case_style ?? style.value ?? '';
+                                    label = style.case_style ?? style.label ?? value ?? 'Unnamed';
+                                } else {
+                                    value = style;
+                                    label = style;
+                                }
+
+                                option.value = value;
+                                option.textContent = label;
+
+                                // Preselect if matches the value
+                                if (selectedCaseStyle && value === selectedCaseStyle) {
+                                    option.selected = true;
+                                }
+
+                                select.appendChild(option);
                             });
-                        })
-                        .catch(error => {
-                            console.error('Error fetching case styles:', error);
-                        });
-                }
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error fetching case styles:', error);
+                    });
             });
         </script>
+
+
+
+
+
 
 </body>
 
