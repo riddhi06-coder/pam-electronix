@@ -334,42 +334,42 @@
         </script>
 
 
-<script>
-    const getCaseStylesUrl = @json(route('getCase.Styles', ['productId' => '__ID__']));
-</script>
+        <script>
+            const getCaseStylesUrl = @json(route('getCase.Styles', ['productId' => '__ID__']));
+        </script>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const productId = document.getElementById('product_id').value;
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const productId = document.getElementById('product_id').value;
 
-        if (!productId) return;
+                if (!productId) return;
 
-        // Replace __ID__ placeholder with actual product ID
-        const url = getCaseStylesUrl.replace('__ID__', productId);
+                // Replace __ID__ placeholder with actual product ID
+                const url = getCaseStylesUrl.replace('__ID__', productId);
 
-        fetch(url)
-            .then(response => response.json())
-            .then(data => {
-                const select = document.getElementById('case_style_select');
-                select.innerHTML = '<option value="">-- Select Case Type --</option>';
+                fetch(url)
+                    .then(response => response.json())
+                    .then(data => {
+                        const select = document.getElementById('case_style_select');
+                        select.innerHTML = '<option value="">-- Select Case Type --</option>';
 
-                if (Array.isArray(data)) {
-                    data.forEach(style => {
-                        const option = document.createElement('option');
+                        if (Array.isArray(data)) {
+                            data.forEach(style => {
+                                const option = document.createElement('option');
 
-                        // Use 'case_style' field for both value and label
-                        option.value = style.case_style || '';
-                        option.textContent = style.case_style || 'Unnamed';
+                                // Use 'case_style' field for both value and label
+                                option.value = style.case_style || '';
+                                option.textContent = style.case_style || 'Unnamed';
 
-                        select.appendChild(option);
+                                select.appendChild(option);
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error fetching case styles:', error);
                     });
-                }
-            })
-            .catch(error => {
-                console.error('Error fetching case styles:', error);
             });
-    });
-</script>
+        </script>
 
 
 

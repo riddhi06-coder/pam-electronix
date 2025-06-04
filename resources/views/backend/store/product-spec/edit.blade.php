@@ -338,11 +338,20 @@
 
 
         <script>
+            const getCaseStylesUrl = @json(route('getCase.Styles', ['productId' => '__ID__']));
+        </script>
+
+
+        <script>
             document.addEventListener('DOMContentLoaded', function () {
-                const productId = document.getElementById('product_id').value;
+                const productId = document.getElementById('product_id')?.value;
                 const selectedCaseStyle = document.getElementById('selected_case_style')?.value;
 
-                fetch(`/get-case-styles/${productId}`)
+                if (!productId) return;
+
+                const url = getCaseStylesUrl.replace('__ID__', productId);
+
+                fetch(url)
                     .then(response => response.json())
                     .then(data => {
                         const select = document.getElementById('case_style_select');
@@ -379,8 +388,6 @@
                     });
             });
         </script>
-
-
 
 
 
