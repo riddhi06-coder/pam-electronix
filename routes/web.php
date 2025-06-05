@@ -74,7 +74,7 @@ Route::get('/get-case-styles/{productId}', [ProductSpecificationsController::cla
 Route::group(['prefix'=> '', 'middleware'=>[\App\Http\Middleware\PreventBackHistoryMiddleware::class]],function(){
 
     
-    Route::get('/', [HomeController::class, 'index'])->name('home.page');
+    Route::get('/home', [HomeController::class, 'index'])->name('home.page');
     Route::get('/specifications', [HomeController::class, 'specifications'])->name('show.specifications');
     Route::post('/connect-experts', [HomeController::class, 'connect_experts'])->name('connect.experts');
     Route::get('/thank-you', [HomeController::class, 'thankyou'])->name('thank.you');
