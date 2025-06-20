@@ -37,10 +37,15 @@
 
     <h2 style="text-align: center;">New Contact Form Enquiry</h2>
 
-    <p><strong>Name:</strong> {{ $name }}</p>
-    <p><strong>Email:</strong> {{ $email }}</p>
-    <p><strong>Subject:</strong> {{ $subject }}</p>
-    <p><strong>Message:</strong> {{ $user_message }}</p>
+<p><strong>First Name:</strong> {{ $first_name }}</p>
+<p><strong>Last Name:</strong> {{ $last_name }}</p>
+<p><strong>Email:</strong> {{ $email }}</p>
+<p><strong>Tel No:</strong> {{ $tel_no }}</p>
+<p><strong>Topic of Interest:</strong> {{ $topic }}</p>
+<p><strong>Website URL:</strong> {{ $website }}</p>
+<p><strong>Company Name:</strong> {{ $company }}</p>
+<p><strong>Message / Feedback:</strong> {{ $user_message }}</p>
+
 
     <hr>
     <!-- Footer Section -->

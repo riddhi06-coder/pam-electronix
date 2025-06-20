@@ -9,6 +9,7 @@
 <script type="text/javascript" src="{{ asset('frontend/assets/js/simpleParallax.min.js') }}" defer></script>
 <script type="text/javascript" src="{{ asset('frontend/assets/js/appear.js') }}" defer></script>
 <script type="text/javascript" src="{{ asset('frontend/assets/js/jquery.countTo.js') }}" defer></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.2.0/jquery.magnific-popup.js" defer></script>
 <script type="text/javascript" src="{{ asset('frontend/assets/js/sharer.js') }}" defer></script>
 <script type="text/javascript" src="{{ asset('frontend/assets/js/creote-extension.js') }}" defer></script>
 

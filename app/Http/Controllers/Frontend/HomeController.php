@@ -59,8 +59,12 @@ class HomeController extends Controller
         ];
 
         Mail::send('frontend.experts_mail', $emailData, function ($message) use ($emailData) {
-            $message->to('riddhi@matrixbricks.com')
-                    ->cc('shweta@matrixbricks.com','onkar@matrixbricks.com')
+            $message->to('varunuchil@gmail.com')
+                        ->cc('shweta@matrixbricks.com')
+                        ->cc('onkar@matrixbricks.com')
+                        ->cc('riddhi@matrixbricks.com')
+                        ->cc('smrita@matrixbricks.com')
+
                     ->subject('Enquiry Details: ' . $emailData['name']);
         });
 

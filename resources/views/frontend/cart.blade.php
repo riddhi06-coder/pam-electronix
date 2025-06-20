@@ -14,6 +14,7 @@
 
 
     </style>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
 </head>
 
@@ -125,14 +126,28 @@
                                                     </div>
                                                     <div class="col-lg-12">
                                                         <div class="cart-page-inner">
-                                                            <div class="row">
-                                                                <div class="col-md-6">
+                                                            <div class="row g-3 align-items-stretch justify-content-center justify-content-md-between">
+                                                                <!-- Add More Button -->
+                                                                <div class="col-12 col-md-6 col-lg-5">
+                                                                    <div class="cart-summary d-flex justify-content-center justify-content-md-start">
+                                                                        <div class="cart-btn w-100" style="max-width: 300px;">
+                                                                            <button type="button" class="btn btn-primary w-100" onclick="window.location.href='https://anvayafoundation.com/pam_electronix/home'">
+                                                                              ←
+                                                                            </button>
+                                                    
+                                                    
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
-                                                                <div class="col-offset-6 col-md-6">
-                                                                    <div class="cart-summary">
-                                                                        <div class="cart-btn">
-                                                                            <button type="submit" class="contact-toggler" {{ $cartItems->isEmpty() ? 'disabled' : '' }}>
+                                                    
+                                                                <!-- Ask to Quote Button -->
+                                                                <div class="col-12 col-md-6 col-lg-5">
+                                                                    <div class="cart-summary d-flex justify-content-center justify-content-md-end">
+                                                                        <div class="cart-btn w-100" style="max-width: 300px;">
+                                                                            <button type="button" class="btn btn-success w-100 contact-toggler" {{ $cartItems->isEmpty() ? 'disabled' : '' }}>
                                                                                 Ask to Quote
+                                                                            </button>
+                                                    
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -150,47 +165,39 @@
 
                         <!---==============modal popup =================-->
                         <div class="modal_popup one">
-                            <div class="modal-popup-inner">
-                                <div class="close-modal"><i class="fa fa-times"></i></div>
-                                <div class="modal_box">
-                                    <div class="row">
-                                        <div class="col-lg-12 col-md-12 form_inner">
-                                                <div class="form_content">
-                                                <h3 class="modal-title">Ask to Quote</h3><br>
-                                                    <!-- <form class="contact-form" method="POST" action="{{ route('contact.send') }}">
-                                                        @csrf -->
-                    
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <input type="text" name="company_name" placeholder="Company Name*">
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <input type="text" name="contact_person" placeholder="Contact Person*">
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <input type="text" name="designation" placeholder="Designation*">
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <input type="text" name="phone" placeholder="Phone No*">
-                                                            </div>
-                                                            <div class="col-md-12">
-                                                                <input type="email" name="email" placeholder="Enter Your Email*">
-                                                            </div>
-                                                            <div class="col-md-12">
-                                                                <textarea name="message" placeholder="Enter Your Message*"></textarea>
-                                                            </div>
-                                                            <div class="col-md-12">
-                                                                <p><input type="submit" class="type" value="Submit"></p>
-                                                            </div>
-                                                        </div>
-                                                    <!-- </form> -->
-
-
-                                                </div>
-                                        </div>
-                                    </div>
+                          <div class="modal-popup-inner">
+                            <div class="close-modal"><i class="fa fa-times"></i></div>
+                            <br>
+                        <h3 class="modal-title" style="text-align: center;">Ask to Quote</h3><br>
+                            <div class="modal_box">
+                              <form class="contact-form" method="POST" action="{{ route('contact.send') }}">
+                                @csrf
+                                <div class="row">
+                                  <div class="col-md-6">
+                                    <input type="text" name="company_name" placeholder="Company Name*">
+                                  </div>
+                                  <div class="col-md-6">
+                                    <input type="text" name="contact_person" placeholder="Contact Person*">
+                                  </div>
+                                  <div class="col-md-6">
+                                    <input type="text" name="designation" placeholder="Designation*">
+                                  </div>
+                                  <div class="col-md-6">
+                                    <input type="text" name="phone" placeholder="Phone No*">
+                                  </div>
+                                  <div class="col-md-12">
+                                    <input type="email" name="email" placeholder="Enter Your Email*">
+                                  </div>
+                                  <div class="col-md-12">
+                                    <textarea name="message" placeholder="Enter Your Message*"></textarea>
+                                  </div>
+                                  <div class="col-md-12">
+                                    <p><input type="submit" class="type" value="Submit"></p>
+                                  </div>
                                 </div>
+                              </form>
                             </div>
+                          </div>
                         </div>
                     </form>
                 <!---==============modal popup end=================-->
@@ -205,29 +212,42 @@
                 <!---- Add to cart functionality----->
                 <script>
                     document.addEventListener('DOMContentLoaded', function () {
+                        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+                
                         document.querySelectorAll('.remove-from-cart-btn').forEach(button => {
                             button.addEventListener('click', function () {
                                 const itemId = this.getAttribute('data-id');
-
+                
                                 if (!confirm('Are you sure you want to remove this item from the cart?')) {
                                     return;
                                 }
-
-                                fetch(`/cart/remove/${itemId}`, {
-                                    method: 'DELETE',
+                
+                                // Get Laravel route dynamically
+                                const removeUrl = `{{ route('cart.remove', ['id' => '__id__']) }}`.replace('__id__', itemId);
+                
+                                fetch(removeUrl, {
+                                    method: 'POST',
                                     headers: {
-                                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                                        'Accept': 'application/json'
+                                        'X-CSRF-TOKEN': csrfToken,
+                                        'Accept': 'application/json',
+                                        'Content-Type': 'application/json'
                                     }
                                 })
-                                .then(response => response.json())
+                                .then(response => {
+                                    const contentType = response.headers.get('content-type');
+                                    if (contentType && contentType.includes('application/json')) {
+                                        return response.json();
+                                    } else {
+                                        throw new Error('Server did not return JSON');
+                                    }
+                                })
                                 .then(data => {
                                     if (data.success) {
                                         notyf.open({
                                             type: 'custom-success',
                                             message: data.message
                                         });
-                                        location.reload(); // reload page to reflect change
+                                        setTimeout(() => location.reload(), 1000); // slight delay so notification is visible
                                     } else {
                                         notyf.open({
                                             type: 'custom-error',
@@ -239,7 +259,7 @@
                                     console.error('Error removing item:', error);
                                     notyf.open({
                                         type: 'custom-error',
-                                        message: 'Something went wrong.'
+                                        message: 'Something went wrong. Please try again.'
                                     });
                                 });
                             });
@@ -251,16 +271,35 @@
                 <!---- Form Validations----->
                 <script>
                     document.addEventListener('DOMContentLoaded', function() {
+                      const askQuoteBtn = document.querySelector('.contact-toggler');
+                      const modal = document.querySelector('.modal_popup.one');
+                      const closeBtn = modal.querySelector('.close-modal');
+                    
+                      askQuoteBtn.addEventListener('click', function() {
+                        modal.classList.add('active');
+                      });
+                    
+                      closeBtn.addEventListener('click', function() {
+                        modal.classList.remove('active');
+                    
+                        // Optional: reset form and remove errors if any
+                        const form = modal.querySelector('.contact-form');
+                        form.reset();
+                        form.querySelectorAll('.error-message').forEach(el => el.remove());
+                      });
+                    });
+                    
+                    document.addEventListener('DOMContentLoaded', function() {
                         const form = document.querySelector('.contact-form');
-
+                    
+                        if (!form) return;
+                    
                         form.addEventListener('submit', function(e) {
-                            // Clear previous errors
-                            const errorMessages = form.querySelectorAll('.error-message');
-                            errorMessages.forEach(el => el.remove());
-
+                            // Clear all previous error messages before validation
+                            form.querySelectorAll('.error-message').forEach(el => el.remove());
+                    
                             let hasError = false;
-
-                            // Helper function to show error below input
+                    
                             function showError(input, message) {
                                 const error = document.createElement('div');
                                 error.className = 'error-message';
@@ -269,14 +308,14 @@
                                 error.textContent = message;
                                 input.insertAdjacentElement('afterend', error);
                             }
-
+                    
                             // Validate company_name (required)
                             const companyName = form.company_name;
                             if (!companyName.value.trim()) {
                                 showError(companyName, 'Company Name is required.');
                                 hasError = true;
                             }
-
+                    
                             // Validate contact_person (required, no numbers)
                             const contactPerson = form.contact_person;
                             if (!contactPerson.value.trim()) {
@@ -286,14 +325,14 @@
                                 showError(contactPerson, 'Contact Person should not contain numbers.');
                                 hasError = true;
                             }
-
+                    
                             // Validate designation (required)
                             const designation = form.designation;
                             if (!designation.value.trim()) {
                                 showError(designation, 'Designation is required.');
                                 hasError = true;
                             }
-
+                    
                             // Validate phone (required, up to 15 digits, optional leading +)
                             const phone = form.phone;
                             if (!phone.value.trim()) {
@@ -303,7 +342,7 @@
                                 showError(phone, 'Please enter a valid phone number up to 15 digits (optional leading +).');
                                 hasError = true;
                             }
-
+                    
                             // Validate email (required, valid format)
                             const email = form.email;
                             if (!email.value.trim()) {
@@ -316,7 +355,7 @@
                                     hasError = true;
                                 }
                             }
-
+                    
                             // Validate message (required, max 2000 chars)
                             const message = form.message;
                             if (!message.value.trim()) {
@@ -326,9 +365,9 @@
                                 showError(message, 'Message should not exceed 2000 characters.');
                                 hasError = true;
                             }
-
+                    
                             if (hasError) {
-                                e.preventDefault(); // Prevent form submission
+                                e.preventDefault(); // Prevent form submission if there are errors
                             }
                         });
                     });

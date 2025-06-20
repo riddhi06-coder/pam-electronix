@@ -14,5 +14,6 @@
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/icomoon.css') }}" type="text/css" media="all" />
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/flexslider.css') }}" type="text/css" media="all" />
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/font-awesome.min.css') }}" type="text/css" media="all" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.2.0/magnific-popup.min.css" type="text/css" media="all" />
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/style.css') }}" type="text/css" media="all" />
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/theme-css.css') }}" type="text/css" media="all" />

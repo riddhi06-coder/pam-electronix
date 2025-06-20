@@ -108,26 +108,76 @@
                     </div>
 
 
-                    <div class="container">
-                        <div class="row gutter_15px">
-                            @foreach ($products as $product)
-                                <div class="col-lg-4 col-md-6 col-sm-12">
-                                    <div class="icon_box_all style_two">
-                                        <div class="icon_content icon_imgs">
-                                            <div class="icon">
-                                                <img src="{{ asset('frontend/assets/images/icons/right-chevron.svg') }}" class="img-fluid svg_image" alt="icon png">
-                                            </div>
-                                            <div class="txt_content">
-                                                <h3>
-                                                    <a href="{{ route('product-details.show', $product->slug) }}" target="_blank" rel="nofollow">{{ $product->product_name }}</a>
-                                                </h3>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
+<div class="container">
+    <div class="row gutter_15px">
+        @foreach ($products as $product)
+            @if ($product->id == 1)
+                {{-- Show only once for ID 1 --}}
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="icon_box_all style_two">
+                        <div class="icon_content icon_imgs">
+                            <div class="icon">
+                                <img src="{{ asset('frontend/assets/images/icons/right-chevron.svg') }}" class="img-fluid svg_image" alt="icon png">
+                            </div>
+                            <div class="txt_content">
+                                <h3>
+                                    <a href="{{ route('product-details.show', $product->slug) }}" target="_blank" rel="nofollow">{{ $product->product_name }}</a>
+                                </h3>
+                            </div>
                         </div>
                     </div>
+                </div>
+
+                {{-- Extra static links only for ID 1 --}}
+                @php
+                    $extraLinks = [
+                        ['route' => 'chip_mica_capacitors.show', 'label' => 'Chip Mica Capacitors'],
+                        ['route' => 'high_voltage_mica_capacitors.show', 'label' => 'High Voltage Mica Capacitors'],
+                        ['route' => 'miniature_dipped_mica_capacitors.show', 'label' => 'Miniature Dipped Mica Capacitors'],
+                        ['route' => 'metal_clad_capacitors.show', 'label' => 'Metal Clad Capacitors'],
+                        ['route' => 'tape_reel_capacitors.show', 'label' => 'Tape Reel Capacitors'],
+                        ['route' => 'molded_capacitor.show', 'label' => 'Molded Capacitor'],
+                    ];
+                @endphp
+
+                @foreach ($extraLinks as $link)
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="icon_box_all style_two">
+                            <div class="icon_content icon_imgs">
+                                <div class="icon">
+                                    <img src="{{ asset('frontend/assets/images/icons/right-chevron.svg') }}" class="img-fluid svg_image" alt="icon png">
+                                </div>
+                                <div class="txt_content">
+                                    <h3>
+                                        <a href="{{ route($link['route']) }}" target="_blank" rel="nofollow">{{ $link['label'] }}</a>
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+
+                @break  {{-- Stop the loop after processing ID 1 and its extra links --}}
+            @else
+                {{-- Default block for all other products (ID != 1) --}}
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="icon_box_all style_two">
+                        <div class="icon_content icon_imgs">
+                            <div class="icon">
+                                <img src="{{ asset('frontend/assets/images/icons/right-chevron.svg') }}" class="img-fluid svg_image" alt="icon png">
+                            </div>
+                            <div class="txt_content">
+                                <h3>
+                                    <a href="{{ route('product-details.show', $product->slug) }}" target="_blank" rel="nofollow">{{ $product->product_name }}</a>
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
+        @endforeach
+    </div>
+</div>
 
                     <div class="pd_bottom_60"></div>
                 </section>
@@ -195,7 +245,7 @@
                 </section>
 
 
-                <section class="contact-section bg_op_1"  style="background-image: url({{ asset('uploads/home/' . $homeIntro->section_image) }});">
+                <section class="contact-section1 bg_op_1"  style="background-image: url({{ asset('uploads/home/' . $homeIntro->section_image) }});">
                     <div class="pd_top_80"></div>
                     <div class="container">
                         <div class="row align-items-center">

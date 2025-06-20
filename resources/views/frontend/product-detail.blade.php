@@ -52,6 +52,7 @@
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <div class="image image_fit">
+                                                  
                                                         <img src="{{ asset('uploads/product/' . $banner->product_image) }}" class="img-fluid mb-4" />
                                                     </div>
                                                 </div>
@@ -126,70 +127,87 @@
                                 @foreach ($banners as $desc)
                                     @if(!empty($desc->capacitance_range_description))
                                         <h4>{{ $desc->capacitance_range_heading ?? 'Capacitance Range' }}</h4>
-                                        <div class="pd_top_20"></div>
+                                        <div class=""></div>
                                         <p>{{ $desc->capacitance_range_description }}</p>
+                                                                                <div class="pd_top_20"></div>
+
                                     @endif
 
                                     @if(!empty($desc->voltage_description))
                                         <h4>{{ $desc->voltage_heading ?? 'Voltage Range' }}</h4>
-                                        <div class="pd_top_20"></div>
+                                        <div class=""></div>
                                         <p>{{ $desc->voltage_description }}</p>
+                                                                                <div class="pd_top_20"></div>
+
                                     @endif
 
                                     @if(!empty($desc->operating_description))
                                         <h4>{{ $desc->operating_heading ?? 'Operating Temperature' }}</h4>
-                                        <div class="pd_top_20"></div>
+                                        <div class=""></div>
                                         <p>{{ $desc->operating_description }}</p>
+                                                                                <div class="pd_top_20"></div>
+
                                     @endif
 
                                     @if(!empty($desc->marking_description))
                                         <h4>{{ $desc->marking_heading ?? 'Marking' }}</h4>
-                                        <div class="pd_top_20"></div>
+                                                                                <div class=""></div>
                                         {!! $desc->marking_description !!}
                                     @endif
+                                        <div class="pd_top_20"></div>
 
                                     @if(!empty($desc->ordering_heading) || !empty($desc->image))
                                         <h4>{{ $desc->ordering_heading ?? 'Ordering Code' }}</h4>
-                                        <div class="pd_top_20"></div>
+                                                                                <div class="pd_top_15"></div>
+
                                         @if(!empty($desc->image))
-                                            <img src="{{ asset('uploads/product/' . $desc->image) }}">
+                                            <a href="{{ asset('uploads/product/' . $desc->image) }}" class="image-popup-vertical-fit">
+                                                <img src="{{ asset('uploads/product/' . $desc->image) }}" style="max-width: 100%; height: auto;">
+                                            </a>
+                                            
                                         @endif
-                                        <div class="pd_top_20"></div>
+                                    
+                                        <div class="pd_top_28"></div>
                                     @endif
+
+                                                                                <div class="pd_top_20"></div>
 
                                     @if(!empty($desc->style_description))
                                         <h4>{{ $desc->style_heading ?? 'Style' }}</h4>
-                                        <div class="pd_top_20"></div>
+                                        <div class=""></div>
                                         <p>{{ $desc->style_description }}</p>
+                                                                                <div class="pd_top_20"></div>
+
                                     @endif
 
                                     @if(!empty($desc->characteristics_description))
                                         <h4>{{ $desc->characteristics_heading ?? 'Characteristic' }}</h4>
-                                        <div class="pd_top_20"></div>
+                                        <div class=""></div>
                                         <p>{{ $desc->characteristics_description }}</p>
+                                                                                <div class="pd_top_20"></div>
+
                                     @endif
 
                                     @if(!empty($desc->capacitance_description)) {{-- Repeated for Capacitance block --}}
                                         <h4>{{ $desc->capacitance_heading ?? 'Capacitance' }}</h4>
-                                        <div class="pd_top_20"></div>
+                                        <div class=""></div>
                                         <p>{{ $desc->capacitance_description }}</p>
+                                                                                <div class="pd_top_20"></div>
+
                                     @endif
 
                                     @if(!empty($desc->leads_description))
                                         <h4>{{ $desc->leads_heading ?? 'Leads' }}</h4>
-                                        <div class="pd_top_20"></div>
+                                        <div class=""></div>
                                         {!! $desc->leads_description !!}
                                     @endif
                                 @endforeach
-                                
-                                <br>
+
+                                <div class="pd_top_20"></div>
                                 <br>
                                 @if(!empty($desc->special_heading))
                                     <h4>{{ $desc->special_heading }}</h4>
                                 @endif
-
-
-                                <div class="pd_top_20"></div>
 
                                 @foreach ($banners as $desc)
                                     @if(!empty($desc->special_description) || !empty($desc->special_image))
@@ -208,7 +226,9 @@
                                             @if(!empty($desc->special_image))
                                                 <div class="col-md-6">
                                                     <div class="img-sec text-center">
-                                                        <img src="{{ asset('uploads/product/' . $desc->special_image) }}" alt="Dipped Mica Capacitors">
+                                                        <a class="image-popup-vertical-fit" href="{{ asset('uploads/product/' . $desc->special_image) }}"  title="">
+                                                        	<img src="{{ asset('uploads/product/' . $desc->special_image) }}" alt="Dipped Mica Capacitors">
+                                                        </a>
                                                     </div>
                                                 </div>
                                             @endif
@@ -255,7 +275,9 @@
                                     @foreach($images as $image)
                                         <div class="col-md-6">
                                             <div class="img-sec text-center">
-                                                <img src="{{ asset('uploads/product/' . $image) }}" alt="{{ $product->name }}">
+                                                <a class="image-popup-vertical-fit" href="{{ asset('uploads/product/' . $image) }}"  title="">
+                                                	<img src="{{ asset('uploads/product/' . $image) }}" alt="{{ $product->name }}">
+                                                </a>
                                             </div>
                                         </div>
                                     @endforeach

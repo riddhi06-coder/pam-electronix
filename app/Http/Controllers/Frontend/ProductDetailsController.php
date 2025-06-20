@@ -74,6 +74,29 @@ class ProductDetailsController extends Controller
         return view('frontend.product-detail', compact('product', 'banners', 'Specifications', 'capHeaders', 'capacitances' , 'infoHeader', 'infoDetails','images'));
     }
 
+    public function chip_mica_capacitors(){
+         return view('frontend.chip_mica_capacitors');
+    }
+    public function high_voltage_mica_capacitors(){
+         return view('frontend.high_voltage_mica_capacitors');
+    }
+    
+    public function miniature_dipped_mica_capacitors(){
+         return view('frontend.miniature_dipped_mica_capacitors');
+    }
+    
+    
+    public function metal_clad_capacitors(){
+         return view('frontend.metal_clad_capacitors');
+    }
+    
+    
+    public function tape_reel_capacitors(){
+         return view('frontend.tape_reel_capacitors');
+    }
+    public function molded_capacitor(){
+         return view('frontend.molded_capacitor');
+    }
 
     public function case_style($product_slug, $case_style_slug)
     {
@@ -222,11 +245,11 @@ class ProductDetailsController extends Controller
     }
 
 
-    public function remove_from_cart($id)
+      public function remove_from_cart($id)
     {
         try {
             DB::table('carts')->where('id', $id)->delete();
-
+    
             return response()->json([
                 'success' => true,
                 'message' => 'Item removed from cart.'
@@ -238,6 +261,7 @@ class ProductDetailsController extends Controller
             ], 500);
         }
     }
+
 
 
     public function sendContact(Request $request)
@@ -281,8 +305,10 @@ class ProductDetailsController extends Controller
                 'cartItems' => $cartItems, 
             ], function ($message) use ($emailData) {
                 $subject = "Quote Form - " . ($emailData['name'] ?? 'Unknown');
-                $message->to('riddhi@matrixbricks.com')
-                        ->cc('shweta@matrixbricks.com','onkar@matrixbricks.com')
+                $message->to('varunuchil@gmail.com')
+                        ->cc('shweta@matrixbricks.com')
+                         ->cc('riddhi@matrixbricks.com')
+                        ->cc('onkar@matrixbricks.com')
                         ->subject($subject);
             });
 

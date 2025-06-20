@@ -173,25 +173,37 @@
 
             <!----Qunatity ------>
             <script>
-                document.addEventListener('DOMContentLoaded', function () {
-                    // Quantity buttons
-                    document.querySelectorAll('.quantity').forEach(container => {
-                        const minus = container.querySelector('.minus');
-                        const plus = container.querySelector('.plus');
-                        const input = container.querySelector('.qty');
-
-                        minus.addEventListener('click', () => {
-                            let val = parseInt(input.value) || 1;
-                            if (val > 1) input.value = val - 1;
-                        });
-
-                        plus.addEventListener('click', () => {
-                            let val = parseInt(input.value) || 1;
-                            input.value = val + 1;
-                        });
-                    });
+                document.addEventListener("DOMContentLoaded", function () {
+              document.querySelectorAll(".quantity").forEach((container, index) => {
+                const minus = container.querySelector(".minus");
+                const plus = container.querySelector(".plus");
+                const input = container.querySelector(".qty");
+            
+                console.log(`Quantity component #${index + 1} initialized.`);
+            
+                minus.addEventListener("click", (e) => {
+                  e.preventDefault();
+                  let val = parseInt(input.value);
+                  console.log(`Minus clicked. Current value: ${input.value} → Parsed: ${val}`);
+                  if (isNaN(val)) val = 0;
+                  if (val > 0) {
+                    input.value = val - 1;
+                    console.log(`Updated value after minus: ${input.value}`);
+                  }
                 });
+            
+                plus.addEventListener("click", (e) => {
+                  e.preventDefault();
+                  let val = parseInt(input.value);
+                  console.log(`Plus clicked. Current value: ${input.value} → Parsed: ${val}`);
+                  if (isNaN(val)) val = 0;
+                  input.value = val + 1;
+                  console.log(`Updated value after plus: ${input.value}`);
+                });
+              });
+            });
             </script>
+
 
             <!----addd to cartttt------>
             <script>

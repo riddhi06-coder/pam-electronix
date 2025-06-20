@@ -77,10 +77,11 @@
                               </div>
                               <div class="contnet">
                                  <h3> Mail Us</h3>
-                                 <p>{{ $contact->email }}</p>
-                                    @if(!empty($contact->email2))
-                                        <p>{{ $contact->email2 }}</p>
-                                    @endif
+                                <p><a href="mailto:{{ $contact->email }}">{{ $contact->email }}</a></p>
+@if(!empty($contact->email2))
+    <p><a href="mailto:{{ $contact->email2 }}">{{ $contact->email2 }}</a></p>
+@endif
+
 
                               </div>
                            </div>
@@ -95,8 +96,17 @@
                               </div>
                               <div class="contnet">
                                  <h3>Phone </h3>
-                                 <p>+1 {{ $contact->phone }}</p>
+@php
+    $phoneRaw = preg_replace('/\D/', '', $contact->phone);
+    if (strlen($phoneRaw) === 10) {
+        $formattedPhone = preg_replace('/(\d{3})(\d{3})(\d{4})/', '$1-$2-$3', $phoneRaw);
+    } else {
+        $formattedPhone = $contact->phone;
+    }
+@endphp
 
+
+    <p><a href="tel:+1{{ $phoneRaw }}">+1 {{ $formattedPhone }}</a></p>
                               </div>
                            </div>
                         </div>
@@ -129,50 +139,73 @@
                            <div class="contact_form_box_inner">
                               <div class="contact_form_shortcode">
 
-                                <form id="contact-form" method="POST" action="{{ route('contact.submit') }}" role="form">
-                                    @csrf
-                                    <div class="messages"></div>
+                                    <form id="contact-form" method="POST" action="{{ route('contact.submit') }}" role="form">
+    @csrf
+    <div class="messages"></div>
+    <div class="controls">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <!--<label>First Name</label>-->
+                    <input type="text" name="first_name" placeholder="First Name">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <!--<label>Last Name</label>-->
+                    <input type="text" name="last_name" placeholder="Last Name">
+                </div>
+            </div>
+             <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <!--<label>Email</label>-->
+                    <input type="text" name="email" placeholder="Email">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <!--<label>Phone No.</label>-->
+                    <input type="text" name="tel_no" placeholder="Phone No">
+                </div>
+            </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <!--<label>Topic of Interest</label>-->
+                    <input type="text" name="topic" placeholder="Topic of Interest">
+                </div>
+            </div>
+                    <div class="row">
 
-                                    <div class="controls">
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <div class="form-group">
-                                                   <label> Your Name<br /></label>
-                                                    <input type="text" name="name" placeholder="Your Name *" data-error="Enter Your Name">
-                                                    <div class="help-block with-errors"></div>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-12">
-                                                <div class="form-group">
-                                                   <label> Your Email<br /></label>
-                                                    <input type="text" name="email" placeholder="Email *" data-error="Enter Your Email Id">
-                                                    <div class="help-block with-errors"></div>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-12">
-                                                <div class="form-group">
-                                                   <label> Your Subject<br /></label>
-                                                    <input type="text" name="subject" placeholder=" Subject *">
-                                                </div>
-                                            </div>
-                                           
-                                            
-                                            <div class="col-sm-12">
-                                                <div class="form-group">
-                                                   <label> Your Message<br /></label>
-                                                    <textarea name="message" placeholder="Additional Information...* " rows="2" data-error="Please, leave us a message."></textarea>
-                                                    <div class="help-block with-errors"></div>
-                                                </div>
-                                            </div>
-                                            
-                                            <div class="col-sm-12">
-                                                <div class="form-group mg_top apbtn">
-                                                    <button class="theme_btn" type="submit">Appointment</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <!--<label>Website URL</label>-->
+                    <input type="text" name="website" placeholder="Website URL">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <!--<label>Company Name</label>-->
+                    <input type="text" name="company" placeholder="Company Name">
+                </div>
+            </div>
+         </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <!--<label>Message / Feedback</label>-->
+                    <textarea name="message" placeholder="Your message" rows="3" style="height: 69px;"></textarea>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group mg_top apbtn">
+                    <button class="theme_btn" type="submit">Submit</button>
+                </div>
+            </div>
+           
+        </div>
+    </div>
+</form>
                                     
                               </div>
                            </div>
@@ -208,66 +241,79 @@
 @include('components.frontend.main-js')
 
 
+
 <script>
-    document.getElementById('contact-form').addEventListener('submit', function (e) {
-        e.preventDefault(); // Prevent form submission
-        let form = e.target;
-        let isValid = true;
+document.getElementById('contact-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    let form = e.target;
+    let isValid = true;
+    form.querySelectorAll('.error-message').forEach(el => el.remove());
 
-        // Clear all previous error messages
-        form.querySelectorAll('.error-message').forEach(el => el.remove());
+    const showError = (input, message) => {
+        const error = document.createElement('div');
+        error.classList.add('error-message');
+        error.style.color = 'red';
+        error.textContent = message;
+        input.parentElement.appendChild(error);
+    };
 
-        // Helper to show error
-        const showError = (input, message) => {
-            const error = document.createElement('div');
-            error.classList.add('error-message');
-            error.style.color = 'red';
-            error.style.marginTop = '5px';
-            error.textContent = message;
-            input.parentElement.appendChild(error);
-        };
+    // Validation rules
+    const firstName = form.querySelector('input[name="first_name"]');
+    if (!firstName.value.trim()) {
+        showError(firstName, 'Please enter your first name.');
+        isValid = false;
+    }
 
+    const lastName = form.querySelector('input[name="last_name"]');
+    if (!lastName.value.trim()) {
+        showError(lastName, 'Please enter your last name.');
+        isValid = false;
+    }
 
-        // Validate name
-        const name = form.querySelector('input[name="name"]');
-        const namePattern = /^[A-Za-z\s]+$/;
-        if (!name.value.trim()) {
-            showError(name, 'Please enter your name.');
-            isValid = false;
-        } else if (!namePattern.test(name.value.trim())) {
-            showError(name, 'Name can only contain letters and spaces.');
-            isValid = false;
-        }
+    const email = form.querySelector('input[name="email"]');
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email.value.trim()) {
+        showError(email, 'Please enter your email.');
+        isValid = false;
+    } else if (!emailPattern.test(email.value)) {
+        showError(email, 'Please enter a valid email.');
+        isValid = false;
+    }
 
-        // Validate email
-        const email = form.querySelector('input[name="email"]');
-        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!email.value.trim()) {
-            showError(email, 'Please enter your email.');
-            isValid = false;
-        } else if (!emailPattern.test(email.value)) {
-            showError(email, 'Please enter a valid email address.');
-            isValid = false;
-        }
+    const tel = form.querySelector('input[name="tel_no"]');
+    if (!tel.value.trim()) {
+        showError(tel, 'Please enter your telephone number.');
+        isValid = false;
+    }
 
-        // Validate subject
-        const subject = form.querySelector('input[name="subject"]');
-        if (!subject.value.trim()) {
-            showError(subject, 'Please enter a subject.');
-            isValid = false;
-        }
+    const topic = form.querySelector('input[name="topic"]');
+    if (!topic.value.trim()) {
+        showError(topic, 'Please enter topic of interest.');
+        isValid = false;
+    }
 
-        // Validate message
-        const message = form.querySelector('textarea[name="message"]');
-        if (!message.value.trim()) {
-            showError(message, 'Please enter your message.');
-            isValid = false;
-        }
+    const website = form.querySelector('input[name="website"]');
+    if (!website.value.trim()) {
+        showError(website, 'Please enter website URL.');
+        isValid = false;
+    }
 
-        if (isValid) {
-            form.submit(); // Submit only if all fields are valid
-        }
-    });
+    const company = form.querySelector('input[name="company"]');
+    if (!company.value.trim()) {
+        showError(company, 'Please enter company name.');
+        isValid = false;
+    }
+
+    const message = form.querySelector('textarea[name="message"]');
+    if (!message.value.trim()) {
+        showError(message, 'Please enter your message/feedback.');
+        isValid = false;
+    }
+
+    if (isValid) {
+        form.submit();
+    }
+});
 </script>
 
 

@@ -90,6 +90,15 @@
                         <li><a href="{{ route('product-specifications.index') }}" class="{{ request()->routeIs('product-specifications.index') ? 'active' : '' }}">Case Style</a></li>
                       </ul>
                     </li>
+                    
+                    
+                    <li>
+                      <a href="{{ route('add-product.index') }}" class="{{ request()->routeIs('add-product.index') ? 'active' : '' }}">
+                        Chip Mica Capacitors
+                      </a>
+                    </li>
+
+
 
                   </ul>
                 </li>
@@ -101,6 +110,22 @@
                     <svg class="fill-icon">
                       <use href="{{ asset('admin/assets/svg/icon-sprite.svg#stroke-board') }}"></use>
                     </svg><span>Specifications</span></a>
+                </li>
+                <li class="sidebar-list {{ request()->routeIs('terms-and-conditions.index') ? 'active' : '' }}">
+                  <i class="fa fa-thumb-tack"> </i>
+                  <a class="sidebar-link sidebar-title" href="#">
+                    <svg class="stroke-icon"> 
+                      <use href="{{ asset('admin/assets/svg/icon-sprite.svg#stroke-icons') }}"></use>
+                    </svg>
+                    <svg class="fill-icon">
+                      <use href="{{ asset('admin/assets/svg/icon-sprite.svg#stroke-icons') }}"></use>
+                    </svg>
+                    <span>Policy Pages</span>
+                  </a>
+                  <ul class="sidebar-submenu">
+                    <li><a href="{{ route('terms-and-conditions.index') }}" class="{{ request()->routeIs('terms-and-conditions.index') ? 'active' : '' }}">Terms & Conditions</a></li>
+                    <li><a href="{{ route('manage-privacy-policy.index') }}" class="{{ request()->routeIs('privacy-policy.index') ? 'active' : '' }}">Privacy Policy</a></li>
+                  </ul>
                 </li>
 
 

@@ -88,7 +88,7 @@ class ProductSpecificationsController extends Controller
         if ($request->hasFile('product_image')) {
             $banner = $request->file('product_image');
             $bannerImageName = time() . rand(10, 999) . '.' . $banner->getClientOriginalExtension();
-            $banner->move(public_path('uploads/product/specifications/'), $bannerImageName);
+            $banner->move(public_path('uploads/product/specifications'), $bannerImageName);
         }
 
         $caseStyleSlug = Str::slug($request->case_style, '-');
@@ -196,10 +196,11 @@ class ProductSpecificationsController extends Controller
         if ($request->hasFile('product_image')) {
             $banner = $request->file('product_image');
             $bannerImageName = time() . rand(10, 999) . '.' . $banner->getClientOriginalExtension();
-            $banner->move(public_path('uploads/product/specifications/'), $bannerImageName);
+            $banner->move(public_path('uploads/product/specifications'), $bannerImageName);
 
             $spec->product_image = $bannerImageName;
         }
+        //dd($bannerImageName);
 
         $caseStyleSlug = Str::slug($request->case_style, '-');
 

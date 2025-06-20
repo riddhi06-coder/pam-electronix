@@ -1,3 +1,7 @@
+    <a href="#" class="float" target="_blank">
+<i class="fa fa-whatsapp my-float"></i>
+</a>
+
     <div class="footer_area thirteen" id="footer_contents">
             <div class="footer_widgets_wrap bg_op_1" style="background-color: #504538;">
                 <div class="pd_top_50"></div>
@@ -14,9 +18,31 @@
 
                         @php
                             use App\Models\Product;
+                            
                             $products = Product::orderBy('id', 'asc')->get();
                             $chunks = $products->chunk(ceil($products->count() / 2));
                         @endphp
+<!--<div class="col-xl-2 col-lg-6 col-md-6 col-sm-12 mb-sm-5 mb-md-5 mb-lg-5 mb-xl-0">-->
+<!--    <div class="footer_widgets wid_tit style_two">-->
+<!--        <div class="fo_wid_title">-->
+<!--            <h2>Quick Links</h2>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="footer_widgets clearfix navigation_foo light_color style_three">-->
+<!--        <div class="navigation_foo_box">-->
+<!--            <div class="navigation_foo_inner">-->
+<!--                <div class="left">-->
+<!--                    <div class="menu-information-container">-->
+<!--                        <ul>-->
+<!--                            <li><a href="{{ route('show.termsconditions') }}">Terms & Conditions</a></li>-->
+<!--                            <li><a href="{{ route('show.privacypolicy') }}">Privacy Policy</a></li>-->
+<!--                        </ul>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
 
                         <div class="col-xl-5 col-lg-6 col-md-6 col-sm-12 mb-sm-5 mb-md-5 mb-lg-5 mb-xl-0">
                             <div class="footer_widgets wid_tit style_two">
@@ -28,21 +54,72 @@
                                 <div class="navigation_foo_box">
                                     <div class="navigation_foo_inner">
                                         <div class="left">
+                                            
                                             <div class="menu-information-container">
-                                                <ul>
-                                                    @foreach($chunks[0] as $product)
-                                                        <li><a href="{{ route('product-details.show', $product->slug) }}">{{ $product->product_name }}</a></li>
-                                                    @endforeach
-                                                </ul>
+                                               
+<ul>
+    @foreach($chunks[0] as $product)
+        @switch($product->id)
+            @case(1)
+                <li>
+                    <a href="{{ route('product-details.show', $product->slug) }}">
+                        {{ $product->product_name }}
+                    </a>
+                </li>
+
+                {{-- Static extra links for product ID 1 --}}
+                <li>
+                    <a href="{{ route('chip_mica_capacitors.show') }}">
+                        Chip Mica Capacitors
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('high_voltage_mica_capacitors.show') }}">
+                        High Voltage Mica Capacitors
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('miniature_dipped_mica_capacitors.show') }}">
+                        Miniature Dipped Mica Capacitors
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('metal_clad_capacitors.show') }}">
+                        Metal Clad Capacitors
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('tape_reel_capacitors.show') }}">
+                        Tape Reel Capacitors
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('molded_capacitor.show') }}">
+                        Molded Capacitor
+                    </a>
+                </li>
+                @break
+
+            <!--@default-->
+            <!--    <li>-->
+            <!--        <a href="{{ route('product-details.show', $product->slug) }}">-->
+            <!--            {{ $product->product_name }}-->
+            <!--        </a>-->
+            <!--    </li>-->
+        @endswitch
+    @endforeach
+</ul>
+
+
                                             </div>
                                         </div>
                                         <div class="right">
                                             <div class="menu-essentials-container">
-                                                <ul>
-                                                    @foreach($chunks[1] as $product)
-                                                        <li><a href="{{ route('product-details.show', $product->slug) }}">{{ $product->product_name }}</a></li>
-                                                    @endforeach
-                                                </ul>
+                                                <!--<ul>-->
+                                                <!--    @foreach($chunks[1] as $product)-->
+                                                <!--        <li><a href="{{ route('product-details.show', $product->slug) }}">{{ $product->product_name }}</a></li>-->
+                                                <!--    @endforeach-->
+                                                <!--</ul>-->
                                             </div>
                                         </div>
                                     </div>
@@ -96,8 +173,19 @@
                                 <div class="same_contact phone">
                                     <span class="icon-telephone"></span>
                                     <div class="content">
-                                        <h6 class="titles">Phone</h6>
-                                        <a href="tel:{{ $contact->phone }}">+1 {{ $contact->phone }}</a>
+                                       @php
+    $phoneRaw = preg_replace('/\D/', '', $contact->phone);
+    if (strlen($phoneRaw) === 10) {
+        $formattedPhone = preg_replace('/(\d{3})(\d{3})(\d{4})/', '$1-$2-$3', $phoneRaw);
+    } else {
+        $formattedPhone = $contact->phone;
+    }
+@endphp
+
+<div class="title">
+    <a href="tel:+1{{ $phoneRaw }}">+1 {{ $formattedPhone }}</a>
+</div>
+
                                     </div>
                                 </div>
                             </div>

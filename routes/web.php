@@ -13,11 +13,15 @@ use App\Http\Controllers\Backend\AddProductController;
 use App\Http\Controllers\Backend\ProductDescriptionController;
 use App\Http\Controllers\Backend\ProductSpecificationsController;
 use App\Http\Controllers\Backend\SpecificationsController;
+use App\Http\Controllers\Backend\TermsConditionsController;
+use App\Http\Controllers\Backend\PrivacyPolicyController;
 
 
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\ProductDetailsController;
 use App\Http\Controllers\Frontend\ContactController;
+use App\Http\Controllers\Frontend\TermsAndConditionsController;
+use App\Http\Controllers\Frontend\PrivacysPolicyController;
 
 // =========================================================================== Backend Routes
 
@@ -68,6 +72,13 @@ Route::resource('manage-specifications', SpecificationsController::class);
 Route::get('/get-case-styles/{productId}', [ProductSpecificationsController::class, 'getCaseStyles'])->name('getCase.Styles');
 
 
+// policy pages
+Route::resource('terms-and-conditions', TermsConditionsController::class);
+Route::resource('manage-privacy-policy', PrivacyPolicyController::class);
+
+// Chip Mica Capacitors
+Route::resource('manage-chip-mica', ChipMicaController::class);
+
 
 // ===================================================================Frontend================================================================
 
@@ -82,11 +93,26 @@ Route::group(['prefix'=> '', 'middleware'=>[\App\Http\Middleware\PreventBackHist
     Route::post('/contact-submit', [ContactController::class, 'sendContactForm'])->name('contact.submit');
     Route::post('/add-to-cart', [ProductDetailsController::class, 'add_to_cart'])->name('add.cart');
     Route::post('/cart', [ProductDetailsController::class, 'cart_details'])->name('cart.details');
-    Route::delete('/cart/remove/{id}', [ProductDetailsController::class, 'remove_from_cart'])->name('cart.remove');
+    Route::post('/cart/remove/{id}', [ProductDetailsController::class, 'remove_from_cart'])->name('cart.remove');
+
     Route::post('/contact/send', [ProductDetailsController::class, 'sendContact'])->name('contact.send');
     Route::get('/product-details/{slug}', [ProductDetailsController::class, 'show'])->name('product-details.show');
+
+    Route::get('/chip_mica_capacitors', [ProductDetailsController::class, 'chip_mica_capacitors'])->name('chip_mica_capacitors.show');
+
+    Route::get('/high_voltage_mica_capacitors', [ProductDetailsController::class, 'high_voltage_mica_capacitors'])->name('high_voltage_mica_capacitors.show');
+    
+    // Optional if you add another one:
+    Route::get('/miniature_dipped_mica_capacitors', [ProductDetailsController::class, 'miniature_dipped_mica_capacitors'])->name('miniature_dipped_mica_capacitors.show');
+    Route::get('/tape_reel_capacitors', [ProductDetailsController::class, 'tape_reel_capacitors'])->name('tape_reel_capacitors.show');
+    Route::get('/molded_capacitor', [ProductDetailsController::class, 'molded_capacitor'])->name('molded_capacitor.show');
+    Route::get('/metal_clad_capacitors', [ProductDetailsController::class, 'metal_clad_capacitors'])->name('metal_clad_capacitors.show');
+
+
     Route::get('/{product_slug}/{case_style_slug}', [ProductDetailsController::class, 'case_style'])->name('productcase.style');
 
+    Route::get('/terms-conditions', [TermsAndConditionsController::class, 'termsconditions'])->name('show.termsconditions');
+    Route::get('/privacy-policy', [PrivacysPolicyController::class, 'privacypolicy'])->name('show.privacypolicy');
 
    
 });
