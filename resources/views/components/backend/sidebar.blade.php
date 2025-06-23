@@ -90,14 +90,17 @@
                         <li><a href="{{ route('product-specifications.index') }}" class="{{ request()->routeIs('product-specifications.index') ? 'active' : '' }}">Case Style</a></li>
                       </ul>
                     </li>
-                    
-                    
-                    <li>
-                      <a href="{{ route('add-product.index') }}" class="{{ request()->routeIs('add-product.index') ? 'active' : '' }}">
-                        Chip Mica Capacitors
-                      </a>
-                    </li>
 
+                     <li>
+                      <a class="submenu-title" href="#">
+                         Chip Mica Capacitors
+                        <span class="sub-arrow"><i class="fa fa-angle-right"></i></span>
+                      </a>
+                      <ul class="nav-sub-childmenu submenu-content">
+                        <li><a href="{{ route('manage-chip-mica.index') }}" class="{{ request()->routeIs('manage-chip-mica.index') ? 'active' : '' }}">Specs & Applications</a></li>
+                        <li><a href="{{ route('product-specifications.index') }}" class="{{ request()->routeIs('product-specifications.index') ? 'active' : '' }}">Case Style</a></li>
+                      </ul>
+                    </li>
 
 
                   </ul>

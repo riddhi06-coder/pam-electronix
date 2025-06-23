@@ -15,6 +15,7 @@ use App\Http\Controllers\Backend\ProductSpecificationsController;
 use App\Http\Controllers\Backend\SpecificationsController;
 use App\Http\Controllers\Backend\TermsConditionsController;
 use App\Http\Controllers\Backend\PrivacyPolicyController;
+use App\Http\Controllers\Backend\ChipMicaController;
 
 
 use App\Http\Controllers\Frontend\HomeController;
